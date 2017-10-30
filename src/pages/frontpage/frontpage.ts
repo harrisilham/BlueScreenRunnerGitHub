@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SignInPage } from '.,/sign-in/sign-in';
+import { SignInPage } from '../sign-in/sign-in';
 import { SigninrunnerPage } from '../signinrunner/signinrunner';
 /**
  * Generated class for the FrontpagePage page.
