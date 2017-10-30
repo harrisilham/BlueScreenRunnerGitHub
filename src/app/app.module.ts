@@ -3,11 +3,16 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';
-import { SignInPage } from '../pages/sign-in/sign-in';
-import { FrontpagePage } from '../pages/frontpage/frontpage';
-import { SigninrunnerPage } from '../pages/signinrunner/signinrunner';
+import { SignInAPage } from '../pages/admin/sign-inA/sign-inA';
+import { FrontPage } from '../pages/front/front';
+import { FrontRunnerPage } from '../pages/front/front-runner/front-runner';
+import { FrontUserPage } from '../pages/front/front-user/front-user';
+import {SignInRPage} from '../pages/runner/sign-in-r/sign-in-r'
+import {SignInUPage} from '../pages/user/sign-in-u/sign-in-u'
+import {HomeRPage} from '../pages/runner/home-r/home-r'
+import {HomeRPageModule} from '../pages/runner/home-r/home-r.module'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,29 +20,38 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    HomeAPage,
     ListPage,
-    SignInPage,
-    FrontpagePage,
-    SigninrunnerPage
+    SignInAPage,
+    FrontPage,
+    FrontRunnerPage,
+    FrontUserPage,
+    SignInRPage,
+    SignInUPage,
+    //HomeRPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HomeRPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    HomeAPage,
     ListPage,
-    SignInPage,
-    FrontpagePage,
-    SigninrunnerPage
+    SignInAPage,
+    FrontPage,
+    FrontRunnerPage,
+    FrontUserPage,
+    SignInRPage,
+    SignInUPage,
+    //HomeRPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

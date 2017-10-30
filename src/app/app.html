@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu  id="menu-a" [content]="content" enable="false">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
@@ -10,6 +10,28 @@
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+
+<ion-menu id="menu-r" [content]="content" enable="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item menuClose (click)="justOpenPage('HomeRPage')">
+        Home
+      </button>
+      <button ion-item (click)="openPage(test)">
+        test
+      </button>
+
     </ion-list>
   </ion-content>
 

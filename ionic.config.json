@@ -2,5 +2,7 @@
   "name": "BlueScreenRunner",
   "app_id": "2f399049",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

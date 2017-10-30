@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from '../home/home';
 
 /**
- * Generated class for the SigninrunnerPage page.
+ * Generated class for the SignInUPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,18 +10,16 @@ import {HomePage} from '../home/home';
 
 @IonicPage()
 @Component({
-  selector: 'page-signinrunner',
-  templateUrl: 'signinrunner.html',
+  selector: 'page-sign-in-u',
+  templateUrl: 'sign-in-u.html',
 })
-export class SigninrunnerPage {
+export class SignInUPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninrunnerPage');
+    console.log('ionViewDidLoad SignInUPage');
   }
-  itemTapped(event, item) {
-    this.navCtrl.setRoot(HomePage);
-  }
+
 }

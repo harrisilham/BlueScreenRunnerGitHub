@@ -2,12 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuController } from 'ionic-angular';
 
-import { HomePage } from '../pages/home/home';
+import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';
-import { SignInPage } from '../pages/sign-in/sign-in';
-import { FrontpagePage } from '../pages/frontpage/frontpage';
-import { SigninrunnerPage } from '../pages/signinrunner/signinrunner';
+import { FrontPage } from '../pages/front/front';
+import { HomeRPage } from '../pages/runner/home-r/home-r';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,21 +15,21 @@ import { SigninrunnerPage } from '../pages/signinrunner/signinrunner';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = FrontpagePage;
+  rootPage: any = FrontPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'Home', component: HomeAPage },
       { title: 'List', component: ListPage },
-      { title: 'Sign Out', component: SignInPage },
+      { title: 'Sign Out', component: FrontPage },
     ];
-
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -45,5 +45,21 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  openMenu() {
+   this.menuCtrl.open();
+ }
+
+ closeMenu() {
+   this.menuCtrl.close();
+ }
+
+ toggleMenu() {
+   this.menuCtrl.toggle();
+ }
+
+ justOpenPage(page){
+   this.nav.setRoot(page);
+ }
 
 }

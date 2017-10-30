@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from '../home/home';
-import { FrontpagePage } from '../frontpage/frontpage';
+import {HomeRPage} from '../home-r/home-r'
 
 /**
  * Generated class for the SignInPage page.
@@ -13,9 +12,9 @@ import { FrontpagePage } from '../frontpage/frontpage';
 @IonicPage()
 @Component({
   selector: 'page-sign-in',
-  templateUrl: 'sign-in.html',
+  templateUrl: 'sign-in-r.html',
 })
-export class SignInPage {
+export class SignInRPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -26,6 +25,6 @@ export class SignInPage {
 
   itemTapped(event, item) {
   //  this.navCtrl.push(HomePage);
-    this.navCtrl.setRoot(FrontpagePage);
+    this.navCtrl.setRoot(HomeRPage);
   }
 }
