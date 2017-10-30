@@ -15,7 +15,7 @@ import { SigninrunnerPage } from '../pages/signinrunner/signinrunner';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SignInPage;
+  rootPage: any = FrontpagePage;
 
   pages: Array<{title: string, component: any}>;
 
