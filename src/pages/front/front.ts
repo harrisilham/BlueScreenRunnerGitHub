@@ -1,9 +1,9 @@
-import { Component , Injectable} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
-import {SignInRPage} from '../runner/sign-in-r/sign-in-r'
-import {SignInUPage} from '../user/sign-in-u/sign-in-u'
+import { SignInRPage } from '../runner/sign-in-r/sign-in-r'
+import { SignInUPage } from '../user/sign-in-u/sign-in-u'
 
 /**
  * Generated class for the FrontPage page.
@@ -37,6 +37,11 @@ export class FrontPage {
     events.subscribe('user:entered', ()=> {
       this.hideTab();
     });
+    events.subscribe('user:reset', ()=> {
+      this.showTab();
+    });
+
+    events.publish('user:reset');
   }
 
   ionViewDidLoad() {
@@ -45,5 +50,9 @@ export class FrontPage {
 
   hideTab(){
     this.hide= false;
+  }
+
+  showTab(){
+    this.hide= true;
   }
 }

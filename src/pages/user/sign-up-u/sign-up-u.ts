@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SignInUPage} from '../sign-in-u/sign-in-u'
+import { FrontPage } from '../../front/front';
+import { Events } from 'ionic-angular';
+
 /**
  * Generated class for the SignUpUPage page.
  *
@@ -15,7 +17,8 @@ import {SignInUPage} from '../sign-in-u/sign-in-u'
 })
 export class SignUpUPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
+    events.publish('user:entered');
   }
 
 
@@ -24,6 +27,10 @@ export class SignUpUPage {
   }
 
   registerButton(event, item){
-    this.navCtrl.push(SignInUPage);
+    this.navCtrl.push(FrontPage);
+  }
+
+  out(){
+    this.navCtrl.setRoot(FrontPage);
   }
 }

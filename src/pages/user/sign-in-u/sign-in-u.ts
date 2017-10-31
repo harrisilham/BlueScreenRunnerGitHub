@@ -28,7 +28,7 @@ export class SignInUPage {
     this.navCtrl.setRoot(HomeUPage);
   }
  buttonRegister(event, item){
-     this.navCtrl.push(SignUpUPage);
+     this.navCtrl.setRoot(SignUpUPage);
  }
 
 }

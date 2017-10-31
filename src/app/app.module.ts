@@ -11,7 +11,6 @@ import { FrontRunnerPage } from '../pages/front/front-runner/front-runner';
 import { FrontUserPage } from '../pages/front/front-user/front-user';
 import {SignInRPage} from '../pages/runner/sign-in-r/sign-in-r'
 import {SignInUPage} from '../pages/user/sign-in-u/sign-in-u'
-import {HomeRPage} from '../pages/runner/home-r/home-r'
 import {HomeRPageModule} from '../pages/runner/home-r/home-r.module'
 import { HomeUPage } from '../pages/user/home-u/home-u';
 import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u'
