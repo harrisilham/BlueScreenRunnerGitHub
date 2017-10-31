@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HomeUPage} from '../home-u/home-u'
-
+import {SignUpUPage} from '../sign-up-u/sign-up-u'
 /**
  * Generated class for the SignInUPage page.
  *
@@ -27,5 +27,8 @@ export class SignInUPage {
   //  this.navCtrl.push(HomePage);
     this.navCtrl.setRoot(HomeUPage);
   }
+ buttonRegister(event, item){
+     this.navCtrl.push(SignUpUPage);
+ }
 
 }

@@ -14,6 +14,7 @@ import {SignInUPage} from '../pages/user/sign-in-u/sign-in-u'
 import {HomeRPage} from '../pages/runner/home-r/home-r'
 import {HomeRPageModule} from '../pages/runner/home-r/home-r.module'
 import { HomeUPage } from '../pages/user/home-u/home-u';
+import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,11 +32,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInUPage,
     //HomeRPage
     HomeUPage,
+    SignUpUPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HomeRPageModule
+    HomeRPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,12 +52,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInUPage,
     //HomeRPage,
     HomeUPage,
+    SignUpUPage,
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FrontPage
+    FrontPage,
   ]
 })
 export class AppModule {}
