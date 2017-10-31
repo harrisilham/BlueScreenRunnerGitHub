@@ -13,19 +13,20 @@
 </ion-header>
 
 
-<ion-content padding>
-  <table>
+<ion-content text-center padding class="center">
+  <h1> RUNNER LOGIN </h1>
+  <ion-grid >
     <ion-row>
-      <ion-col> <input type="text" id="email" placeholder="Email"> </ion-col>
+      <ion-col> <input type="text" id="emailR" placeholder="Email"> </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col> <input type="password" id="password" placeholder="Password"> </ion-col>
+      <ion-col> <input type="password" id="passwordR" placeholder="Password"> </ion-col>
     </ion-row>
 
     <ion-row>
-        <ion-col colspan="2" align="middle"> <button type="submit" (click)="itemTapped(FrontpagePage)">Submit </button> </ion-col>
+        <ion-col colspan="2" align="middle"> <button type="submit" (click)="itemTapped(FrontPage)">Submit </button> </ion-col>
     </ion-row>
 
-  </table>
+  </ion-grid>
 </ion-content>

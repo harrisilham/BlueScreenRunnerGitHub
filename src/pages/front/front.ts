@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , Injectable} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import {FrontRunnerPage} from './front-runner/front-runner' ;
-import {FrontUserPage} from './front-user/front-user' ;
+import { Events } from 'ionic-angular';
 
 import {SignInRPage} from '../runner/sign-in-r/sign-in-r'
 import {SignInUPage} from '../user/sign-in-u/sign-in-u'
@@ -28,10 +26,24 @@ export class FrontPage {
   tab1Root = SignInRPage;
   tab2Root = SignInUPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  hide : boolean= true ;
+  highlight: boolean= true;
+
+  constructor(public events: Events) {
+    this.tab1Root = SignInRPage;
+    this.tab2Root = SignInUPage;
+    this.hide= true;
+
+    events.subscribe('user:entered', ()=> {
+      this.hideTab();
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FrontPage');
+  }
+
+  hideTab(){
+    this.hide= false;
   }
 }

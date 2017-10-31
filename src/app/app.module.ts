@@ -13,6 +13,7 @@ import {SignInRPage} from '../pages/runner/sign-in-r/sign-in-r'
 import {SignInUPage} from '../pages/user/sign-in-u/sign-in-u'
 import {HomeRPage} from '../pages/runner/home-r/home-r'
 import {HomeRPageModule} from '../pages/runner/home-r/home-r.module'
+import { HomeUPage } from '../pages/user/home-u/home-u';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,6 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInRPage,
     SignInUPage,
     //HomeRPage
+    HomeUPage,
   ],
   imports: [
     BrowserModule,
@@ -47,11 +49,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInRPage,
     SignInUPage,
     //HomeRPage,
+    HomeUPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FrontPage
   ]
 })
 export class AppModule {}

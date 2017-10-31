@@ -8,6 +8,7 @@ import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';
 import { FrontPage } from '../pages/front/front';
 import { HomeRPage } from '../pages/runner/home-r/home-r';
+import { HomeUPage } from '../pages/user/home-u/home-u';
 
 @Component({
   templateUrl: 'app.html'

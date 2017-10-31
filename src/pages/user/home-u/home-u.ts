@@ -4,7 +4,7 @@ import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
 /**
- * Generated class for the HomeRPage page.
+ * Generated class for the HomeUPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,22 +12,22 @@ import { Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-home-r',
-  templateUrl: 'home-r.html',
+  selector: 'page-home-u',
+  templateUrl: 'home-u.html',
 })
-export class HomeRPage {
+export class HomeUPage {
   activeMenu: string = 'menu-r'
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events) {
     this.activeMenu= 'menu-r' ;
     this.menu.enable(true, 'menu-r') ;
     this.menu.enable(false, 'menu-a');
-    
+
     events.publish('user:entered');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomeRPage');
+    console.log('ionViewDidLoad HomeUPage');
   }
 
 }

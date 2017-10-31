@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>sign-in-u</ion-title>
+    <ion-title>BlueScreen Runner</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content text-center padding class="center">
+  <h1> USER LOGIN </h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col> <input type="text" id="emailU" placeholder="Email"> </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-col> <input type="password" id="passwordU" placeholder="Password"> </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col colspan="2" align="middle"> <button type="submit" (click)="itemTapped(FrontPage)">Submit </button> </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>
