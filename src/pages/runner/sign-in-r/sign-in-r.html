@@ -15,18 +15,20 @@
 
 <ion-content text-center padding class="center">
   <h1> RUNNER LOGIN </h1>
-  <ion-grid >
-    <ion-row>
-      <ion-col> <input type="text" id="emailR" placeholder="Email"> </ion-col>
-    </ion-row>
+  <form>
+    <ion-grid >
+      <ion-row>
+        <ion-col> <input type="text" id="emailR" placeholder="Email"> </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col> <input type="password" id="passwordR" placeholder="Password"> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="password" id="passwordR" placeholder="Password"> </ion-col>
+      </ion-row>
 
-    <ion-row>
-        <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="itemTapped(FrontPage)">Sign In </button> </ion-col>
-    </ion-row>
+      <ion-row>
+          <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="itemTapped()">Sign In </button> </ion-col>
+      </ion-row>
 
-  </ion-grid>
+    </ion-grid>
+  </form>
 </ion-content>

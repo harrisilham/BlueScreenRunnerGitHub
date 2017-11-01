@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomeUPage} from '../home-u/home-u'
-import {SignUpUPage} from '../sign-up-u/sign-up-u'
+import { HomeUPage } from '../home-u/home-u';
+import { HomeAPage } from '../../admin/home-a/home-a';
+import { SignUpUPage } from '../sign-up-u/sign-up-u';
 /**
  * Generated class for the SignInUPage page.
  *
@@ -15,18 +16,34 @@ import {SignUpUPage} from '../sign-up-u/sign-up-u'
   templateUrl: 'sign-in-u.html',
 })
 export class SignInUPage {
+  email:any;
+  password: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInUPage');
   }
 
-  itemTapped(event, item) {
-  //  this.navCtrl.push(HomePage);
-    this.navCtrl.setRoot(HomeUPage);
+  itemTapped() {
+
+    this.email= (<HTMLInputElement>document.getElementById("emailU")).value;
+    this.password= (<HTMLInputElement>document.getElementById('passwordU')).value;
+
+    if(this.email=="admin" && this.password=="admin123"){
+      this.navCtrl.setRoot(HomeAPage);
+    }
+
+    else if(this.email=="user" && this.password=="user123"){
+      this.navCtrl.setRoot(HomeUPage);
+    }
+    else{
+      this.navCtrl.setRoot(SignInUPage);
+    }
   }
+
  buttonRegister(event, item){
      this.navCtrl.setRoot(SignUpUPage);
  }
