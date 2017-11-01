@@ -9,24 +9,39 @@
 
 <ion-content padding>
   <h3>BlueScreen Admin Homepage</h3>
-<ion-grid>
+<ion-card>
 
   <ion-row>
-      <ion-col colspan="2" align="middle"> <button ion-button round outline color="dark" type="viewRunner" (click)="viewButton(ViewrunnerAPage)">View Runner </button> </ion-col>
+    <ion-col>
+    <button ion-item round outline type="viewRunner"
+    (click)="viewButton(ViewrunnerAPage)">
+    <ion-icon name="eye" item-start></ion-icon>
+    View Runner</button>
+    </ion-col>
+
+    <ion-col>
+    <button ion-item round outline type="addRunner"
+    (click)="addButton(AddrunnerAPage)">
+    <ion-icon name="add" item-start></ion-icon>
+    Add Runner</button>
+    </ion-col>
   </ion-row>
 
-  <ion-row>
-      <ion-col colspan="2" align="middle"> <button ion-button round outline color="secondary" type="addRunner" (click)="addButton(AddrunnerAPage)">Add Runner</button> </ion-col>
-  </ion-row>
+<ion-row>
+    <ion-col>
+    <button ion-item round outline type="editRunner"
+    (click)="editButton(EditrunnerAPage)">
+    <ion-icon name="create" item-start></ion-icon>
+    Edit Runner</button>
+    </ion-col>
 
-  <ion-row>
-      <ion-col colspan="2" align="middle"> <button ion-button round outline type="editRunner" (click)="editButton(EditrunnerAPage)">Edit Runner</button> </ion-col>
-  </ion-row>
+    <ion-col>
+    <button ion-item round outline  type="deleteRunner"
+    (click)="deleteButton(DeleterunnerAPage)">
+    <ion-icon name="trash" item-start></ion-icon>
+    Delete Runner</button>
+    </ion-col>
+</ion-row>
 
-  <ion-row>
-      <ion-col colspan="2" align="middle"> <button ion-button round outline color="danger" type="deleteRunner" (click)="deleteButton(DeleterunnerAPage)">Delete Runner</button> </ion-col>
-  </ion-row>
-
-</ion-grid>
-  <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
+</ion-card>
 </ion-content>
