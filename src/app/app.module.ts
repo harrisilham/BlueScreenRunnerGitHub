@@ -16,6 +16,10 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AddrunnerAPage } from '../pages/admin/addrunner-a/addrunner-a';
+import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a';
+import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
+import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     //HomeRPage,
     //HomeUPage,
     SignUpUPage,
+    AddrunnerAPage,
+    DeleterunnerAPage,
+    EditrunnerAPage,
+    ViewrunnerAPage,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     //HomeRPage,
     //HomeUPage,
     SignUpUPage,
-
+    AddrunnerAPage,
+    DeleterunnerAPage,
+    EditrunnerAPage,
+    ViewrunnerAPage,
   ],
   providers: [
     StatusBar,

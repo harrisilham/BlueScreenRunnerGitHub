@@ -8,9 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>BlueScreen Runner Homepage</h3>
+  <h3>BlueScreen Admin Homepage</h3>
+<ion-grid>
 
-  admin!
+  <ion-row>
+      <ion-col colspan="2" align="middle"> <button ion-button round outline color="dark" type="viewRunner" (click)="viewButton(ViewrunnerAPage)">View Runner </button> </ion-col>
+  </ion-row>
 
+  <ion-row>
+      <ion-col colspan="2" align="middle"> <button ion-button round outline color="secondary" type="addRunner" (click)="addButton(AddrunnerAPage)">Add Runner</button> </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col colspan="2" align="middle"> <button ion-button round outline type="editRunner" (click)="editButton(EditrunnerAPage)">Edit Runner</button> </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col colspan="2" align="middle"> <button ion-button round outline color="danger" type="deleteRunner" (click)="deleteButton(DeleterunnerAPage)">Delete Runner</button> </ion-col>
+  </ion-row>
+
+</ion-grid>
   <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
