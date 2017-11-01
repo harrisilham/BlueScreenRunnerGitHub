@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
+import firebase from 'firebase';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';
@@ -27,6 +28,15 @@ export class MyApp {
       { title: 'List', component: ListPage },
       { title: 'Sign Out', component: FrontPage },
     ];
+
+    firebase.initializeApp({
+      apiKey: "AIzaSyB4gM65eE1RYXe3gc7nAMqV1IWZqjODPXw",
+      authDomain: "bluescreenrunner.firebaseapp.com",
+      databaseURL: "https://bluescreenrunner.firebaseio.com",
+      projectId: "bluescreenrunner",
+      storageBucket: "bluescreenrunner.appspot.com",
+      messagingSenderId: "833160565470"
+    });
   }
 
 
