@@ -1,3 +1,4 @@
+<!-- admin menu -->
 <ion-menu  id="menu-a" [content]="content" enable="false">
   <ion-header>
     <ion-toolbar>
@@ -15,7 +16,7 @@
 
 </ion-menu>
 
-
+<!-- runner menu -->
 <ion-menu id="menu-r" [content]="content" enable="false">
   <ion-header>
     <ion-toolbar>
@@ -29,16 +30,30 @@
         Home
       </button>
       <button ion-item menuClose (click)="nav.goToRoot()">
-        signout
-      </button>
-
-    <!--  <button ion-item menuClose(click)="justOpenPage('FrontPage')">
         Sign Out
-      </button> -->
-
+      </button>
     </ion-list>
   </ion-content>
 
+<!-- user menu -->
+</ion-menu>
+<ion-menu id="menu-u" [content]="content" enable="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item menuClose (click)="justOpenPage('HomeUPage')">
+        Home
+      </button>
+      <button ion-item menuClose (click)="nav.goToRoot()">
+        Sign Out
+      </button>
+    </ion-list>
+  </ion-content>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

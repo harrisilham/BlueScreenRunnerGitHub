@@ -19,9 +19,10 @@ export class HomeUPage {
   activeMenu: string = 'menu-r'
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events) {
-    this.activeMenu= 'menu-r' ;
-    this.menu.enable(true, 'menu-r') ;
+    this.activeMenu= 'menu-u' ;
     this.menu.enable(false, 'menu-a');
+    this.menu.enable(false, 'menu-r') ;
+    this.menu.enable(true, 'menu-u');
 
     events.publish('user:entered');
   }

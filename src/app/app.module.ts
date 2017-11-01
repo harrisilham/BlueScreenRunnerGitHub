@@ -9,12 +9,11 @@ import { SignInAPage } from '../pages/admin/sign-inA/sign-inA';
 import { FrontPage } from '../pages/front/front';
 import { FrontRunnerPage } from '../pages/front/front-runner/front-runner';
 import { FrontUserPage } from '../pages/front/front-user/front-user';
-import {SignInRPage} from '../pages/runner/sign-in-r/sign-in-r'
-import {SignInUPage} from '../pages/user/sign-in-u/sign-in-u'
-import {HomeRPageModule} from '../pages/runner/home-r/home-r.module'
-import { HomeUPage } from '../pages/user/home-u/home-u';
-import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u'
-
+import { SignInRPage } from '../pages/runner/sign-in-r/sign-in-r'
+import { SignInUPage } from '../pages/user/sign-in-u/sign-in-u'
+import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
+import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
+import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -29,14 +28,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FrontUserPage,
     SignInRPage,
     SignInUPage,
-    //HomeRPage
-    HomeUPage,
+    //HomeRPage,
+    //HomeUPage,
     SignUpUPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HomeRPageModule,
+    HomeUPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInRPage,
     SignInUPage,
     //HomeRPage,
-    HomeUPage,
+    //HomeUPage,
     SignUpUPage,
 
   ],

@@ -20,9 +20,10 @@ export class HomeRPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events) {
     this.activeMenu= 'menu-r' ;
-    this.menu.enable(true, 'menu-r') ;
     this.menu.enable(false, 'menu-a');
-    
+    this.menu.enable(true, 'menu-r') ;
+    this.menu.enable(false, 'menu-u');
+
     events.publish('user:entered');
   }
 
