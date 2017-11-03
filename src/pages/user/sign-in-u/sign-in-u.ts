@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
+
 import { HomeUPage } from '../home-u/home-u';
 import { HomeAPage } from '../../admin/home-a/home-a';
 import { SignUpUPage } from '../sign-up-u/sign-up-u';
@@ -27,7 +29,7 @@ export class SignInUPage {
   public EmailA= {};
   public PasswordA= {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
   }
 
@@ -68,6 +70,7 @@ export class SignInUPage {
         this.navCtrl.setRoot(HomeUPage);
       }
       else{
+        this.presentAlert();
         this.navCtrl.setRoot(SignInUPage);
       }
     }
@@ -76,10 +79,12 @@ export class SignInUPage {
         this.navCtrl.setRoot(HomeAPage);
       }
       else{
+        this.presentAlert();
         this.navCtrl.setRoot(SignInUPage);
       }
     }
     else{
+      this.presentAlert();
       this.navCtrl.setRoot(SignInUPage);
     }
   }
@@ -87,5 +92,12 @@ export class SignInUPage {
  buttonRegister(event, item){
      this.navCtrl.setRoot(SignUpUPage);
  }
-
+ presentAlert() {
+ let alert = this.alertCtrl.create({
+   title: 'Wrong Username And Password',
+   subTitle: 'Please Try Again',
+   buttons: ['Dismiss']
+ });
+ alert.present();
+ }
 }

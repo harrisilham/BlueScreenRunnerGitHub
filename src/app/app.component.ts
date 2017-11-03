@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';

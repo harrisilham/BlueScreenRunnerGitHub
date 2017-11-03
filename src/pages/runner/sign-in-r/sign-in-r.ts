@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
 
 import { HomeRPage } from '../home-r/home-r';
 import { FrontPage } from '../../front/front'
@@ -29,7 +30,7 @@ export class SignInRPage {
 
   front:any = FrontPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
   }
 
@@ -60,14 +61,24 @@ export class SignInRPage {
         this.navCtrl.setRoot(HomeRPage);
       }
       else{
+        this.presentAlert();
         this.navCtrl.setRoot(SignInRPage);
       }
     }
 
     else{
+      this.presentAlert();
       this.navCtrl.setRoot(SignInRPage);
     }
 
 
   }
+  presentAlert() {
+  let alert = this.alertCtrl.create({
+    title: 'Wrong Username And Password',
+    subTitle: 'Please Try Again',
+    buttons: ['Dismiss']
+  });
+  alert.present();
+}
 }
