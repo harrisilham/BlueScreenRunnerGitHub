@@ -59,7 +59,7 @@ export class SignInRPage {
         this.navCtrl.setRoot(HomeRPage);
       }
       else{
-        //this.navCtrl.setRoot(SignInRPage);
+        this.navCtrl.setRoot(SignInRPage);
       }
     }
 
