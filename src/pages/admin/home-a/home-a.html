@@ -18,7 +18,7 @@
           <div class="col">Delete</div>
         </div>
         <div class="row" ng-repeat="data in ctrl.data">
-         <div class="col">azamhasni7@gmail.com</div>
+         <div class="col" onload =viewListRunner()> </div>
          <div class="col"><button type="editRunner"
          (click)="editButton(EditrunnerAPage)">
          <ion-icon name="create" item-start></ion-icon></button></div>
@@ -32,6 +32,8 @@
     (click)="addButton(AddrunnerAPage)">
     <ion-icon name="add" item-start></ion-icon>
     Add Runner</button>
+
+    <button (click)="viewListRunner()"> viewwww</button>
 
 </ion-card>
 </ion-content>

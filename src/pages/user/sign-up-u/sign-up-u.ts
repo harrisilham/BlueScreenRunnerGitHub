@@ -78,8 +78,8 @@ export class SignUpUPage {
 
   presentAlert() {
   let alert = this.alertCtrl.create({
-    title: 'Form Does Not Fill',
-    subTitle: 'Please Fill The Form',
+    title: 'Required Field Cannot Be Left Blank!',
+    subTitle: 'Please Fill All The Field',
     buttons: ['Dismiss']
   });
   alert.present();
@@ -87,7 +87,7 @@ export class SignUpUPage {
 
   presentAlertpass() {
   let alert = this.alertCtrl.create({
-    title: 'Password does not matching',
+    title: 'Passwords Not Matched',
     subTitle: 'Please Try Again',
     buttons: ['Dismiss']
   });

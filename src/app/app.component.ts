@@ -6,7 +6,6 @@ import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
-import { ListPage } from '../pages/list/list';
 import { FrontPage } from '../pages/front/front';
 import { DummyPage } from '../pages/dummy/dummy';
 
@@ -26,7 +25,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomeAPage },
-      { title: 'List', component: ListPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 

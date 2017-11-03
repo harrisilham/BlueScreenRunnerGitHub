@@ -4,8 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomeAPage } from '../pages/admin/home-a/home-a';
-import { ListPage } from '../pages/list/list';
-import { SignInAPage } from '../pages/admin/sign-inA/sign-inA';
 import { FrontPage } from '../pages/front/front';
 import { SignInRPage } from '../pages/runner/sign-in-r/sign-in-r'
 import { SignInUPage } from '../pages/user/sign-in-u/sign-in-u'
@@ -24,8 +22,6 @@ import { DummyPage } from '../pages/dummy/dummy';
   declarations: [
     MyApp,
     HomeAPage,
-    ListPage,
-    SignInAPage,
     FrontPage,
     SignInRPage,
     SignInUPage,
@@ -48,8 +44,6 @@ import { DummyPage } from '../pages/dummy/dummy';
   entryComponents: [
     MyApp,
     HomeAPage,
-    ListPage,
-    SignInAPage,
     FrontPage,
     SignInRPage,
     SignInUPage,
