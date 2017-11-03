@@ -21,5 +21,9 @@ export class AddrunnerAPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddrunnerAPage');
   }
+  registerButton()
+  {
 
+
+  }
 }
