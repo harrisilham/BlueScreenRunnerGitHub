@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { ListPage } from '../pages/list/list';
 import { FrontPage } from '../pages/front/front';
+import { DummyPage } from '../pages/dummy/dummy';
 
 @Component({
   templateUrl: 'app.html'

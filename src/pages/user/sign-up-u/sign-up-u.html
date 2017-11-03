@@ -16,31 +16,37 @@
 
 <ion-content text-center padding class="center">
   <h2> USER SIGN UP </h2>
-  <ion-grid>
-    <ion-row>
-      <ion-col> <input type="text" id="nameU" placeholder="Your Full Name"> </ion-col>
-    </ion-row>
+  <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col> <input type="text" id="nameU" placeholder="Your Full Name">* </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col> <input type="text" id="phoneU" placeholder="Your Mobile Number"> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="text" id="phoneU" placeholder="Your Mobile Number">* </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col> <input type="text" id="emailU" placeholder="Your Email Address"> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="text" id="emailU" placeholder="Your Email Address">* </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col> <input type="password" id="passwordU" placeholder="Your Password"> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="text" id="usernameU" placeholder="Your Chosen Username">* </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col> <input type="password" id="confirmpasswordU" placeholder="Confirm Password"> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="password" id="passwordU" placeholder="Your Password">* </ion-col>
+      </ion-row>
 
-    <ion-row>
-        <ion-col colspan="2" align="middle"> <button ion-button color="secondary" type="submit" (click)="registerButton(SignInUPage)">Register Now ! </button> </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col> <input type="password" id="confirmPasswordU" placeholder="Confirm Password">* </ion-col>
+      </ion-row>
 
-  </ion-grid>
+      <ion-row>
+          <ion-col colspan="2" align="middle"> <button ion-button color="secondary" type="submit" (click)="register()">Register Now ! </button> </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
 
 </ion-content>

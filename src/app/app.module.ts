@@ -18,6 +18,7 @@ import { AddrunnerAPage } from '../pages/admin/addrunner-a/addrunner-a';
 import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a';
 import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
 import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
+import { DummyPage } from '../pages/dummy/dummy';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
+    DummyPage
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
+    DummyPage
   ],
   providers: [
     StatusBar,

@@ -19,14 +19,15 @@ import { FrontPage } from '../../front/front'
   templateUrl: 'sign-in-r.html',
 })
 export class SignInRPage {
-  email: any;
+  username: any;
   password: any;
   pathString: any;
 
-  public Email= {};
+  public Username= {};
   public Password= {};
 
-  emailRef: firebase.database.Reference;
+  usernameRef: firebase.database.Reference;
+  passwordRef: firebase.database.Reference;
 
   front:any = FrontPage;
 
@@ -39,30 +40,25 @@ export class SignInRPage {
   }
 
   itemTapped() {
-    this.email= (<HTMLInputElement>document.getElementById('emailR')).value;
-    this.pathString = `/runnerStorage/`+ this.email+ `/` ;
+    this.username= (<HTMLInputElement>document.getElementById('usernameR')).value;
+    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
     this.password= (<HTMLInputElement>document.getElementById('passwordR')).value;
 
     //runner data
-    this.emailRef= firebase.database().ref(this.pathString+'email/');
-    this.emailRef.on('value', dataSnapshot => {
-      this.Email = dataSnapshot.val();
+    this.usernameRef= firebase.database().ref(this.pathString+'username/');
+    this.usernameRef.on('value', dataSnapshot => {
+      this.Username = dataSnapshot.val();
       })
 
 
-    const passwordRef: firebase.database.Reference = firebase.database().ref(this.pathString+'password/');
-    passwordRef.on('value', dataSnapshot => {
+    this.passwordRef= firebase.database().ref(this.pathString+'password/');
+    this.passwordRef.on('value', dataSnapshot => {
       this.Password = dataSnapshot.val();
     })
 
-    if(this.Email){
-      if(this.password==this.Password){
+    //make loading here
+    if(this.username==this.Username && this.password==this.Password){
         this.navCtrl.setRoot(HomeRPage);
-      }
-      else{
-        this.presentAlert();
-        this.navCtrl.setRoot(SignInRPage);
-      }
     }
 
     else{
@@ -73,11 +69,11 @@ export class SignInRPage {
 
   }
   presentAlert() {
-  let alert = this.alertCtrl.create({
-    title: 'Wrong Username And Password',
-    subTitle: 'Please Try Again',
-    buttons: ['Dismiss']
-  });
-  alert.present();
-}
+    let alert = this.alertCtrl.create({
+      title: 'Wrong Username And Password',
+      subTitle: 'Please Try Again',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 }

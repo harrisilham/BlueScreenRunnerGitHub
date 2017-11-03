@@ -19,14 +19,20 @@ import { SignUpUPage } from '../sign-up-u/sign-up-u';
   templateUrl: 'sign-in-u.html',
 })
 export class SignInUPage {
-  email:any;
+  username:any;
   password: any;
   pathString: any;
   pathStringA: any;
 
-  public Email= {};
+  usernameRef: firebase.database.Reference;
+  passwordRef: firebase.database.Reference;
+  usernameARef: firebase.database.Reference;
+  passwordARef: firebase.database.Reference;
+
+
+  public Username= {};
   public Password= {};
-  public EmailA= {};
+  public UsernameA= {};
   public PasswordA= {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
@@ -38,48 +44,37 @@ export class SignInUPage {
   }
 
   itemTapped() {
-    this.email= (<HTMLInputElement>document.getElementById('emailU')).value;
+    this.username= (<HTMLInputElement>document.getElementById('usernameU')).value;
     this.password= (<HTMLInputElement>document.getElementById('passwordU')).value;
-    this.pathString = `/userStorage/`+ this.email+ `/` ;
-    this.pathStringA= `/adminStorage/`+ this.email+ `/` ;
+    this.pathString = `/userStorage/`+ this.username+ `/` ;
+    this.pathStringA= `/adminStorage/`+ this.username+ `/` ;
 
     //user data
-    const emailRef: firebase.database.Reference = firebase.database().ref(this.pathString+'email/');
-    emailRef.on('value', dataSnapshot => {
-      this.Email = dataSnapshot.val();
+    this.usernameRef= firebase.database().ref(this.pathString+'username/');
+    this.usernameRef.on('value', dataSnapshot => {
+      this.Username = dataSnapshot.val();
     })
-    const passwordRef: firebase.database.Reference = firebase.database().ref(this.pathString+'password/');
-    passwordRef.on('value', dataSnapshot => {
+    this.passwordRef= firebase.database().ref(this.pathString+'password/');
+    this.passwordRef.on('value', dataSnapshot => {
       this.Password = dataSnapshot.val();
     })
 
     //admin data
-    const emailRefA: firebase.database.Reference = firebase.database().ref(this.pathStringA+'email/');
-    emailRefA.on('value', dataSnapshot => {
-      this.EmailA = dataSnapshot.val();
+    this.usernameARef= firebase.database().ref(this.pathStringA+'username/');
+    this.usernameARef.on('value', dataSnapshot => {
+      this.UsernameA = dataSnapshot.val();
     })
-    const passwordRefA: firebase.database.Reference = firebase.database().ref(this.pathStringA+'password/');
-    passwordRefA.on('value', dataSnapshot => {
+    this.passwordARef = firebase.database().ref(this.pathStringA+'password/');
+    this.passwordARef.on('value', dataSnapshot => {
       this.PasswordA = dataSnapshot.val();
     })
 
-    if(this.Email){
-      if(this.Password==this.password){
-        this.navCtrl.setRoot(HomeUPage);
-      }
-      else{
-        this.presentAlert();
-        this.navCtrl.setRoot(SignInUPage);
-      }
+    //make loading here
+    if(this.Username && this.Password==this.password){
+      this.navCtrl.setRoot(HomeUPage);
     }
-    else if(this.EmailA){
-      if(this.PasswordA==this.password){
-        this.navCtrl.setRoot(HomeAPage);
-      }
-      else{
-        this.presentAlert();
-        this.navCtrl.setRoot(SignInUPage);
-      }
+    else if(this.UsernameA && this.PasswordA==this.password){
+      this.navCtrl.setRoot(HomeAPage);
     }
     else{
       this.presentAlert();
