@@ -39,6 +39,7 @@ export class SignInUPage {
 
   itemTapped() {
     this.email= (<HTMLInputElement>document.getElementById('emailU')).value;
+    this.password= (<HTMLInputElement>document.getElementById('passwordU')).value;
     this.pathString = `/userStorage/`+ this.email+ `/` ;
     this.pathStringA= `/adminStorage/`+ this.email+ `/` ;
 
@@ -61,9 +62,6 @@ export class SignInUPage {
     passwordRefA.on('value', dataSnapshot => {
       this.PasswordA = dataSnapshot.val();
     })
-
-
-    this.password= (<HTMLInputElement>document.getElementById('passwordU')).value;
 
     if(this.Email){
       if(this.Password==this.password){

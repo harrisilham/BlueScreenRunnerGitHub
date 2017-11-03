@@ -41,6 +41,7 @@ export class SignInRPage {
   itemTapped() {
     this.email= (<HTMLInputElement>document.getElementById('emailR')).value;
     this.pathString = `/runnerStorage/`+ this.email+ `/` ;
+    this.password= (<HTMLInputElement>document.getElementById('passwordR')).value;
 
     //runner data
     this.emailRef= firebase.database().ref(this.pathString+'email/');
@@ -53,8 +54,6 @@ export class SignInRPage {
     passwordRef.on('value', dataSnapshot => {
       this.Password = dataSnapshot.val();
     })
-
-    this.password= (<HTMLInputElement>document.getElementById('passwordR')).value;
 
     if(this.Email){
       if(this.password==this.Password){
