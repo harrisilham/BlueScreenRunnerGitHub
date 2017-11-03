@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FrontPage } from '../../front/front';
 import { Events } from 'ionic-angular';
 import firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SignUpUPage page.
@@ -28,7 +29,7 @@ export class SignUpUPage {
 
   dataRef: firebase.database.Reference;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private alertCtrl: AlertController) {
     events.publish('user:entered');
   }
 
@@ -47,10 +48,12 @@ export class SignUpUPage {
 
     if(this.name==""||this.phone==null||this.email==""||this.username==""||this.password==""||this.confirmPassword==""){
       //error cz no input
+      this.presentAlert()
       this.navCtrl.setRoot(SignUpUPage);
     }
     else if(this.password!=this.confirmPassword){
       //error pass not same
+      this.presentAlertpass()
       this.navCtrl.setRoot(SignUpUPage);
     }
     else{
@@ -71,5 +74,23 @@ export class SignUpUPage {
 
   out(){
     this.navCtrl.setRoot(FrontPage);
+  }
+
+  presentAlert() {
+  let alert = this.alertCtrl.create({
+    title: 'Form Does Not Fill',
+    subTitle: 'Please Fill The Form',
+    buttons: ['Dismiss']
+  });
+  alert.present();
+  }
+
+  presentAlertpass() {
+  let alert = this.alertCtrl.create({
+    title: 'Password does not matching',
+    subTitle: 'Please Try Again',
+    buttons: ['Dismiss']
+  });
+  alert.present();
   }
 }
