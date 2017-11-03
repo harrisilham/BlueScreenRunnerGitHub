@@ -4,44 +4,36 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home Admin!</ion-title>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>BlueScreen Admin Homepage</h3>
+  <h3>View Runner List</h3>
+  <br>
 <ion-card>
+    <div class="row header">
+          <div class="col">Name</div>
+          <div class="col">IC Number</div>
+          <div class="col">Edit</div>
+          <div class="col">Delete</div>
+        </div>
+        <div class="row" ng-repeat="data in ctrl.data">
+         <div class="col">azam</div>
+         <div class="col">960713016239</div>
+         <div class="col"><button type="editRunner"
+         (click)="editButton(EditrunnerAPage)">
+         <ion-icon name="create" item-start></ion-icon></button></div>
+         <div class="col"><button type="deleteRunner"
+         (click)="deleteButton(DeleterunnerAPage)">
+         <ion-icon name="trash" item-start></ion-icon></button></div>
+       </div>
 
-  <ion-row>
-    <ion-col>
-    <button ion-item round outline type="viewRunner"
-    (click)="viewButton(ViewrunnerAPage)">
-    <ion-icon name="eye" item-start></ion-icon>
-    View Runner</button>
-    </ion-col>
 
-    <ion-col>
-    <button ion-item round outline type="addRunner"
+    <button ion-item type="addRunner"
     (click)="addButton(AddrunnerAPage)">
     <ion-icon name="add" item-start></ion-icon>
     Add Runner</button>
-    </ion-col>
-  </ion-row>
-
-<ion-row>
-    <ion-col>
-    <button ion-item round outline type="editRunner"
-    (click)="editButton(EditrunnerAPage)">
-    <ion-icon name="create" item-start></ion-icon>
-    Edit Runner</button>
-    </ion-col>
-
-    <ion-col>
-    <button ion-item round outline  type="deleteRunner"
-    (click)="deleteButton(DeleterunnerAPage)">
-    <ion-icon name="trash" item-start></ion-icon>
-    Delete Runner</button>
-    </ion-col>
-</ion-row>
 
 </ion-card>
 </ion-content>
