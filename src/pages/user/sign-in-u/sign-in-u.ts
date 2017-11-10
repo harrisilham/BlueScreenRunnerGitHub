@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
 
@@ -35,41 +35,42 @@ export class SignInUPage {
   public UsernameA= {};
   public PasswordA= {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInUPage');
   }
 
-  itemTapped() {
+  async itemTapped() {
     this.username= (<HTMLInputElement>document.getElementById('usernameU')).value;
     this.password= (<HTMLInputElement>document.getElementById('passwordU')).value;
     this.pathString = `/userStorage/`+ this.username+ `/` ;
     this.pathStringA= `/adminStorage/`+ this.username+ `/` ;
 
     //user data
-    this.usernameRef= firebase.database().ref(this.pathString+'username/');
+    this.usernameRef=  firebase.database().ref(this.pathString+'username/');
     this.usernameRef.on('value', dataSnapshot => {
       this.Username = dataSnapshot.val();
     })
-    this.passwordRef= firebase.database().ref(this.pathString+'password/');
+    this.passwordRef=  firebase.database().ref(this.pathString+'password/');
     this.passwordRef.on('value', dataSnapshot => {
       this.Password = dataSnapshot.val();
     })
 
     //admin data
-    this.usernameARef= firebase.database().ref(this.pathStringA+'username/');
+    this.usernameARef=  firebase.database().ref(this.pathStringA+'username/');
     this.usernameARef.on('value', dataSnapshot => {
       this.UsernameA = dataSnapshot.val();
     })
-    this.passwordARef = firebase.database().ref(this.pathStringA+'password/');
+    this.passwordARef =  firebase.database().ref(this.pathStringA+'password/');
     this.passwordARef.on('value', dataSnapshot => {
-      this.PasswordA = dataSnapshot.val();
+       this.PasswordA = dataSnapshot.val();
     })
 
-    //make loading here
+    this.loadingfunc(); //loading spinner
+    await this.delay(5000); //wait 5sec
+
     if(this.Username && this.Password==this.password){
       this.navCtrl.setRoot(HomeUPage);
     }
@@ -80,17 +81,39 @@ export class SignInUPage {
       this.presentAlert();
       this.navCtrl.setRoot(SignInUPage);
     }
+
   }
 
- buttonRegister(event, item){
-     this.navCtrl.setRoot(SignUpUPage);
- }
- presentAlert() {
- let alert = this.alertCtrl.create({
-   title: 'Wrong Username And Password',
-   subTitle: 'Please Try Again',
-   buttons: ['Dismiss']
- });
- alert.present();
- }
+  buttonRegister(event, item){
+       this.navCtrl.setRoot(SignUpUPage);
+  }
+
+  presentAlert() {
+   let alert = this.alertCtrl.create({
+     title: 'Wrong Username And Password',
+     subTitle: 'Please Try Again',
+     buttons: ['Dismiss']
+  });
+   alert.present();
+  }
+
+  delay(ms: number) {
+     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  loadingfunc() {
+    let loading = this.loadingCtrl.create({
+
+      spinner: 'ios',
+      dismissOnPageChange: true,
+      content: 'Signing in...'
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
+
 }

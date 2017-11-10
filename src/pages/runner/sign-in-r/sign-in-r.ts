@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
 
@@ -31,7 +31,7 @@ export class SignInRPage {
 
   front:any = FrontPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 
   }
 
@@ -39,7 +39,7 @@ export class SignInRPage {
     console.log('ionViewDidLoad SignInRPage');
   }
 
-  itemTapped() {
+  async itemTapped() {
     this.username= (<HTMLInputElement>document.getElementById('usernameR')).value;
     this.pathString = `/runnerStorage/`+ this.username+ `/` ;
     this.password= (<HTMLInputElement>document.getElementById('passwordR')).value;
@@ -57,6 +57,9 @@ export class SignInRPage {
     })
 
     //make loading here
+    this.loadingfunc(); //loading spinner
+    await this.delay(5000); //wait 5sec
+
     if(this.username==this.Username && this.password==this.Password){
         this.navCtrl.setRoot(HomeRPage);
     }
@@ -76,4 +79,24 @@ export class SignInRPage {
     });
     alert.present();
   }
+
+  delay(ms: number) {
+     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  loadingfunc() {
+    let loading = this.loadingCtrl.create({
+
+      spinner: 'ios',
+      dismissOnPageChange: true,
+      content: 'Signing in...'
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
+
 }
