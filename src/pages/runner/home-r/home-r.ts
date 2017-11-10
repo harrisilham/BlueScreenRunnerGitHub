@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
-
+import { EditrunnerPage } from '../editrunner/editrunner'
 /**
  * Generated class for the HomeRPage page.
  *
@@ -28,5 +28,8 @@ export class HomeRPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeRPage');
   }
+  editProfilebutton(){
+    this.navCtrl.push(EditrunnerPage);
 
+  }
 }
