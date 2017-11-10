@@ -11,8 +11,11 @@
 <ion-content padding>
   <h3>View Runner List</h3>
   <br>
-<ion-card>
-    <div class="row header">
+
+<ion-card >
+  <ion-grid>
+  <table id="listRunner" class="center">
+  <!--  <div class="row header">
           <div class="col">Email</div>
           <div class="col">Edit</div>
           <div class="col">Delete</div>
@@ -25,9 +28,24 @@
          <div class="col"><button type="deleteRunner"
          (click)="deleteButton(DeleterunnerAPage)">
          <ion-icon name="trash" item-start></ion-icon></button></div>
-       </div>
+       </div>-->
 
-
+<!--<ion-row>
+    <ion-col *ngFor="let r of runnerNode2  " >
+      {{r.username}}
+    </ion-col>
+    <ion-col ngFor*="let r of runner" (click)="editProfile(r)">
+      <button type="editRunner">
+      <ion-icon name="create" item-start></ion-icon></button>
+    </ion-col>
+    <ion-col ngFor*="let r of runner" (click)="deleteProfile(r)">
+      <button type="deleteRunner">
+      <ion-icon name="trash" item-start></ion-icon></button>
+    </ion-col>
+  </ion-row>-->
+  </table>
+</ion-grid>
+</ion-card>
     <button ion-item type="addRunner"
     (click)="addButton(AddrunnerAPage)">
     <ion-icon name="add" item-start></ion-icon>
@@ -35,5 +53,5 @@
 
     <button (click)="viewListRunner()"> viewwww</button>
 
-</ion-card>
+
 </ion-content>
