@@ -68,6 +68,7 @@ export class SignUpUPage {
         password: this.password
       })
       //make successfull alert here n ask user to login at frontpage
+      this.presentAlertSuccess();
       this.navCtrl.setRoot(FrontPage);
     }
   }
@@ -90,6 +91,15 @@ export class SignUpUPage {
     title: 'Passwords Not Matched',
     subTitle: 'Please Try Again',
     buttons: ['Dismiss']
+  });
+  alert.present();
+  }
+
+  presentAlertSuccess() {
+  let alert = this.alertCtrl.create({
+    title: 'Account Created',
+    subTitle: 'Please sign in with your username and password',
+    buttons: ['OK']
   });
   alert.present();
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
 
@@ -35,7 +35,7 @@ export class SignInUPage {
   public UsernameA= {};
   public PasswordA= {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController, public events: Events) {
   }
 
   ionViewDidLoad() {
@@ -71,11 +71,17 @@ export class SignInUPage {
     this.loadingfunc(); //loading spinner
     await this.delay(5000); //wait 5sec
 
-    if(this.Username && this.Password==this.password){
-      this.navCtrl.setRoot(HomeUPage);
+    if(this.Username && this.Password==this.password){//user
+      this.events.publish("username", this.username);
+      this.navCtrl.setRoot(HomeUPage, {
+        username: <String> this.Username
+      });
     }
-    else if(this.UsernameA && this.PasswordA==this.password){
-      this.navCtrl.setRoot(HomeAPage);
+    else if(this.UsernameA && this.PasswordA==this.password){//admin
+      this.events.publish("username", this.username);
+      this.navCtrl.setRoot(HomeAPage, {
+        username: <String> this.UsernameA
+      });
     }
     else{
       this.presentAlert();
@@ -115,5 +121,4 @@ export class SignInUPage {
       loading.dismiss();
     }, 5000);
   }
-
 }

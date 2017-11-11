@@ -64,8 +64,8 @@ export class EditrunnerAPage {
     var phoneNum= (<HTMLInputElement>document.getElementById('phoneNum')).value;
     var email= (<HTMLInputElement>document.getElementById('email')).value;
 
+    document.write(fullName)
     var path=`/runnerStorage/`+ this.runnerNode[0].username+`/`;
-    //document.write(path)
     var pathRef= firebase.database().ref(path);
     pathRef.update({
       username: username,

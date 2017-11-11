@@ -1,13 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component, ViewChild, Injectable } from '@angular/core';
+import { Nav, Platform, NavController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
+import { HomeUPage } from '../pages/user/home-u/home-u';
+import { HomeRPage } from '../pages/runner/home-r/home-r';
 import { FrontPage } from '../pages/front/front';
-import { DummyPage } from '../pages/dummy/dummy';
+import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,15 +18,34 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = FrontPage;
+  username:any;
 
-  pages: Array<{title: string, component: any}>;
+  pagesA: Array<{title: string, component: any}>;
+  pagesU: Array<{title: string, component: any}>;
+  pagesR: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, public events: Events) {
     this.initializeApp();
+    this.events.subscribe('username',(usernamePassed)=>{
+      this.username= usernamePassed;
+    });
 
-    // used for an example of ngFor and navigation
-    this.pages = [
+    // admin menu elements
+    this.pagesA = [
       { title: 'Home', component: HomeAPage },
+      { title: 'Sign Out', component: FrontPage },
+    ];
+
+    //user menu elements
+    this.pagesU = [
+      { title: 'Home', component: HomeUPage },
+      { title: 'My Profile', component: ProfileUPage },
+      { title: 'Sign Out', component: FrontPage },
+    ];
+
+    //runner menu elements
+    this.pagesR = [
+      { title: 'Home', component: HomeRPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 
@@ -38,7 +59,6 @@ export class MyApp {
     });
   }
 
-
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -49,9 +69,10 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(page.title=="Home"|| page.title=="Sign Out")this.nav.setRoot(page.component);
+    else this.nav.push(page.component, {
+      username: this.username
+    });
   }
 
   openMenu() {
@@ -65,9 +86,4 @@ export class MyApp {
  toggleMenu() {
    this.menuCtrl.toggle();
  }
-
- justOpenPage(page){
-   this.nav.setRoot(page);
- }
-
 }

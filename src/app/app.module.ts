@@ -7,8 +7,6 @@ import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { FrontPage } from '../pages/front/front';
 import { SignInRPage } from '../pages/runner/sign-in-r/sign-in-r'
 import { SignInUPage } from '../pages/user/sign-in-u/sign-in-u'
-import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
-import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +15,13 @@ import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a'
 import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
 import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
 import { AvailabilityPage } from '../pages/runner/availability/availability'
-import { DummyPage } from '../pages/dummy/dummy';
+import { ProfileUPage } from '../pages/user/profile-u/profile-u';
+import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
+
+import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
+import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
+//import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
+
 
 @NgModule({
   declarations: [
@@ -26,21 +30,22 @@ import { DummyPage } from '../pages/dummy/dummy';
     FrontPage,
     SignInRPage,
     SignInUPage,
-    //HomeRPage,
-    //HomeUPage,
     SignUpUPage,
     AddrunnerAPage,
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
     AvailabilityPage,
-    DummyPage
+    ProfileUPage,
+    EditUserUPage
+
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HomeRPageModule,
     HomeUPageModule,
+    //ProfileUPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,15 +54,15 @@ import { DummyPage } from '../pages/dummy/dummy';
     FrontPage,
     SignInRPage,
     SignInUPage,
-    //HomeRPage,
-    //HomeUPage,
     SignUpUPage,
     AddrunnerAPage,
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
     AvailabilityPage,
-    DummyPage
+    ProfileUPage,
+    EditUserUPage
+
   ],
   providers: [
     StatusBar,

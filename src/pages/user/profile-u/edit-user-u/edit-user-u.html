@@ -1,5 +1,5 @@
 <!--
-  Generated template for the EditrunnerAPage page.
+  Generated template for the EditUserUPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,23 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Edit Runner</ion-title>
+    <ion-title>editUserU</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<h2>Edit Runner Information </h2>
-
+  <h3 align="center">Edit Profile</h3>
+  
   <ion-card>
-    <ion-list *ngFor="let a of runnerNode">
+    <ion-list *ngFor="let u of userNode">
       <ion-row>
         <ion-col>
           Username
         </ion-col>
         <ion-col>
-          <input type="text" id="username" value={{a.username}} readonly>
+          <input type="text" id="username" value={{u.username}} readonly>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -31,15 +31,7 @@
           Full Name
         </ion-col>
         <ion-col>
-          <input type="text" id="fullName" value={{a.fullName}}>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          IC Number
-        </ion-col>
-        <ion-col>
-          <input type="text" id="ic" value={{a.ic}}>
+          <input type="text" id="fullName" value={{u.fullName}}>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -47,7 +39,7 @@
           Phone Number
         </ion-col>
         <ion-col>
-          <input type="text" id="phoneNum" value={{a.phoneNum}}>
+          <input type="text" id="phoneNum" value={{u.phoneNum}}>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -55,18 +47,18 @@
           Email
         </ion-col>
         <ion-col>
-          <input type="text" id="email" value={{a.email}}>
+          <input type="text" id="email" value={{u.email}}>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col>
           <button ion-button round outline color="danger" (click)="this.navCtrl.pop()">CANCEL </button>
         </ion-col>
         <ion-col>
-          <b><button ion-button round outline  (click)="editRunner()"><b>SAVE CHANGES</b> </button></b>
+          <b><button ion-button round outline  (click)="editUser()"><b>SAVE CHANGES</b> </button></b>
         </ion-col>
       </ion-row>
     </ion-list>
   </ion-card>
+
 </ion-content>

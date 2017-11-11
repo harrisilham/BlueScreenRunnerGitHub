@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController, MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 
 import { AddrunnerAPage } from '../addrunner-a/addrunner-a';
@@ -12,6 +12,8 @@ import { ViewrunnerAPage } from '../viewrunner-a/viewrunner-a';
   templateUrl: 'home-a.html'
 })
 export class HomeAPage {
+  activeMenu: string = 'menu-a'
+
   runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
 
   runnerNodeSearch: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
@@ -26,7 +28,12 @@ export class HomeAPage {
   public phoneNum=[];
   public username=[];
 
-  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController, private menu: MenuController) {
+    this.activeMenu= 'menu-u' ;
+    this.menu.enable(true, 'menu-a');
+    this.menu.enable(false, 'menu-r') ;
+    this.menu.enable(false, 'menu-u');
+
     events.publish('user:entered');//disable tab
 
     this.pathString= `/runnerStorage/` ;

@@ -16,9 +16,13 @@ import { Events } from 'ionic-angular';
   templateUrl: 'home-u.html',
 })
 export class HomeUPage {
-  activeMenu: string = 'menu-r'
+  usernamePassed: any;
+  activeMenu: string = 'menu-u'
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events) {
+    //get username from last page..front
+    this.usernamePassed= navParams.get('username');
+
     this.activeMenu= 'menu-u' ;
     this.menu.enable(false, 'menu-a');
     this.menu.enable(false, 'menu-r') ;
