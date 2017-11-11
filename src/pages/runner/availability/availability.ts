@@ -23,18 +23,4 @@ export class AvailabilityPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AvailabilityPage');
   }
-
-  notify(){
-    this.doAlert();
-  }
-
-  doAlert() {
-  	let alert = this.alertCtrl.create({
-  		title: 'Availability',
-  		message: 'You just on your availability',
-  		buttons: ['OK']
-  	});
-  	alert.present()
-  
-  }
 }
