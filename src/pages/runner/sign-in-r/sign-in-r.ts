@@ -32,12 +32,14 @@ export class SignInRPage {
   front:any = FrontPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+    //
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInRPage');
   }
+
 
   async itemTapped() {
     this.username= (<HTMLInputElement>document.getElementById('usernameR')).value;
@@ -61,7 +63,7 @@ export class SignInRPage {
     await this.delay(5000); //wait 5sec
 
     if(this.username==this.Username && this.password==this.Password){
-        this.navCtrl.setRoot(HomeRPage);
+        this.navCtrl.setRoot(HomeRPage, {info:this.username});
     }
 
     else{
