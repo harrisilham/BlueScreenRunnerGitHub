@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
-import { EditrunnerPage } from '../editrunner/editrunner'
+import { EditrunnerPage } from '../editrunner/editrunner';
+import { AvailabilityPage} from '../availability/availability';
 /**
  * Generated class for the HomeRPage page.
  *
@@ -30,6 +31,11 @@ export class HomeRPage {
   }
   editProfilebutton(){
     this.navCtrl.push(EditrunnerPage);
+
+  }
+
+  availabilitybutton(){
+    this.navCtrl.push(AvailabilityPage);
 
   }
 }

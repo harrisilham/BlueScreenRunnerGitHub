@@ -16,6 +16,7 @@ import { AddrunnerAPage } from '../pages/admin/addrunner-a/addrunner-a';
 import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a';
 import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
 import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
+import { AvailabilityPage } from '../pages/runner/availability/availability'
 import { EditrunnerPage } from '../pages/runner/editrunner/editrunner';
 import { DummyPage } from '../pages/dummy/dummy';
 
@@ -33,6 +34,7 @@ import { DummyPage } from '../pages/dummy/dummy';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
+    AvailabilityPage,
     EditrunnerPage,
     DummyPage
   ],
@@ -56,6 +58,7 @@ import { DummyPage } from '../pages/dummy/dummy';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
+    AvailabilityPage,
     EditrunnerPage,
     DummyPage
   ],
