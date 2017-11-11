@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
-<<<<<<< HEAD
 import { EditrunnerPage } from '../editrunner/editrunner';
 import { AvailabilityPage} from '../availability/availability';
-=======
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
->>>>>>> c6ee0a47d84eb000fbc48f0b7e1e150af14ba29e
+
 /**
  * Generated class for the HomeRPage page.
  *
