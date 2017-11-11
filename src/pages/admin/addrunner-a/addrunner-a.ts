@@ -36,7 +36,7 @@ export class AddrunnerAPage {
     console.log('ionViewDidLoad AddrunnerAPage');
   }
   registerButton(){
-    this.name=(<HTMLInputElement>document.getElementById('nameR')).value;
+    this.name=(<HTMLInputElement>document.getElementById('nameR')).value; //nak amik nilai user tulis dkt form
     this.ic=parseInt((<HTMLInputElement>document.getElementById('ICR')).value);
     this.phone=parseInt((<HTMLInputElement>document.getElementById('phoneR')).value);
     this.email=(<HTMLInputElement>document.getElementById('emailR')).value;
@@ -67,6 +67,7 @@ export class AddrunnerAPage {
         password: this.password
       })
       //make successfull alert uname n pass
+      this.presentAlertSuccess();
       this.navCtrl.setRoot(HomeAPage);
     }
 
@@ -75,6 +76,15 @@ export class AddrunnerAPage {
   let alert = this.alertCtrl.create({
     title: 'Required Field Cannot Be Left Blank!',
     subTitle: 'Please Fill All The Field',
+    buttons: ['Dismiss']
+  });
+  alert.present();
+  }
+
+  presentAlertSuccess() {
+  let alert = this.alertCtrl.create({
+    title: 'Successfull !',
+    subTitle: 'Data will be saved in the database',
     buttons: ['Dismiss']
   });
   alert.present();

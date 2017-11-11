@@ -16,7 +16,6 @@ import { AddrunnerAPage } from '../pages/admin/addrunner-a/addrunner-a';
 import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a';
 import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
 import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
-import { EditrunnerPage } from '../pages/runner/editrunner/editrunner';
 import { DummyPage } from '../pages/dummy/dummy';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { DummyPage } from '../pages/dummy/dummy';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
-    EditrunnerPage,
     DummyPage
   ],
   imports: [
@@ -56,7 +54,6 @@ import { DummyPage } from '../pages/dummy/dummy';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
-    EditrunnerPage,
     DummyPage
   ],
   providers: [
@@ -64,6 +61,7 @@ import { DummyPage } from '../pages/dummy/dummy';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FrontPage,
+    SignInRPage,
   ]
 })
 export class AppModule {}
