@@ -9,49 +9,49 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>View Runner List</h3>
+  <h3>Runner List</h3>
   <br>
+  <button ion-item type="addRunner"
+  (click)="addButton(AddrunnerAPage)">
+  <ion-icon name="add" item-start></ion-icon>
+  Add New Runner</button>
 
-<ion-card >
-  <ion-grid>
-  <table id="listRunner" class="center">
-  <!--  <div class="row header">
-          <div class="col">Email</div>
-          <div class="col">Edit</div>
-          <div class="col">Delete</div>
-        </div>
-        <div class="row" ng-repeat="data in ctrl.data">
-         <div class="col" onload =viewListRunner()> </div>
-         <div class="col"><button type="editRunner"
-         (click)="editButton(EditrunnerAPage)">
-         <ion-icon name="create" item-start></ion-icon></button></div>
-         <div class="col"><button type="deleteRunner"
-         (click)="deleteButton(DeleterunnerAPage)">
-         <ion-icon name="trash" item-start></ion-icon></button></div>
-       </div>-->
 
-<!--<ion-row>
-    <ion-col *ngFor="let r of runnerNode2  " >
-      {{r.username}}
-    </ion-col>
-    <ion-col ngFor*="let r of runner" (click)="editProfile(r)">
-      <button type="editRunner">
-      <ion-icon name="create" item-start></ion-icon></button>
-    </ion-col>
-    <ion-col ngFor*="let r of runner" (click)="deleteProfile(r)">
-      <button type="deleteRunner">
-      <ion-icon name="trash" item-start></ion-icon></button>
-    </ion-col>
-  </ion-row>-->
-  </table>
-</ion-grid>
+
+<ion-card>
+  <ion-searchbar (ionInput)="getRunner($event)"></ion-searchbar>
+  <ion-list>
+    <ion-row>
+      <ion-col>#</ion-col>
+      <ion-col>Username</ion-col>
+      <ion-col>Edit</ion-col>
+      <ion-col>Delete</ion-col>
+    </ion-row>
+
+    <ion-row  *ngFor="let p of runnerNodeSearch">
+      <ion-col>
+        {{p.index}}
+      </ion-col>
+      <ion-col>
+        <a>
+        {{p.username}}
+        </a>
+      </ion-col>
+      <ion-col>
+        <button style="background-color:Transparent;">
+          <ion-icon name='create' item-start></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button style="background-color:Transparent;">
+          <ion-icon name='trash' item-start></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
 </ion-card>
-    <button ion-item type="addRunner"
-    (click)="addButton(AddrunnerAPage)">
-    <ion-icon name="add" item-start></ion-icon>
-    Add Runner</button>
 
-    <button (click)="viewListRunner()"> viewwww</button>
 
 
 </ion-content>

@@ -12,35 +12,23 @@ import { ViewrunnerAPage } from '../viewrunner-a/viewrunner-a';
   templateUrl: 'home-a.html'
 })
 export class HomeAPage {
-  runner: Array<{email: string, fullName: string, ic: number, password: string, phoneNum: number, username: string}>;
+  runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
 
-  size: number;
+  runnerNodeSearch: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
 
   pathString: any;
-  emailString: any;
-
   pathRef: any;
-  emailRef: any;
-  fullNameRef: any;
-  icRef: any;
-  passwordRef: any;
-  phoneNumRef: any;
 
-  runnerNode: Array<{email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>;
   public runnerList=[];
   test: any;
   testEmail: any;
 
-  public runnerNode2=[]; //tk gunaaa
   public email=[];
   public fullName=[];
   public ic=[];
   public password=[];
   public phoneNum=[];
   public username=[];
-
-  public Username= {};
-  public Email= {};
 
   constructor(public navCtrl: NavController, public events: Events) {
     events.publish('user:entered');
@@ -62,24 +50,12 @@ export class HomeAPage {
 
         /*document.writeln(this.email[index]+ "<br>"+ this.fullName[index]+ "<br>"+ this.ic[index]+ "<br>"+ this.password[index]+ "<br>"+ this.phoneNum[index]+ "<br>"+ this.username[index]+ "<br><br>");*/
 
-        //create table
-        var table: HTMLTableElement= <HTMLTableElement>document.getElementById('listRunner');
-        var row: HTMLTableRowElement = <HTMLTableRowElement>table.insertRow(-1);
-        var cell1: HTMLTableCellElement=<HTMLTableCellElement>row.insertCell(0);
-        var cell2: HTMLTableCellElement=<HTMLTableCellElement>row.insertCell(1);
-        var cell3: HTMLTableCellElement=<HTMLTableCellElement>row.insertCell(2);
-        var cell4: HTMLTableCellElement=<HTMLTableCellElement>row.insertCell(3);
-
-        cell1.innerHTML= index.toString();
-        cell2.innerHTML= this.username[index];
-        cell3.innerHTML= "<button><ion-icon name='create'>edit</ion-icon> </button>";
-        cell4.innerHTML= "<button><ion-icon name='trash'>delete</ion-icon> </button>";
-
-        cell1.style.border=cell2.style.border=cell3.style.border=cell4.style.border= "1px solid ";
+        //push into array object
+        this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], ic: this.ic[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index] });
         index++;
       });
     });
-
+    this.initializeRunnerSearch();
   }
 
   viewButton(event, item){
@@ -98,7 +74,23 @@ export class HomeAPage {
     this.navCtrl.push(DeleterunnerAPage);
   }
 
-  public incrementSize(){
-    this.size++;
+  initializeRunnerSearch(){
+    this.runnerNodeSearch=this.runnerNode;
   }
+
+  getRunner(ev: any){
+    // Reset items back to all of the items
+    this.initializeRunnerSearch();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.runnerNodeSearch = this.runnerNodeSearch.filter((p) => {
+        return (p.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
 }
