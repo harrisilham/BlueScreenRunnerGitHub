@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
-import { EditrunnerPage } from '../editrunner/editrunner';
+import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { AvailabilityPage} from '../availability/availability';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
