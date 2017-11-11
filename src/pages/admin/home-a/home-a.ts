@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events} from 'ionic-angular';
+import { NavController, Events, AlertController } from 'ionic-angular';
 import firebase from 'firebase';
 
 import { AddrunnerAPage } from '../addrunner-a/addrunner-a';
@@ -20,8 +20,6 @@ export class HomeAPage {
   pathRef: any;
 
   public runnerList=[];
-  test: any;
-  testEmail: any;
 
   public email=[];
   public fullName=[];
@@ -30,7 +28,7 @@ export class HomeAPage {
   public phoneNum=[];
   public username=[];
 
-  constructor(public navCtrl: NavController, public events: Events) {
+  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController) {
     events.publish('user:entered');
 
     this.pathString= `/runnerStorage/` ;
@@ -47,8 +45,6 @@ export class HomeAPage {
         this.password[index]=  childSnapshot.child("/password/").val();
         this.phoneNum[index]=  childSnapshot.child("/phoneNum/").val();
         this.username[index]=  childSnapshot.child("/username/").val();
-
-        /*document.writeln(this.email[index]+ "<br>"+ this.fullName[index]+ "<br>"+ this.ic[index]+ "<br>"+ this.password[index]+ "<br>"+ this.phoneNum[index]+ "<br>"+ this.username[index]+ "<br><br>");*/
 
         //push into array object
         this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], ic: this.ic[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index] });
@@ -91,6 +87,36 @@ export class HomeAPage {
         return (p.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  presentAlert(username: String) {
+    let alert = this.alertCtrl.create({
+      title: 'Are you sure to delete <b>'+ username+'</b>?',
+      subTitle: 'This will delete all the data stored on '+ username,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+          this.deleteRunner(username);
+        }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  deleteRunner(username: String){
+    var pathString= this.pathString+username+"/";
+    var pathRef= firebase.database().ref(pathString);
+
+    pathRef.remove();
+
+    //refresh page
+    this.navCtrl.setRoot(HomeAPage);
   }
 
 }
