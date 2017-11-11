@@ -19,8 +19,6 @@ export class HomeAPage {
   pathString: any;
   pathRef: any;
 
-  public runnerList=[];
-
   public email=[];
   public fullName=[];
   public ic=[];
@@ -29,7 +27,7 @@ export class HomeAPage {
   public username=[];
 
   constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController) {
-    events.publish('user:entered');
+    events.publish('user:entered');//disable tab
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -119,4 +117,9 @@ export class HomeAPage {
     this.navCtrl.setRoot(HomeAPage);
   }
 
+  editRunner(username: String){
+    this.navCtrl.push(EditrunnerAPage, {
+      username: username
+    });
+  }
 }

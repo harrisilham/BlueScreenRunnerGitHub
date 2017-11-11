@@ -14,5 +14,59 @@
 
 
 <ion-content padding>
-EDIT
+<h2>Edit Runner Information </h2>
+
+  <ion-card>
+    <ion-list *ngFor="let a of runnerNode">
+      <ion-row>
+        <ion-col>
+          Username
+        </ion-col>
+        <ion-col>
+          <input type="text" id="username" value={{a.username}}>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Full Name
+        </ion-col>
+        <ion-col>
+          <input type="text" id="fullName" value={{a.fullName}}>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          IC Number
+        </ion-col>
+        <ion-col>
+          <input type="text" id="ic" value={{a.ic}}>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Phone Number
+        </ion-col>
+        <ion-col>
+          <input type="text" id="phoneNum" value={{a.phoneNum}}>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Email
+        </ion-col>
+        <ion-col>
+          <input type="text" id="email" value={{a.email}}>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button round outline color="danger" (click)="this.navCtrl.pop()">CANCEL </button>
+        </ion-col>
+        <ion-col>
+          <b><button ion-button round outline  (click)="editRunner()"><b>SAVE CHANGES</b> </button></b>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card>
 </ion-content>
