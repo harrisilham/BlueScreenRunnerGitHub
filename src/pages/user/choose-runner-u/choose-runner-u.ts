@@ -44,7 +44,7 @@ export class ChooseRunnerUPage {
     this.pathRef= firebase.database().ref(this.pathString);
 
     //get all data
-    this.pathRef.on('value', snapshot => {
+    this.pathRef.once('value', snapshot => {
       var index=0;
       snapshot.forEach(childSnapshot => {
 
@@ -83,5 +83,13 @@ export class ChooseRunnerUPage {
     });
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 
 }
