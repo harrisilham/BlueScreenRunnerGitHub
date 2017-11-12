@@ -16,7 +16,7 @@ import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
 import { AvailabilityPage } from '../pages/runner/availability/availability'
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
-
+import { EditrunnerPage } from '../pages/runner/editrunner/editrunner';
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
 import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 //import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
@@ -36,6 +36,7 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
     ViewrunnerAPage,
     AvailabilityPage,
     ProfileUPage,
+    EditrunnerPage,
     EditUserUPage
 
   ],
@@ -60,6 +61,7 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
     ViewrunnerAPage,
     AvailabilityPage,
     ProfileUPage,
+    EditrunnerPage,
     EditUserUPage
 
   ],

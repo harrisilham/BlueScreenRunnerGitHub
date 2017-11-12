@@ -4,7 +4,7 @@ import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { AvailabilityPage} from '../availability/availability';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
-
+import { EditrunnerPage} from '../editrunner/editrunner';
 /**
  * Generated class for the HomeRPage page.
  *
@@ -43,26 +43,8 @@ export class HomeRPage {
     console.log('ionViewDidLoad HomeRPage');
   }
 
-  confirmButton(){
-    this.bioR=(<HTMLInputElement>document.getElementById('biodataR')).value;
-    this.coverArea=(<HTMLInputElement>document.getElementById('CoverArea')).value;
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
-    this.dataRef= firebase.database().ref(this.pathString);
-    this.dataRef.update({
-    biodata: this.bioR,
-    coverArea: this.coverArea
-    })
-    this.presentAlertSuccess();
-    this.navCtrl.setRoot(HomeRPage);
-  }
-
-  presentAlertSuccess() {
-  let alert = this.alertCtrl.create({
-    title: 'Successfull !',
-    subTitle: 'Data will be saved in the database',
-    buttons: ['Dismiss']
-  });
-  alert.present();
+  profileButton(){
+    this.navCtrl.push(EditrunnerPage, {info:this.username});
   }
 
   availabilitybutton(){
