@@ -44,7 +44,7 @@ export class ChooseRunnerUPage {
     this.pathRef= firebase.database().ref(this.pathString);
 
     //get all data
-    this.pathRef.once('value', snapshot => {
+    this.pathRef.on('value', snapshot => {
       var index=0;
       snapshot.forEach(childSnapshot => {
 
