@@ -14,6 +14,11 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <h3 align="center">BlueScreen User Homepage</h3>
 
   <ion-grid align="middle">
