@@ -19,7 +19,7 @@ import { EditRunnerRPage } from './edit-runner-r/edit-runner-r';
 export class ProfileRPage {
   usernamePassed: any;
 
-  runnerNode: Array<{index: number, email: String, fullName: String, password: String, phoneNum: number, username: String, biodata: String}>=[];
+  runnerNode: Array<{index: number, email: String, fullName: String, password: String, phoneNum: number, username: String, biodata: String, coverArea: String}>=[];
 
   pathString: any;
   pathRef: any;
@@ -30,6 +30,7 @@ export class ProfileRPage {
   public phoneNum=[];
   public username=[];
   public biodata=[];
+  public coverArea=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //get username from last page..home
@@ -50,10 +51,11 @@ export class ProfileRPage {
         this.phoneNum[index]=  childSnapshot.child("/phoneNum/").val();
         this.username[index]=  <string> childSnapshot.child("/username/").val();
         this.biodata[index]= childSnapshot.child("/biodata/").val();
+        this.coverArea[index]= childSnapshot.child("/coverArea/").val();
 
         //push into array object
         if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
-          this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index], biodata: this.biodata[index] });
+          this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index], biodata: this.biodata[index], coverArea: this.coverArea[index] });
         }
       });
     });
