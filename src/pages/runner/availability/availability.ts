@@ -24,7 +24,11 @@ export class AvailabilityPage {
   dataRef: firebase.database.Reference;
 
   constructor(public alertCtrl: AlertController, navCtrl: NavController, public navParams: NavParams, public events: Events) {
+    //get passed username
     this.usernamePassed= navParams.get('username');
+
+    //set pathstring to the current username
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
   }
 
   ionViewDidLoad() {
@@ -32,11 +36,15 @@ export class AvailabilityPage {
   }
 
   availableToggled(){
-    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
+
+    //should put if here if toggle on , set true. else false
     this.dataRef.update({
     availability: "true"
     })
+  }
+
+  getAvailability(){
 
   }
 }

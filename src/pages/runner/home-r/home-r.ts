@@ -21,25 +21,56 @@ import { EditrunnerPage} from '../editrunner/editrunner';
 export class HomeRPage {
   activeMenu: string = 'menu-r'
 
+  runnerNode: Array<{availability: String}>=[];
+  data={av: true};
+
+  public availability=[];
+  public username=[];
+
   bioR: string;
   coverArea: string;
-  username: string;
   usernamePassed: any;
 
   pathString: any;
-
-  dataRef: firebase.database.Reference;
+  pathRef: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
+    //set active menu runner
     this.activeMenu= 'menu-r' ;
     this.menu.enable(false, 'menu-a');
     this.menu.enable(true, 'menu-r') ;
     this.menu.enable(false, 'menu-u');
 
+    //disable tab
     events.publish('user:entered');
 
+    //get passed username
+    this.usernamePassed= navParams.get('username');
 
-  this.usernamePassed= navParams.get('username');
+    //set path
+    this.pathString= `/runnerStorage/` ;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    //read availability
+    this.pathRef.once('value', snapshot => {
+      var index=0;
+      snapshot.forEach(childSnapshot => {
+
+        this.availability[index]=  childSnapshot.child("/availability/").val();
+        this.username[index]= childSnapshot.child("/username/").val();
+
+        //push into array object
+        if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
+          this.runnerNode.push({availability: this.availability[index] });
+        }
+      });
+    });
+    var boolAv= false;
+    if(this.availability[0]=="true")boolAv=true;
+    this.data=({av: boolAv});
+
+    //set pathstring to the current username
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
   }
 
   ionViewDidLoad() {
@@ -56,5 +87,47 @@ export class HomeRPage {
     this.navCtrl.push(AvailabilityPage, {
       username: <string>this.usernamePassed
     });
+  }
+
+  availableToggled(){
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    //should put if here if toggle on , set true. else false
+    if(this.data.av==true){
+      this.pathRef.update({
+      availability: "true"
+      })
+    }
+    else{
+      this.pathRef.update({
+      availability: "false"
+      })
+    }
+  }
+
+  getAvailability(){
+    //set path
+    this.pathString= `/runnerStorage/` ;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    //read availability
+    this.pathRef.once('value', snapshot => {
+      var index=0;
+      snapshot.forEach(childSnapshot => {
+
+        this.availability[index]=  childSnapshot.child("/availability/").val();
+        this.username[index]= childSnapshot.child("/username/").val();
+
+        //push into array object
+        if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
+          this.runnerNode.push({availability: this.availability[index] });
+        }
+      });
+    });
+
+    if(this.availability[0]=="true")return true;
+    else return false;
+
+
   }
 }

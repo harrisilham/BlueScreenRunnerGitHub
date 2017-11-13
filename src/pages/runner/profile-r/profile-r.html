@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ProfileUPage page.
+  Generated template for the ProfileRPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -14,15 +14,26 @@
 
 
 <ion-content padding>
+
   <h3 align="center">My Profile</h3>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 align="center"><ion-avatar>
+        <img src="a" width="60" height="60">
+      </ion-avatar>
+      </ion-col>
+    </ion-row>
+
   <ion-card>
-    <ion-list *ngFor="let u of userNode">
+    <ion-list *ngFor="let r of runnerNode">
+
       <ion-row>
         <ion-col>
           Username
         </ion-col>
         <ion-col>
-          <input type="text" value={{u.username}} readonly>
+          <input type="text" value={{r.username}} readonly>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -30,7 +41,7 @@
           Full Name
         </ion-col>
         <ion-col>
-          <input type="text" value={{u.fullName}} readonly>
+          <input type="text" value={{r.fullName}} readonly>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -38,7 +49,7 @@
           Phone Number
         </ion-col>
         <ion-col>
-          <input type="text" value={{u.phoneNum}} readonly>
+          <input type="text" value={{r.phoneNum}} readonly>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -46,15 +57,15 @@
           Email
         </ion-col>
         <ion-col>
-          <input type="text" value={{u.email}} readonly>
+          <input type="text" value={{r.email}} readonly>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col colspan="2" align="center" >
+        <ion-col colspan="2" align="center">
           <button ion-button round outline (click)="go()">Edit Profile</button>
         </ion-col>
       </ion-row>
     </ion-list>
-  </ion-card>
+  </ion-card></ion-grid>
 
 </ion-content>

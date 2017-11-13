@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 
-import { EditUserUPage } from './edit-user-u/edit-user-u';
+import { EditRunnerRPage } from './edit-runner-r/edit-runner-r';
 
 /**
- * Generated class for the ProfileUPage page.
+ * Generated class for the ProfileRPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,13 +13,13 @@ import { EditUserUPage } from './edit-user-u/edit-user-u';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-u',
-  templateUrl: 'profile-u.html',
+  selector: 'page-profile-r',
+  templateUrl: 'profile-r.html',
 })
-export class ProfileUPage {
+export class ProfileRPage {
   usernamePassed: any;
 
-  userNode: Array<{index: number, email: String, fullName: String, password: String, phoneNum: number, username: String}>=[];
+  runnerNode: Array<{index: number, email: String, fullName: String, password: String, phoneNum: number, username: String, biodata: String}>=[];
 
   pathString: any;
   pathRef: any;
@@ -29,13 +29,14 @@ export class ProfileUPage {
   public password=[];
   public phoneNum=[];
   public username=[];
+  public biodata=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //get username from last page..home
     this.usernamePassed= navParams.get('username');
 
     //set path
-    this.pathString= `/userStorage/` ;
+    this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
 
     //get all data
@@ -48,23 +49,24 @@ export class ProfileUPage {
         this.password[index]=  childSnapshot.child("/password/").val();
         this.phoneNum[index]=  childSnapshot.child("/phoneNum/").val();
         this.username[index]=  <string> childSnapshot.child("/username/").val();
+        this.biodata[index]= childSnapshot.child("/biodata/").val();
 
         //push into array object
-        if(this.username[index]==<string>this.usernamePassed){//check for selected user to edit
-          this.userNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index] });
+        if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
+          this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index], biodata: this.biodata[index] });
         }
       });
     });
   }
 
-  go(){
-    this.navCtrl.push(EditUserUPage, {
-      userNode: this.userNode[0]
-    });
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ProfileRPage');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileUPage');
+  go(){
+    this.navCtrl.push(EditRunnerRPage, {
+      userNode: this.runnerNode[0]
+    });
   }
 
 }

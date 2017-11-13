@@ -11,26 +11,25 @@
     <button ion-button [menuToggle]='activeMenu'>
       <ion-icon name="menu" ></ion-icon>
     </button>
-    <ion-title>Home Runner!</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3 align="center">BlueScreen Runner Homepage</h3>
-    <ion-grid >
+  <h3 style="color: blue" align="left">@{{usernamePassed}}</h3>
 
-      <ion-row>
+  <ion-item>
+    <ion-label> Availability</ion-label>
+    <!-- [checked]="getAvailability()"-->
+    <ion-toggle  [(ngModel)]="data.av" (ionChange)="availableToggled()">
+    </ion-toggle>
+  </ion-item>
 
-        <ion-col colspan="2" align="middle"> <button ion-button round outline type="sumbit"
-          (click)="availabilitybutton(AvailabilityPage)">Availability</button>
-        </ion-col>
+  <br><br>
 
-        <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit"
-          (click)="profileButton(EditrunnerPage)">Go to your Profile</button> </ion-col>
-
-      </ion-row>
-
-    </ion-grid>
+    <ion-card>
+      <ion-col align="center"> COMING SOON..<br>SHOW CURRENT DELIVERY.. </ion-col>
+    </ion-card>
 
   <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>

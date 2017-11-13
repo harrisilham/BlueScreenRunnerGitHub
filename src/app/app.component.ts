@@ -10,6 +10,7 @@ import { HomeUPage } from '../pages/user/home-u/home-u';
 import { HomeRPage } from '../pages/runner/home-r/home-r';
 import { FrontPage } from '../pages/front/front';
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
+import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,6 +27,8 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, public events: Events) {
     this.initializeApp();
+
+    //get username passed
     this.events.subscribe('username',(usernamePassed)=>{
       this.username= usernamePassed;
     });
@@ -46,6 +49,7 @@ export class MyApp {
     //runner menu elements
     this.pagesR = [
       { title: 'Home', component: HomeRPage },
+      { title: 'My Profile', component: ProfileRPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 

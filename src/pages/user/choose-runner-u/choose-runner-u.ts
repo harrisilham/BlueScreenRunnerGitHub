@@ -87,7 +87,9 @@ export class ChooseRunnerUPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.runnerNodeSearch = this.runnerNodeSearch.filter((p) => {
-        return (p.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        if(p.username!=null){
+          return (p.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        }
       })
     }
   }
