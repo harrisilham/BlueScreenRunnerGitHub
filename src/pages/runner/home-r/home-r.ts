@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
-import { AvailabilityPage} from '../availability/availability';
 import firebase from 'firebase';
 import { Events } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { EditrunnerPage} from '../editrunner/editrunner';
 /**
  * Generated class for the HomeRPage page.
  *
@@ -52,41 +50,37 @@ export class HomeRPage {
     this.pathRef= firebase.database().ref(this.pathString);
 
     //read availability
+
     this.pathRef.once('value', snapshot => {
       var index=0;
       snapshot.forEach(childSnapshot => {
 
         this.availability[index]=  childSnapshot.child("/availability/").val();
         this.username[index]= childSnapshot.child("/username/").val();
-
         //push into array object
         if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
-          this.runnerNode.push({availability: this.availability[index] });
+          this.runnerNode[0]=({availability: this.availability[index] });
+
+          var boolAv= false;
+
+          if(<string>this.availability[index]=="true")boolAv=true;
+
+          this.data=({av: boolAv});
+
         }
       });
     });
-    var boolAv= false;
-    if(this.availability[0]=="true")boolAv=true;
-    this.data=({av: boolAv});
+
+
 
     //set pathstring to the current username
     this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
   }
-
+  test(){
+    document.write(<string>this.runnerNode[0].availability)
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeRPage');
-  }
-
-  profileButton(){
-    this.navCtrl.push(EditrunnerPage, {
-      username: <string>this.usernamePassed
-    });
-  }
-
-  availabilitybutton(){
-    this.navCtrl.push(AvailabilityPage, {
-      username: <string>this.usernamePassed
-    });
   }
 
   availableToggled(){

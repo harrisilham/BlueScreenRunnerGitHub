@@ -65,7 +65,7 @@ export class ProfileRPage {
 
   go(){
     this.navCtrl.push(EditRunnerRPage, {
-      userNode: this.runnerNode[0]
+      username: this.usernamePassed
     });
   }
 

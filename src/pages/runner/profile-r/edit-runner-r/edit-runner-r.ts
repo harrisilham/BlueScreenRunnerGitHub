@@ -56,7 +56,9 @@ export class EditRunnerRPage {
     coverArea: this.coverArea
     })
     this.presentAlertSuccess();
-    this.navCtrl.setRoot(HomeRPage);
+    this.navCtrl.setRoot(HomeRPage,{
+      username: this.usernamePassed
+    });
 
   }
 

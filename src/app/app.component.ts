@@ -73,7 +73,10 @@ export class MyApp {
   }
 
   openPage(page) {
-    if(page.title=="Home"|| page.title=="Sign Out")this.nav.setRoot(page.component);
+    if(page.title=="Sign Out")this.nav.setRoot(page.component);
+    else if(page.title=="Home")this.nav.setRoot(page.component, {
+      username: this.username
+    });
     else this.nav.push(page.component, {
       username: this.username
     });

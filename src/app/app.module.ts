@@ -14,13 +14,11 @@ import { AddrunnerAPage } from '../pages/admin/addrunner-a/addrunner-a';
 import { DeleterunnerAPage } from '../pages/admin/deleterunner-a/deleterunner-a';
 import { EditrunnerAPage } from '../pages/admin/editrunner-a/editrunner-a';
 import { ViewrunnerAPage } from '../pages/admin/viewrunner-a/viewrunner-a';
-import { AvailabilityPage } from '../pages/runner/availability/availability'
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 import { EditRunnerRPage } from '../pages/runner/profile-r/edit-runner-r/edit-runner-r';
 import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
 import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
-import { EditrunnerPage } from '../pages/runner/editrunner/editrunner';
 import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
 import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
@@ -40,11 +38,9 @@ import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
-    AvailabilityPage,
     ProfileUPage,
     ProfileRPage,
     EditRunnerRPage,
-    EditrunnerPage,
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
@@ -70,11 +66,9 @@ import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
     DeleterunnerAPage,
     EditrunnerAPage,
     ViewrunnerAPage,
-    AvailabilityPage,
     ProfileUPage,
     ProfileRPage,
     EditRunnerRPage,
-    EditrunnerPage,
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
