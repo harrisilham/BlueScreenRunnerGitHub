@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
 import { HomeRPage} from '../home-r/home-r';
@@ -24,15 +24,15 @@ export class EditrunnerPage {
   bioTick: boolean;
   coverTick: boolean;
   username: string;
+  usernamePassed: any;
 
   pathString: any;
 
   dataRef: firebase.database.Reference;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertCtrl: AlertController) {
-
-        this.username = navParams.get('info');
+    private alertCtrl: AlertController, public events: Events) {
+      this.usernamePassed= navParams.get('username');
   }
 
   ionViewDidLoad() {
@@ -48,7 +48,7 @@ export class EditrunnerPage {
   //this.coverTick=(<HTMLInputElement>document.getElementById('coverTick')).value;
 
 
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     biodata: this.bioR,
@@ -59,9 +59,8 @@ export class EditrunnerPage {
 
   }
 
-
   nameTicked(){
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     nameTick: "true"
@@ -70,7 +69,7 @@ export class EditrunnerPage {
   }
 
   phoneTicked(){
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     phoneTick: "true"
@@ -79,7 +78,7 @@ export class EditrunnerPage {
   }
 
   bioTicked(){
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     bioTick: "true"
@@ -88,7 +87,7 @@ export class EditrunnerPage {
   }
 
   coverTicked(){
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     coverTick: "true"
@@ -97,7 +96,7 @@ export class EditrunnerPage {
   }
 
   emailTicked(){
-    this.pathString = `/runnerStorage/`+ this.username+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
     emailTick: "true"
@@ -110,7 +109,7 @@ export class EditrunnerPage {
   let alert = this.alertCtrl.create({
     title: 'Successfull !',
     subTitle: 'Data will be saved in the database',
-    buttons: ['Dismiss']
+    buttons: ['OK']
   });
   alert.present();
   }

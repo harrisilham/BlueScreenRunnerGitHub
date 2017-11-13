@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 import { HomeRPage } from '../home-r/home-r';
 import { FrontPage } from '../../front/front'
@@ -31,7 +32,7 @@ export class SignInRPage {
 
   front:any = FrontPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController, public events: Events) {
     //
 
   }
@@ -63,7 +64,11 @@ export class SignInRPage {
     await this.delay(5000); //wait 5sec
 
     if(this.username==this.Username && this.password==this.Password){
-        this.navCtrl.setRoot(HomeRPage, {info:this.username});
+        this.events.publish("username", this.username);
+        this.navCtrl.setRoot(HomeRPage, {
+          username: <string> this.Username
+        });
+
     }
 
     else{
@@ -100,5 +105,6 @@ export class SignInRPage {
       loading.dismiss();
     }, 5000);
   }
+
 
 }

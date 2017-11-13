@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { AvailabilityPage} from '../availability/availability';
 import firebase from 'firebase';
+import { Events } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { EditrunnerPage} from '../editrunner/editrunner';
 /**
@@ -23,6 +24,7 @@ export class HomeRPage {
   bioR: string;
   coverArea: string;
   username: string;
+  usernamePassed: any;
 
   pathString: any;
 
@@ -36,7 +38,8 @@ export class HomeRPage {
 
     events.publish('user:entered');
 
-    this.username = navParams.get('info');
+
+  this.usernamePassed= navParams.get('username');
   }
 
   ionViewDidLoad() {
@@ -44,7 +47,9 @@ export class HomeRPage {
   }
 
   profileButton(){
-    this.navCtrl.push(EditrunnerPage, {info:this.username});
+    this.navCtrl.push(EditrunnerPage, {
+      username: <string>this.usernamePassed
+    });
   }
 
   availabilitybutton(){

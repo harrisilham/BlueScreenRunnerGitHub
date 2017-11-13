@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content padding>
+  
   <ion-list>
    <ion-list-header>
      What to display:
@@ -20,7 +21,7 @@
 
    <ion-item>
      <ion-label>Your Name</ion-label>
-     <ion-checkbox checked="true"[(ngModel)]="nameTick" (ionChange)="nameTicked()"></ion-checkbox>
+     <ion-checkbox [(ngModel)]="nameTick" (ionChange)="nameTicked()"></ion-checkbox>
    </ion-item>
 
    <ion-item>
