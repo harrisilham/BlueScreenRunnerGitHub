@@ -49,6 +49,5 @@ export class HomeRPage {
 
   availabilitybutton(){
     this.navCtrl.push(AvailabilityPage);
-
   }
 }

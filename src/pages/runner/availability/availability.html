@@ -12,11 +12,10 @@
 
 </ion-header>
 
-
 <ion-content padding>
 <ion-item>
   <ion-label> Availability</ion-label>
-  <ion-toggle checked="true">	
+  <ion-toggle checked="false" [(ngModel)]="availableToggle" (ionChange)="availableToggled()">
   </ion-toggle>
 </ion-item>
 </ion-content>

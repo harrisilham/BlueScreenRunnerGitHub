@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
+import firebase from 'firebase';
 import { Events } from 'ionic-angular';
+
+import { ViewrunnerUPage } from '../viewrunner-u/viewrunner-u';
 
 /**
  * Generated class for the HomeUPage page.
@@ -19,6 +22,8 @@ export class HomeUPage {
   usernamePassed: any;
   activeMenu: string = 'menu-u'
 
+  dataRef: firebase.database.Reference;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events) {
     //get username from last page..front
     this.usernamePassed= navParams.get('username');
@@ -35,4 +40,7 @@ export class HomeUPage {
     console.log('ionViewDidLoad HomeUPage');
   }
 
+  viewrunnerButton(){
+    this.navCtrl.push(ViewrunnerUPage);
+  }
 }
