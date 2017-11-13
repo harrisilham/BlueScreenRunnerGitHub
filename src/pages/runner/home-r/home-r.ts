@@ -53,6 +53,8 @@ export class HomeRPage {
   }
 
   availabilitybutton(){
-    this.navCtrl.push(AvailabilityPage);
+    this.navCtrl.push(AvailabilityPage, {
+      username: <string>this.usernamePassed
+    });
   }
 }

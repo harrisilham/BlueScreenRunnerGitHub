@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import firebase from 'firebase';
 import { HomeRPage} from '../home-r/home-r';
 
@@ -19,10 +19,12 @@ export class AvailabilityPage {
   isToggled: boolean;
 
   pathString: any;
+  usernamePassed: any;
 
   dataRef: firebase.database.Reference;
 
-  constructor(public alertCtrl: AlertController, navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, navCtrl: NavController, public navParams: NavParams, public events: Events) {
+    this.usernamePassed= navParams.get('username');
   }
 
   ionViewDidLoad() {
@@ -30,10 +32,10 @@ export class AvailabilityPage {
   }
 
   availableToggled(){
-    this.pathString = `/runnerStorage/`+ this.isToggled+ `/` ;
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
     this.dataRef= firebase.database().ref(this.pathString);
     this.dataRef.update({
-    availableToggle: "true"
+    availability: "true"
     })
 
   }
