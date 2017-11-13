@@ -1,0 +1,84 @@
+<!--
+  Generated template for the ConfirmRunnerUPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Runner Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3 align="center">Runner Profile</h3>
+
+  <ion-grid>
+    <ion-list *ngFor="let p of runnerNode">
+      <ion-row>
+        <ion-col col-12 align="center"><ion-avatar>
+          <img src="img/default.png" width="60" height="60">
+        </ion-avatar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 align="center"><b>{{p.fullName}}</b>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 align="center"><i>{{p.biodata}}</i>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 align="center"><ion-icon name="call"> 0{{p.phoneNum}}</ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-card>
+        <ion-item>
+          <ion-row row-2>
+            <ion-col col-5 align="left">
+              <b>Username</b>
+            </ion-col>
+            <ion-col col-7 align="left" >
+              {{p.username}}
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-row row-2>
+            <ion-col col-5 align="left">
+              <b>Email</b>
+            </ion-col>
+            <ion-col col-7 align="left">
+              {{p.email}}
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col col-5 align="left">
+              <b>Job Done</b>
+            </ion-col>
+            <ion-col col-7 align="left">
+              {{p.deliveryCount}}
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-card>
+      <ion-row>
+        <ion-col>
+          <button ion-button round outline color="danger" (click)="this.navCtrl.pop()">CANCEL </button>
+        </ion-col>
+        <ion-col>
+          <b><button ion-button round outline  (click)="go()"><b>CONFIRM</b> </button></b>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

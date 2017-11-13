@@ -18,9 +18,11 @@ import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
 import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
 import { EditrunnerPage } from '../pages/runner/editrunner/editrunner';
+import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
+import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
 import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
-//import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
+import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
     ProfileUPage,
     EditrunnerPage,
     EditUserUPage,
-    ViewrunnerUPage
+    ViewrunnerUPage,
+    ChooseRunnerUPage,
+    ConfirmRunnerUPage
 
   ],
   imports: [
@@ -65,7 +69,9 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
     ProfileUPage,
     EditrunnerPage,
     EditUserUPage,
-    ViewrunnerUPage
+    ViewrunnerUPage,
+    ChooseRunnerUPage,
+    ConfirmRunnerUPage
 
   ],
   providers: [

@@ -14,7 +14,13 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <h3 align="center">BlueScreen User Homepage</h3>
+<<<<<<< HEAD
   <ion-grid >
     <ion-row>
       <ion-col colspan="2" align="middle"> <button ion-button round outline type="sumbit"
@@ -23,4 +29,13 @@
     </ion-row>
   </ion-grid>
   <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
+
+  <ion-grid align="middle">
+    <ion-row>
+      <ion-col align="middle">
+        <button ion-button round outline (click)="makeDelivery()">Make New Delivery</button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

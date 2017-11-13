@@ -74,13 +74,13 @@ export class SignInUPage {
     if(this.Username && this.Password==this.password){//user
       this.events.publish("username", this.username);
       this.navCtrl.setRoot(HomeUPage, {
-        username: <String> this.Username
+        username: <string> this.Username
       });
     }
     else if(this.UsernameA && this.PasswordA==this.password){//admin
       this.events.publish("username", this.username);
       this.navCtrl.setRoot(HomeAPage, {
-        username: <String> this.UsernameA
+        username: <string> this.Username
       });
     }
     else{
