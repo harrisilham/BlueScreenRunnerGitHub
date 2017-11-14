@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
-
+import { AlertController } from 'ionic-angular';
 import {ProfileRPage } from '../profile-r';
 /**
  * Generated class for the EditbioRPage page.
@@ -35,7 +35,7 @@ export class EditbioRPage {
   public biodata=[];
   public coverArea=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
     this.usernamePassed= navParams.get('username');
 
@@ -76,10 +76,19 @@ export class EditbioRPage {
     this.dataRef.update({
     biodata: this.bioR
     })
+    this.successAlert();
     this.navCtrl.push(ProfileRPage, {
       username: this.usernamePassed
     });
   }
 
+  successAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Successfully edit your biodata',
+      subTitle: 'you data will keep in the database',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 }
