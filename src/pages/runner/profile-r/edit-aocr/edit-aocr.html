@@ -1,0 +1,28 @@
+<!--
+  Generated template for the EditAocrPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Cover Area</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-list *ngFor="let r of runnerNode">
+      <ion-row>
+        <ion-col col-12 align="left">Area Of Coverage<br><textarea id="CoverArea" write>{{r.coverArea}}</textarea>
+          <button style="background-color:Transparent;" >
+            <ion-icon name="create" (click)="changeAocButton(ProfileRPage)" ></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-grid>
+</ion-content>

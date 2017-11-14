@@ -28,7 +28,7 @@
       <ion-row>
         <ion-col col-12 align="left">Biodata<br><textarea readonly>{{r.biodata}}</textarea>
           <button style="background-color:Transparent;" >
-            <ion-icon name="create"></ion-icon>
+            <ion-icon name="create" (click)="bioButton(EditbioRPage)"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
@@ -36,7 +36,7 @@
       <ion-row>
         <ion-col col-12 align="left">Area Of Coverage<br><textarea readonly>{{r.coverArea}}</textarea>
           <button style="background-color:Transparent;" >
-            <ion-icon name="create"></ion-icon>
+            <ion-icon name="create" (click)="aocButton(EditAocrPage)"></ion-icon>
           </button>
         </ion-col>
       </ion-row>

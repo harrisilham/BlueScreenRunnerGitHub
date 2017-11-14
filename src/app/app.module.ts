@@ -24,7 +24,8 @@ import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runne
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
 import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
-
+import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
+import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
+    EditAocrPage,
+    EditbioRPage,
     ConfirmRunnerUPage
 
   ],
@@ -72,6 +75,8 @@ import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
+    EditAocrPage,
+    EditbioRPage,
     ConfirmRunnerUPage
 
   ],

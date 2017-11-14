@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 
-import { EditRunnerRPage } from './edit-runner-r/edit-runner-r';
-import {EditbioRPage } from './editbio-r/editbio-r';
-import { EditAocrPage } from './edit-aocr/edit-aocr';
+import {ProfileRPage } from '../profile-r';
 /**
- * Generated class for the ProfileRPage page.
+ * Generated class for the EditbioRPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -14,11 +12,15 @@ import { EditAocrPage } from './edit-aocr/edit-aocr';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-r',
-  templateUrl: 'profile-r.html',
+  selector: 'page-editbio-r',
+  templateUrl: 'editbio-r.html',
 })
-export class ProfileRPage {
+export class EditbioRPage {
+
+  bioR: string;
   usernamePassed: any;
+
+  dataRef: firebase.database.Reference;
 
   runnerNode: Array<{index: number, email: String, fullName: String, password: String, phoneNum: number, username: String, biodata: String, coverArea: String}>=[];
 
@@ -34,7 +36,7 @@ export class ProfileRPage {
   public coverArea=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    //get username from last page..home
+
     this.usernamePassed= navParams.get('username');
 
     //set path
@@ -63,24 +65,21 @@ export class ProfileRPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileRPage');
+    console.log('ionViewDidLoad EditbioRPage');
   }
 
-  go(){
-    this.navCtrl.push(EditRunnerRPage, {
+  changeBioButton(){
+    this.bioR=(<HTMLInputElement>document.getElementById('biodataR')).value;
+
+    this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
+    this.dataRef= firebase.database().ref(this.pathString);
+    this.dataRef.update({
+    biodata: this.bioR
+    })
+    this.navCtrl.push(ProfileRPage, {
       username: this.usernamePassed
     });
   }
 
-  bioButton(){
-    this.navCtrl.push(EditbioRPage, {
-      username: this.usernamePassed
-    });
-  }
 
-  aocButton(){
-    this.navCtrl.push(EditAocrPage, {
-      username: this.usernamePassed
-    });
-  }
 }
