@@ -23,6 +23,7 @@ export class AddrunnerAPage {
   email: string;
   username: string;
   password: string;
+  licenseNumber: string;
   confirmPassword: string;
 
   pathString: any;
@@ -40,6 +41,7 @@ export class AddrunnerAPage {
     this.ic=parseInt((<HTMLInputElement>document.getElementById('ICR')).value);
     this.phone=parseInt((<HTMLInputElement>document.getElementById('phoneR')).value);
     this.email=(<HTMLInputElement>document.getElementById('emailR')).value;
+    this.licenseNumber=(<HTMLInputElement>document.getElementById('licenseNumberR')).value;
     this.username=(<HTMLInputElement>document.getElementById('usernameR')).value;
     this.password=(<HTMLInputElement>document.getElementById('passwordR')).value;
     this.confirmPassword=(<HTMLInputElement>document.getElementById('confirmpasswordR')).value;
@@ -63,6 +65,7 @@ export class AddrunnerAPage {
         ic: this.ic,
         phoneNum: this.phone,
         email: this.email ,
+        licenseNumber: this.licenseNumber ,
         username: this.username,
         password: this.password
       })

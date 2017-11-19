@@ -32,7 +32,7 @@ export class ProfileRPage {
   public username=[];
   public biodata=[];
   public coverArea=[];
-
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //get username from last page..home
     this.usernamePassed= navParams.get('username');
