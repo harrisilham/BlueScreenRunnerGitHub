@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
-import {ProfileRPage } from '../profile-r';
+import { ProfileRPage } from '../profile-r';
 /**
  * Generated class for the EditbioRPage page.
  *
@@ -19,6 +19,7 @@ export class EditbioRPage {
 
   bioR: string;
   usernamePassed: any;
+  profileRPage: any;
 
   dataRef: firebase.database.Reference;
 
@@ -38,6 +39,7 @@ export class EditbioRPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
     this.usernamePassed= navParams.get('username');
+    this.profileRPage= navParams.get('page');
 
     //set path
     this.pathString= `/runnerStorage/` ;
@@ -76,16 +78,16 @@ export class EditbioRPage {
     this.dataRef.update({
     biodata: this.bioR
     })
+    
+    this.profileRPage.doRefresh();
     this.successAlert();
-    this.navCtrl.push(ProfileRPage, {
-      username: this.usernamePassed
-    });
+    //should pop
+    this.navCtrl.pop();
   }
 
   successAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Successfully edit your biodata',
-      subTitle: 'you data will keep in the database',
+      title: 'Your biodata has been updated!',
       buttons: ['OK']
     });
     alert.present();

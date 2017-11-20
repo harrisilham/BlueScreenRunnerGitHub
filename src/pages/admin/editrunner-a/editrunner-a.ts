@@ -17,16 +17,22 @@ import firebase from 'firebase';
 export class EditrunnerAPage {
   usernamePassed: any;
 
-  runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
+  runnerNode: Array<{availability: String, biodata: String, coverArea: String, deliveryCount: number, email: String, fullName: String, ic: number, password: String, licenseNumber: String, phoneNum: number, rating: number, username: String}>=[];
 
   pathString: any;
   pathRef: any;
 
+  public availability=[];
+  public biodata=[];
+  public coverArea=[];
+  public deliveryCount=[];
   public email=[];
   public fullName=[];
   public ic=[];
   public password=[];
+  public licenseNumber=[];
   public phoneNum=[];
+  public rating=[];
   public username=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
@@ -41,16 +47,35 @@ export class EditrunnerAPage {
       var index=0;
       snapshot.forEach(childSnapshot => {
 
+        this.availability[index]=  childSnapshot.child("/availability/").val();
+        this.biodata[index]=  childSnapshot.child("/biodata/").val();
+        this.coverArea[index]=  childSnapshot.child("/coverArea/").val();
+        this.deliveryCount[index]=  childSnapshot.child("/deliveryCount/").val();
         this.email[index]=  childSnapshot.child("/email/").val();
         this.fullName[index]=  childSnapshot.child("/fullName/").val();
         this.ic[index]=  childSnapshot.child("/ic/").val();
         this.password[index]=  childSnapshot.child("/password/").val();
+        this.licenseNumber[index]=  childSnapshot.child("/licenseNumber/").val();
         this.phoneNum[index]=  childSnapshot.child("/phoneNum/").val();
+        this.rating[index]=  childSnapshot.child("/rating/").val();
         this.username[index]=  childSnapshot.child("/username/").val();
 
         //push into array object
         if(this.username[index]==this.usernamePassed){//check for selected user to edit
-          this.runnerNode.push({index: (index+1), email: this.email[index], fullName: this.fullName[index], ic: this.ic[index], password: this.password[index], phoneNum: this.phoneNum[index], username: this.username[index] });
+          this.runnerNode.push({
+            availability: this.availability[index],
+            biodata: this.biodata[index],
+            coverArea: this.coverArea[index],
+            deliveryCount: this.deliveryCount[index],
+            email: this.email[index],
+            fullName: this.fullName[index],
+            ic: this.ic[index],
+            password: this.password[index],
+            licenseNumber: this.licenseNumber[index],
+            phoneNum: this.phoneNum[index],
+            rating: this.rating[index],
+            username: this.username[index]
+          });
         }
       });
     });
@@ -64,7 +89,6 @@ export class EditrunnerAPage {
     var phoneNum= (<HTMLInputElement>document.getElementById('phoneNum')).value;
     var email= (<HTMLInputElement>document.getElementById('email')).value;
 
-    document.write(fullName)
     var path=`/runnerStorage/`+ this.runnerNode[0].username+`/`;
     var pathRef= firebase.database().ref(path);
     pathRef.update({

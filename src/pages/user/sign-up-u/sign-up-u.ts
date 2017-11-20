@@ -19,7 +19,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class SignUpUPage {
   name: string;
-  phone: number;
+  phone: string;
   email: string;
   username: string;
   password: string;
@@ -40,7 +40,7 @@ export class SignUpUPage {
 
   register(){
     this.name=(<HTMLInputElement>document.getElementById('nameU')).value;
-    this.phone=parseInt((<HTMLInputElement>document.getElementById('phoneU')).value);
+    this.phone=(<HTMLInputElement>document.getElementById('phoneU')).value;
     this.email=(<HTMLInputElement>document.getElementById('emailU')).value;
     this.username=(<HTMLInputElement>document.getElementById('usernameU')).value;
     this.password=(<HTMLInputElement>document.getElementById('passwordU')).value;

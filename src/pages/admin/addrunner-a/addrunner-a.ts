@@ -19,7 +19,7 @@ import firebase from 'firebase';
 export class AddrunnerAPage {
   name: string;
   ic: number;
-  phone: number;
+  phone: string;
   email: string;
   username: string;
   password: string;
@@ -39,7 +39,7 @@ export class AddrunnerAPage {
   registerButton(){
     this.name=(<HTMLInputElement>document.getElementById('nameR')).value; //nak amik nilai user tulis dkt form
     this.ic=parseInt((<HTMLInputElement>document.getElementById('ICR')).value);
-    this.phone=parseInt((<HTMLInputElement>document.getElementById('phoneR')).value);
+    this.phone=(<HTMLInputElement>document.getElementById('phoneR')).value;
     this.email=(<HTMLInputElement>document.getElementById('emailR')).value;
     this.licenseNumber=(<HTMLInputElement>document.getElementById('licenseNumberR')).value;
     this.username=(<HTMLInputElement>document.getElementById('usernameR')).value;
@@ -49,25 +49,31 @@ export class AddrunnerAPage {
     if(this.name==""||this.ic==null||this.phone==null||this.email==""||this.username==""||this.password==""||this.confirmPassword==""){
       //error cz no input
       this.presentAlert()
-      this.navCtrl.setRoot(AddrunnerAPage);
+      //this.navCtrl.setRoot(AddrunnerAPage);
     }
     else if(this.password!=this.confirmPassword){
       //error pass not same
       this.presentAlertpass()
-      this.navCtrl.setRoot(AddrunnerAPage);
+      //this.navCtrl.setRoot(AddrunnerAPage);
     }
     else{
       //write data
       this.pathString = `/runnerStorage/`+ this.username+ `/` ;
       this.dataRef= firebase.database().ref(this.pathString);
       this.dataRef.set({
+        availability: "false",
+        biodata: "none",
+        coverArea: "none",
+        deliveryCount: 0,
+        email: this.email ,
         fullName: this.name,
         ic: this.ic,
-        phoneNum: this.phone,
-        email: this.email ,
         licenseNumber: this.licenseNumber ,
+        password: this.password,
+        phoneNum: this.phone,
+        rating: 0,
         username: this.username,
-        password: this.password
+
       })
       //make successfull alert uname n pass
       this.presentAlertSuccess();
@@ -86,8 +92,7 @@ export class AddrunnerAPage {
 
   presentAlertSuccess() {
   let alert = this.alertCtrl.create({
-    title: 'Successfull !',
-    subTitle: 'Data will be saved in the database',
+    title: 'New runner <b>'+ this.username +'</b> has been successfully created!',
     buttons: ['Dismiss']
   });
   alert.present();

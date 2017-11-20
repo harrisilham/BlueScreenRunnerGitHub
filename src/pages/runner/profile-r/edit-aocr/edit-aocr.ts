@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
-import {ProfileRPage } from '../profile-r';
+import { ProfileRPage } from '../profile-r';
 /**
  * Generated class for the EditAocrPage page.
  *
@@ -19,6 +19,7 @@ export class EditAocrPage {
 
   usernamePassed: any;
   coverAreaR: string;
+  profileRPage: any;
 
   dataRef: firebase.database.Reference;
 
@@ -38,6 +39,7 @@ export class EditAocrPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
     this.usernamePassed= navParams.get('username');
+    this.profileRPage= navParams.get('page');
 
     //set path
     this.pathString= `/runnerStorage/` ;
@@ -76,17 +78,16 @@ export class EditAocrPage {
     this.dataRef.update({
     coverArea: this.coverAreaR
     })
-    this.successAlert();
-    this.navCtrl.push(ProfileRPage, {
 
-      username: this.usernamePassed
-    });
+    this.profileRPage.doRefresh();
+    this.successAlert();
+    //should pop here
+    this.navCtrl.pop();
   }
 
   successAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Successfully edit your cover area',
-      subTitle: 'you data will keep in the database',
+      title: 'Your are of coverage has been updated!',
       buttons: ['OK']
     });
     alert.present();
