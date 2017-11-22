@@ -19,6 +19,7 @@ import firebase from 'firebase';
 export class InsDeliveryInfoUPage {
   usernamePassed: any;
   runnerPassed: any;
+  title: string;
 
   runnerNode: Array<{email: String, fullName: String, phoneNum: number, username: String, rating: number, deliveryCount: number, biodata: String}>;
 
@@ -41,6 +42,8 @@ export class InsDeliveryInfoUPage {
 
     //get selected runner frm prev page..confirm runner
     this.runnerPassed= navParams.get('runner');
+
+    this.title= navParams.get('title');
 
     //db initial
     this.pathString= `/deliveryStorage/`;
@@ -67,6 +70,7 @@ export class InsDeliveryInfoUPage {
       accepted: "false",
       additional: additional,
       runnerUsername: this.runnerPassed,
+      title: this.title,
       userUsername: this.usernamePassed
     });
 

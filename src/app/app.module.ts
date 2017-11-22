@@ -27,6 +27,7 @@ import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
 import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
 import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
 import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-delivery-info-u';
+import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-delivery-title-u';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-deli
     EditAocrPage,
     EditbioRPage,
     ConfirmRunnerUPage,
-    InsDeliveryInfoUPage
+    InsDeliveryInfoUPage,
+    InsDeliveryTitleUPage
 
   ],
   imports: [
@@ -80,7 +82,8 @@ import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-deli
     EditAocrPage,
     EditbioRPage,
     ConfirmRunnerUPage,
-    InsDeliveryInfoUPage
+    InsDeliveryInfoUPage,
+    InsDeliveryTitleUPage
 
   ],
   providers: [

@@ -19,6 +19,7 @@ import firebase from 'firebase';
 export class ConfirmRunnerUPage {
   usernamePassed: any;
   runnerPassed: any;
+  title: string;
 
   runnerNode: Array<{email: String, fullName: String, phoneNum: number, username: String, rating: number, deliveryCount: number, biodata: String}>=[];
 
@@ -37,6 +38,7 @@ export class ConfirmRunnerUPage {
     //get username from last page..choose runner u
     this.usernamePassed= navParams.get('username');
     this.runnerPassed= navParams.get('runner');
+    this.title= navParams.get('title');
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -70,7 +72,8 @@ export class ConfirmRunnerUPage {
     //go next page to create delivery with all other details on next page
     this.navCtrl.push(InsDeliveryInfoUPage, {
       username: this.usernamePassed,
-      runner: this.runnerPassed
+      runner: this.runnerPassed,
+      title: this.title
     });
   }
 

@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 import { Events } from 'ionic-angular';
-import { ViewrunnerUPage } from '../viewrunner-u/viewrunner-u';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
+import { InsDeliveryTitleUPage } from '../ins-delivery-title-u/ins-delivery-title-u';
 
 /**
  * Generated class for the HomeUPage page.
@@ -44,18 +44,14 @@ export class HomeUPage {
     console.log('ionViewDidLoad HomeUPage');
   }
 
-  viewrunnerButton(){
-    this.navCtrl.push(ViewrunnerUPage);
-  }
-
   makeDelivery(){
-    this.navCtrl.push(ChooseRunnerUPage, {
+    this.navCtrl.push(InsDeliveryTitleUPage, {
       username: <string>this.usernamePassed
     });
   }
 
   currentDelivery(){
-    
+
   }
 
   doRefresh(refresher) {
