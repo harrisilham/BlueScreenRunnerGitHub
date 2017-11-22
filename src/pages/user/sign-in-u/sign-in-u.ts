@@ -24,6 +24,10 @@ export class SignInUPage {
   pathString: any;
   pathStringA: any;
 
+  //test
+  dataPath: any;
+  dataRef: any;
+
   usernameRef: firebase.database.Reference;
   passwordRef: firebase.database.Reference;
   usernameARef: firebase.database.Reference;
@@ -36,6 +40,19 @@ export class SignInUPage {
   public PasswordA= {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public loadingCtrl: LoadingController, public events: Events) {
+
+    //test push
+    this.dataPath= `/deliveryStorage/1/messageList/1/`
+    this.dataRef=  firebase.database().ref(this.dataPath);
+    /*
+    this.dataRef.push({
+      sender: "user",
+      message: "test message 2"
+    });*/
+    /*
+    this.dataRef.on('child_added', function(data){
+      document.write(data.val().sender + "<br>"+ data.val().message+ "<br><br>")
+    });*/
   }
 
   ionViewDidLoad() {

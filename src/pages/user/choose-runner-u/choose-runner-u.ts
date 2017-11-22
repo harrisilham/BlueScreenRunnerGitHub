@@ -96,7 +96,8 @@ export class ChooseRunnerUPage {
 
   confirm(usernameR){
     this.navCtrl.push(ConfirmRunnerUPage, {
-      username: <string>usernameR //pass runner selected
+      runner: <string>usernameR ,//pass runner selected
+      username: this.usernamePassed
     });
   }
 

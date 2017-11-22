@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { InsDeliveryInfoUPage } from '../ins-delivery-info-u/ins-delivery-info-u';
 
 import firebase from 'firebase';
 
@@ -17,6 +18,7 @@ import firebase from 'firebase';
 })
 export class ConfirmRunnerUPage {
   usernamePassed: any;
+  runnerPassed: any;
 
   runnerNode: Array<{email: String, fullName: String, phoneNum: number, username: String, rating: number, deliveryCount: number, biodata: String}>=[];
 
@@ -34,6 +36,7 @@ export class ConfirmRunnerUPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
     //get username from last page..choose runner u
     this.usernamePassed= navParams.get('username');
+    this.runnerPassed= navParams.get('runner');
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -52,10 +55,9 @@ export class ConfirmRunnerUPage {
         this.biodata[index]= childSnapshot.child("/biodata/").val();
 
         //push into array object
-        if(this.username[index]==this.usernamePassed){
+        if(this.username[index]==this.runnerPassed){
           this.runnerNode.push({email: this.email[index], fullName: this.fullName[index], phoneNum: this.phoneNum[index], username: this.username[index], rating: this.rating[index], deliveryCount: this.deliveryCount[index], biodata: this.biodata[index]  });
         }
-        index++;
       });
     });
   }
@@ -66,6 +68,10 @@ export class ConfirmRunnerUPage {
 
   go(){
     //go next page to create delivery with all other details on next page
+    this.navCtrl.push(InsDeliveryInfoUPage, {
+      username: this.usernamePassed,
+      runner: this.runnerPassed
+    });
   }
 
 }

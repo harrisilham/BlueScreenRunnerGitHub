@@ -22,11 +22,22 @@
   <h3 align="center">BlueScreen User Homepage</h3>
 
   <ion-grid align="middle">
-    <ion-row>
-      <ion-col align="middle">
-        <button ion-button round outline (click)="makeDelivery()">Make New Delivery</button>
+
+
+    <ion-card>
+      <ion-row>
+
+      <ion-col col-6  align="middle">
+        <button style="background-color:Transparent; color: green" (click)="currentDelivery()"><ion-icon name="bicycle" style="font-size:80px"></ion-icon><br>CURRENT DELIVERY</button>
       </ion-col>
-    </ion-row>
+
+      <ion-col col-6 align="middle">
+        <button style="background-color:Transparent;color: blue" (click)="makeDelivery()"><ion-icon name="add" style="font-size:80px"></ion-icon><br>NEW DELIVERY</button>
+      </ion-col>
+
+      </ion-row>
+    </ion-card>
+
 
   </ion-grid>
 </ion-content>

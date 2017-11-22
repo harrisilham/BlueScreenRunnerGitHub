@@ -54,6 +54,10 @@ export class HomeUPage {
     });
   }
 
+  currentDelivery(){
+    
+  }
+
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 

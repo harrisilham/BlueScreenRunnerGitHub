@@ -26,6 +26,7 @@ import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
 import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
 import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
+import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-delivery-info-u';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
     ChooseRunnerUPage,
     EditAocrPage,
     EditbioRPage,
-    ConfirmRunnerUPage
+    ConfirmRunnerUPage,
+    InsDeliveryInfoUPage
 
   ],
   imports: [
@@ -77,7 +79,8 @@ import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
     ChooseRunnerUPage,
     EditAocrPage,
     EditbioRPage,
-    ConfirmRunnerUPage
+    ConfirmRunnerUPage,
+    InsDeliveryInfoUPage
 
   ],
   providers: [
