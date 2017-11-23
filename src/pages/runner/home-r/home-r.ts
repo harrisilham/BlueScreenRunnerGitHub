@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events, AlertController } from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import firebase from 'firebase';
-import { Events } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the HomeRPage page.
  *
@@ -19,11 +17,13 @@ import { AlertController } from 'ionic-angular';
 export class HomeRPage {
   activeMenu: string = 'menu-r'
 
-  runnerNode: Array<{availability: String}>=[];
+  runnerNode: Array<{availability: String, currentDelivery: string}>=[];
+
   data={av: true};
 
   public availability=[];
   public username=[];
+  public currentDelivery=[];
 
   bioR: string;
   coverArea: string;
@@ -31,6 +31,18 @@ export class HomeRPage {
 
   pathString: any;
   pathRef: any;
+
+  //for delivery
+  delivery: Array<{accepted: string, additional: string, runnerUsername: string, userUsername: string}>=[];
+
+  public accepted=[];
+  public additional=[];
+  public runnerUsername=[];
+  public userUsername=[];
+  public key=[];
+
+  delString: any;
+  delRef: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -57,9 +69,11 @@ export class HomeRPage {
 
         this.availability[index]=  childSnapshot.child("/availability/").val();
         this.username[index]= childSnapshot.child("/username/").val();
+        this.currentDelivery[index]= childSnapshot.child("/currentDelivery/").val();
+
         //push into array object
         if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
-          this.runnerNode[0]=({availability: this.availability[index] });
+          this.runnerNode[0]=({availability: this.availability[index], currentDelivery: this.currentDelivery[index] });
 
           var boolAv= false;
 
@@ -75,6 +89,33 @@ export class HomeRPage {
 
     //set pathstring to the current username
     this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
+
+    //delivery req
+    this.delString= `/deliveryStorage/`;
+    this.delRef= firebase.database().ref(this.delString);
+
+
+    this.delRef.on('value', snapshot => {
+      var index=0;
+
+      snapshot.forEach(childSnapshot => {
+        this.key[index]= childSnapshot.key;
+
+        if(this.key[index]==this.currentDelivery[0]){
+          //get del data
+          this.accepted[index]=  childSnapshot.child("/accepted/").val();
+          this.additional[index]= childSnapshot.child("/additional/").val();
+          this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
+          this.userUsername[index]= childSnapshot.child("/userUsername/").val();
+
+          //push into array object
+          this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], userUsername: this.userUsername[index] });
+
+        }
+
+      });
+    });
+
   }
   test(){
     document.write(<string>this.runnerNode[0].availability)
@@ -114,7 +155,7 @@ export class HomeRPage {
 
         //push into array object
         if(this.username[index]==<string>this.usernamePassed){//check for selected runner to edit
-          this.runnerNode.push({availability: this.availability[index] });
+          this.runnerNode.push({availability: this.availability[index], currentDelivery: this.currentDelivery[index] });
         }
       });
     });
@@ -123,5 +164,9 @@ export class HomeRPage {
     else return false;
 
 
+  }
+
+  review(){
+    
   }
 }
