@@ -166,6 +166,8 @@ export class HomeRPage {
 
   }
   review(){
-      this.navCtrl.setRoot(MemoinfoRPage);
+      this.navCtrl.push(MemoinfoRPage, {
+        username: <string>this.usernamePassed
+      });
   }
 }

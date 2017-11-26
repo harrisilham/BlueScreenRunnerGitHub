@@ -21,8 +21,8 @@
           <ion-col col-2 align="center">User ID</ion-col>
           <ion-col col-3 align="center">Title</ion-col>
           <ion-col col-3 align="center">Description</ion-col>
-          <ion-col col-2 align="center">Accept</ion-col>
-          <ion-col col-2 align="center">Reject</ion-col>
+          <ion-col col-1 align="center">Accept</ion-col>
+          <ion-col col-1 align="center">Reject</ion-col>
         </ion-row>
       </ion-item>
   </ion-list-header>
@@ -32,8 +32,8 @@
           <ion-col col-2 align="center">{{d.userUsername}}</ion-col>
           <ion-col col-3 align="center">{{d.title}}</ion-col>
           <ion-col col-3 align="center">{{d.additional}}</ion-col>
-          <ion-col col-2 align="center"><button ion-button round outline type="submit" color="secondary" (click)="accepted()">Accept </button></ion-col>
-          <ion-col col-2 align="center"><button ion-button round outline type="submit" color="danger" (click)="rejected()">Reject </button></ion-col>
+          <ion-col col-1 align="center"><button ion-button round outline type="submit" color="secondary" (click)="acceptButton()">Accept </button></ion-col>
+          <ion-col col-1 align="center"><button ion-button round outline type="submit" color="danger" (click)="rejectButton()">Reject </button></ion-col>
         </ion-row>
     </ion-list>
 </ion-content>
