@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events, AlertController } from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import firebase from 'firebase';
+import { MemoinfoRPage } from '../memoinfo-r//memoinfo-r'
 /**
  * Generated class for the HomeRPage page.
  *
@@ -163,10 +164,8 @@ export class HomeRPage {
     if(this.availability[0]=="true")return true;
     else return false;
 
-
   }
-
   review(){
-    
+      this.navCtrl.setRoot(MemoinfoRPage);
   }
 }

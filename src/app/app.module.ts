@@ -19,6 +19,7 @@ import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 import { EditRunnerRPage } from '../pages/runner/profile-r/edit-runner-r/edit-runner-r';
 import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
 import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
+import { MemoinfoRPage } from '../pages/runner/memoinfo-r/memoinfo-r';
 import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
 import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
@@ -50,6 +51,7 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
     EditAocrPage,
     EditbioRPage,
     ConfirmRunnerUPage,
+    MemoinfoRPage,
     InsDeliveryInfoUPage,
     InsDeliveryTitleUPage
 
@@ -76,6 +78,7 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
     ProfileUPage,
     ProfileRPage,
     EditRunnerRPage,
+    MemoinfoRPage,
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
