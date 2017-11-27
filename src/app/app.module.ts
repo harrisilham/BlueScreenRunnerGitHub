@@ -19,7 +19,7 @@ import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 import { EditRunnerRPage } from '../pages/runner/profile-r/edit-runner-r/edit-runner-r';
 import { EditUserUPage } from '../pages/user/profile-u/edit-user-u/edit-user-u';
 import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
-import { MemoinfoRPage } from '../pages/runner/memoinfo-r/memoinfo-r';
+import { DispDelInfoRPage } from '../pages/runner/disp-del-info-r/disp-del-info-r';
 import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
 import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
 import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
@@ -29,6 +29,8 @@ import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
 import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
 import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-delivery-info-u';
 import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-delivery-title-u';
+import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-current-del-u';
+
 
 @NgModule({
   declarations: [
@@ -51,9 +53,10 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
     EditAocrPage,
     EditbioRPage,
     ConfirmRunnerUPage,
-    MemoinfoRPage,
     InsDeliveryInfoUPage,
-    InsDeliveryTitleUPage
+    InsDeliveryTitleUPage,
+    DispDelInfoRPage,
+    DispCurrentDelUPage
 
   ],
   imports: [
@@ -78,7 +81,6 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
     ProfileUPage,
     ProfileRPage,
     EditRunnerRPage,
-    MemoinfoRPage,
     EditUserUPage,
     ViewrunnerUPage,
     ChooseRunnerUPage,
@@ -86,7 +88,9 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
     EditbioRPage,
     ConfirmRunnerUPage,
     InsDeliveryInfoUPage,
-    InsDeliveryTitleUPage
+    InsDeliveryTitleUPage,
+    DispDelInfoRPage,
+    DispCurrentDelUPage
 
   ],
   providers: [

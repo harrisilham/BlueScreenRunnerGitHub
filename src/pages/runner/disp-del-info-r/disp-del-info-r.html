@@ -1,0 +1,50 @@
+<!--
+  Generated template for the DispDelInfoRPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Delivery Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngFor="let d of delivery">
+    <ion-grid>
+
+      <ion-row>
+        <ion-col col-4><b>Title</b></ion-col>
+        <ion-col col-4 align="left">{{d.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Description</b></ion-col>
+        <ion-col col-8 align="left">{{d.additional}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
+      </ion-row>
+
+      <ion-card>
+        COMING SOON..MAP SHOWS ROUTE.
+      </ion-card>
+
+      <ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col col-4 align="center"><button ion-button detail-none type="submit" color="danger" (click)="rejectButton()"><ion-icon name="close-circle"></ion-icon> </button></ion-col>
+        <ion-col col-4 align="center"><button ion-button detail-none type="submit" color="secondary" (click)="acceptButton()"><ion-icon name="checkmark-circle"></ion-icon> </button></ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

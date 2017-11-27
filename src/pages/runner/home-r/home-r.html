@@ -29,14 +29,14 @@
   <br><br>
 
   <!-- delivery request-->
-  <h4 align="center">Delivery Request</h4>
+  <h4 align="center" [hidden]="!haveDel">Delivery Request</h4>
 
-  <ion-card>
+  <ion-card [hidden]="!haveDel">
 
     <ion-list-header>
         <ion-item>
           <ion-row>
-            <ion-col col-5 align="center">User ID</ion-col>
+            <ion-col col-6 align="center">User ID</ion-col>
             <ion-col col-5 align="center">$</ion-col>
           </ion-row>
         </ion-item>
@@ -48,8 +48,8 @@
         <button ion-item start  detail-none (click)="review()" >
 
           <ion-row>
-            <ion-col col-5 align="center">{{d.userUsername}}</ion-col>
-            <ion-col col-5 align="center">RM1.00</ion-col>
+            <ion-col col-6 align="center">{{d.userUsername}}</ion-col>
+            <ion-col col-5 align="center">COMINGSOON</ion-col>
             <ion-col col-1 align="center"><ion-icon name="arrow-forward"></ion-icon></ion-col>
           </ion-row>
 
@@ -62,7 +62,7 @@
 
   <!-- current delivery -->
     <ion-card>
-      <ion-col align="center"> COMING SOON..<br>SHOW CURRENT DELIVERY.. </ion-col>
+      <ion-col align="center" [hidden]="!haveAcc"> COMING SOON..<br>SHOW CURRENT DELIVERY..</ion-col>
     </ion-card>
 
   <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->

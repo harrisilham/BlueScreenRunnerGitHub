@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Events } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 import { InsDeliveryTitleUPage } from '../ins-delivery-title-u/ins-delivery-title-u';
+import { DispCurrentDelUPage } from '../disp-current-del-u/disp-current-del-u';
 
 /**
  * Generated class for the HomeUPage page.
@@ -51,7 +52,9 @@ export class HomeUPage {
   }
 
   currentDelivery(){
-
+    this.navCtrl.push(DispCurrentDelUPage, {
+      username: <string>this.usernamePassed
+    });
   }
 
   doRefresh(refresher) {

@@ -1,0 +1,33 @@
+<!--
+  Generated template for the DispCurrentDelUPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Current Delivery</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  {{Cur}}
+
+  <!-- pending req -->
+  <div [hidden]="!havePen">
+
+    pending
+
+  </div>
+
+  <!-- approved req -->
+  <div [hidden]="!haveAcc">
+
+    approved
+
+  </div>
+
+</ion-content>
