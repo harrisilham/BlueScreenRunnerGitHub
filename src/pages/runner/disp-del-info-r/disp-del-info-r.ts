@@ -70,6 +70,17 @@ export class DispDelInfoRPage {
 
   rejectButton(){
     //this.rejectAlert();
+
+    this.delRef= firebase.database().ref(this.delString);
+    this.delRef.update({
+    accepted: "reject",
+    })
+
+    this.pathRef= firebase.database().ref(this.pathString);
+    this.pathRef.update({
+      currentDelivery: "none"
+    })
+
     this.navCtrl.setRoot(HomeRPage, {
       username: <string>this.usernamePassed
     });

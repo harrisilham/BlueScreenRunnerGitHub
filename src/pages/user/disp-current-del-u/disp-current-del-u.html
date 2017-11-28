@@ -14,19 +14,97 @@
 
 
 <ion-content padding>
-  {{Cur}}
 
   <!-- pending req -->
   <div [hidden]="!havePen">
 
-    pending
+    <ion-grid *ngFor="let d of deliveryNode">
+      <h4>Pending Request</h4>
+
+      <ion-row>
+        <ion-col col-4><b>Title</b></ion-col>
+        <ion-col col-4 align="left">{{d.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Description</b></ion-col>
+        <ion-col col-8 align="left">{{d.additional}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
+      </ion-row>
+
+      <ion-card>
+        COMING SOON..MAP SHOWS ROUTE.
+      </ion-card>
+
+    </ion-grid>
 
   </div>
+
 
   <!-- approved req -->
   <div [hidden]="!haveAcc">
 
-    approved
+    <ion-grid *ngFor="let d of deliveryNode">
+      <h4>Request Approved by <a>@{{d.runnerUsername}} </a></h4>
+
+      <ion-row>
+        <ion-col col-4><b>Title</b></ion-col>
+        <ion-col col-4 align="left">{{d.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Description</b></ion-col>
+        <ion-col col-8 align="left">{{d.additional}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
+      </ion-row>
+
+      <ion-card>
+        COMING SOON..MAP SHOWS ROUTE.
+      </ion-card>
+
+    </ion-grid>
+
+  </div>
+
+
+  <!-- rejected req -->
+  <div [hidden]="!haveRej">
+
+    <ion-grid *ngFor="let d of deliveryNode">
+      <h4>Request Rejected by <a>@{{d.runnerUsername}} </a></h4>
+
+      <ion-row>
+        <ion-col col-4><b>Title</b></ion-col>
+        <ion-col col-4 align="left">{{d.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Description</b></ion-col>
+        <ion-col col-8 align="left">{{d.additional}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
+      </ion-row>
+
+      <ion-card>
+        COMING SOON..MAP SHOWS ROUTE.
+      </ion-card>
+
+      <ion-row>
+          <ion-col  align="middle"> <button ion-button round outline type="submit" (click)="newRunner()">Choose New Runner</button> </ion-col>
+      </ion-row>
+
+    </ion-grid>
 
   </div>
 

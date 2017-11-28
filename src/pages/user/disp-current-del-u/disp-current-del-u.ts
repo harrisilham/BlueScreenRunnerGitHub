@@ -25,10 +25,10 @@ export class DispCurrentDelUPage {
   public currentDelivery=[];
   public username=[];
 
-  public Cur: string;
+  public Cur={};
 
   pathString: any;
-  pathRef: any;
+  pathRef: firebase.database.Reference;;
 
   //delivery
   deliveryNode: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
@@ -41,62 +41,20 @@ export class DispCurrentDelUPage {
   public key: string;
 
   delString: any;
-  delRef: any;
+  delRef: firebase.database.Reference;
+
+  accRef: firebase.database.Reference;
+  addRef: firebase.database.Reference;
+  rURef: firebase.database.Reference;
+  titleRef: firebase.database.Reference;
+  uURef: firebase.database.Reference;
+
 
   haveAcc=0;
   havePen=0;
+  haveRej=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    //get username from last page..homeu
-    this.usernamePassed= navParams.get('username');
-
-    //get user data
-    this.pathString= `/userStorage/`+this.usernamePassed;
-
-    this.pathRef= firebase.database().ref(this.pathString+ '/currentDelivery/');
-    this.pathRef.on('value', snapshot => {
-      this.Cur = snapshot.val();
-
-      //get del data
-      this.delString=`/deliveryStorage/`+ this.Cur;
-
-      this.delRef= firebase.database().ref(this.delString+ 'accepted');
-      this.delRef.on('value', snapshot => {
-        this.accepted= snapshot.val();
-      });
-
-      this.delRef= firebase.database().ref(this.delString+ 'additional');
-      this.delRef.on('value', snapshot => {
-        this.additional= snapshot.val();
-      });
-
-      this.delRef= firebase.database().ref(this.delString+ 'runnerUsername');
-      this.delRef.on('value', snapshot => {
-        this.runnerUsername= snapshot.val();
-      });
-
-      this.delRef= firebase.database().ref(this.delString+ 'title');
-      this.delRef.on('value', snapshot => {
-        this.title= snapshot.val();
-      });
-
-      this.delRef= firebase.database().ref(this.delString+ 'userUsername');
-      this.delRef.on('value', snapshot => {
-        this.userUsername= snapshot.val();
-      });
-
-      if(this.accepted=="true") {
-        this.haveAcc=1;
-        this.havePen=0;
-      }
-      else {
-        this.haveAcc=0;
-        this.havePen=1;
-      }
-
-
-    })
 
 
 
@@ -105,6 +63,82 @@ export class DispCurrentDelUPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DispCurrentDelUPage');
+    //get username from last page..homeu
+    this.usernamePassed= this.navParams.get('username');
+
+    this.getData();
+  }
+
+  async getData(){
+    //get user data
+    this.pathString= `/userStorage/`+this.usernamePassed+ `/`;
+
+    var Cur;
+    this.pathRef= firebase.database().ref(this.pathString+ 'currentDelivery/');
+    this.pathRef.on('value', snapshot =>  {
+      this.Cur = snapshot.val();
+
+    });
+
+    await this.delay(1000, Cur); //wait
+
+    //get del data
+    this.delString=`/deliveryStorage/`+ <string>this.Cur+ `/`;
+
+    this.accRef= firebase.database().ref(this.delString+ 'accepted');
+    this.accRef.on('value', snapshot => {
+      this.accepted= snapshot.val();
+    });
+
+    this.addRef= firebase.database().ref(this.delString+ 'additional');
+    this.addRef.on('value', snapshot => {
+      this.additional= snapshot.val();
+    });
+
+    this.rURef= firebase.database().ref(this.delString+ 'runnerUsername');
+    this.rURef.on('value', snapshot => {
+      this.runnerUsername= snapshot.val();
+    });
+
+    this.titleRef= firebase.database().ref(this.delString+ 'title');
+    this.titleRef.on('value', snapshot => {
+      this.title= snapshot.val();
+    });
+
+    this.uURef= firebase.database().ref(this.delString+ 'userUsername');
+    this.uURef.on('value', snapshot => {
+      this.userUsername= snapshot.val();
+    });
+
+    await this.delay(1000, Cur); //wait
+
+    if(this.accepted=="true") {
+      this.haveAcc=1;
+      this.havePen=0;
+      this.haveRej=0;
+    }
+    else if(this.accepted=="false") {
+      this.haveAcc=0;
+      this.havePen=1;
+      this.haveRej=0;
+    }
+    else{
+      this.haveAcc=0;
+      this.havePen=0;
+      this.haveRej=1;
+    }
+
+    //push to deliveryNode
+    this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername}
+  }
+
+  delay(ms: number, Cur) {
+    //this.test(Cur)
+     return new Promise(resolve => setTimeout(resolve, ms) );
+  }
+
+  newRunner(){
+    
   }
 
 }
