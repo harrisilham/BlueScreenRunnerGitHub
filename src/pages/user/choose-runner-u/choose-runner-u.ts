@@ -19,6 +19,7 @@ import { ConfirmRunnerUPage } from '../confirm-runner-u/confirm-runner-u'
 export class ChooseRunnerUPage {
   usernamePassed: any;
   title: string;
+  additional: string;
 
   runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String, availability: String, rating: number, deliveryCount: number}>=[];
 
@@ -38,9 +39,11 @@ export class ChooseRunnerUPage {
   public deliveryCount=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
-    //get username from last page..homeu
+    //get passed from last page..ins del info
     this.usernamePassed= navParams.get('username');
     this.title= navParams.get('title');
+    this.additional= navParams.get('additional');
+
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -100,7 +103,8 @@ export class ChooseRunnerUPage {
     this.navCtrl.push(ConfirmRunnerUPage, {
       runner: <string>usernameR ,//pass runner selected
       username: this.usernamePassed,
-      title: this.title
+      title: this.title,
+      additional: this.additional
     });
   }
 

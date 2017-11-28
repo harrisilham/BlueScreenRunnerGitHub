@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
-import { InsDeliveryInfoUPage } from '../ins-delivery-info-u/ins-delivery-info-u';
+import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { HomeUPage } from '../home-u/home-u';
 
 import firebase from 'firebase';
 
@@ -20,6 +20,7 @@ export class ConfirmRunnerUPage {
   usernamePassed: any;
   runnerPassed: any;
   title: string;
+  additional: string;
 
   runnerNode: Array<{email: String, fullName: String, phoneNum: number, username: String, rating: number, deliveryCount: number, biodata: String}>=[];
 
@@ -34,11 +35,12 @@ export class ConfirmRunnerUPage {
   public deliveryCount=[];
   public biodata=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public alertCtrl: AlertController) {
     //get username from last page..choose runner u
     this.usernamePassed= navParams.get('username');
     this.runnerPassed= navParams.get('runner');
     this.title= navParams.get('title');
+    this.additional= navParams.get('additional');
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -69,12 +71,54 @@ export class ConfirmRunnerUPage {
   }
 
   go(){
-    //go next page to create delivery with all other details on next page
-    this.navCtrl.push(InsDeliveryInfoUPage, {
-      username: this.usernamePassed,
-      runner: this.runnerPassed,
-      title: this.title
+    //set new key node
+    var newKey= this.pathRef.push().key;
+
+
+    //create delivery
+    this.pathString= `/deliveryStorage/`+newKey +`/`;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    this.pathRef.set({
+      accepted: "false",
+      additional: this.additional,
+      runnerUsername: this.runnerPassed,
+      title: this.title,
+      userUsername: this.usernamePassed
     });
+
+    //update at user
+    this.pathString= `/userStorage/`+ this.usernamePassed;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    this.pathRef.update({
+      currentDelivery: newKey
+    });
+
+    //update at runner
+    this.pathString= `/runnerStorage/`+ this.runnerPassed;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    this.pathRef.update({
+      currentDelivery: newKey,
+      acceptedDel: "none"
+    });
+
+    //go homeU
+    this.presentAlert();
+
+    this.navCtrl.setRoot(HomeUPage, {
+      username: this.usernamePassed
+    });
+  }
+
+  presentAlert() {
+   let alert = this.alertCtrl.create({
+     title: 'New Delivery Requested!!',
+     subTitle: 'Please wait for runner confirmation..',
+     buttons: ['OK']
+  });
+   alert.present();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 
 import firebase from 'firebase';
 
@@ -138,7 +139,13 @@ export class DispCurrentDelUPage {
   }
 
   newRunner(){
-    
+    this.navCtrl.push(ChooseRunnerUPage, {
+      username: <string>this.userUsername ,
+      title: <string>this.title,
+      additional: <string>this.additional
+    });
+
+
   }
 
 }

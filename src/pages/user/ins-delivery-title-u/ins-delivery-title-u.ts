@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
+import { InsDeliveryInfoUPage } from '../ins-delivery-info-u/ins-delivery-info-u';
 
 /**
  * Generated class for the InsDeliveryTitleUPage page.
@@ -30,8 +30,8 @@ export class InsDeliveryTitleUPage {
 
   go(){
     this.title= (<HTMLInputElement>document.getElementById('title')).value;
-    
-    this.navCtrl.push(ChooseRunnerUPage, {
+
+    this.navCtrl.push(InsDeliveryInfoUPage, {
       username: <string>this.usernamePassed,
       title: this.title
     });
