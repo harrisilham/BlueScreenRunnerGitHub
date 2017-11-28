@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Events, AlertController } from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { DispDelInfoRPage } from '../disp-del-info-r/disp-del-info-r';
+import { ChatRPage } from '../chat-r/chat-r';
 
 import firebase from 'firebase';
 /**
@@ -51,6 +52,22 @@ export class HomeRPage {
   delString: any;
   delRef: any;
 
+  //for del accepted
+  deliveryA: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+
+
+  public acceptedA=[];
+  public additionalA=[];
+  public runnerUsernameA=[];
+  public titleA=[];
+  public userUsernameA=[];
+  public keyA=[];
+
+  currentKeyA: any;
+
+  delStringA: any;
+  delRefA: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -86,46 +103,82 @@ export class HomeRPage {
           this.runnerNode[0]=({availability: this.availability[index], currentDelivery: this.currentDelivery[index], acceptedDel: this.acceptedDel[index] });
 
           //check accepted del
-          if(this.acceptedDel[index]!="none") this.haveAcc=1;
+          if(this.acceptedDel[index]!="none") {
+            this.haveAcc=1;
+
+            //accepted del
+            this.delString= `/deliveryStorage/`;
+            this.delRef= firebase.database().ref(this.delString);
+
+
+            this.delRef.on('value', snapshot => {
+              var index=0;
+
+              snapshot.forEach(childSnapshot => {
+                this.key[index]= childSnapshot.key;
+
+                //document.write(this.runnerNode[0].currentDelivery+ " "+ this.key[index]+ "<br>")
+
+                if(this.key[index]==this.runnerNode[0].acceptedDel){
+                  this.currentKey= this.key[index];
+                  //get del data
+                  this.accepted[index]=  childSnapshot.child("/accepted/").val();
+                  this.additional[index]= childSnapshot.child("/additional/").val();
+                  this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
+                  this.title[index]= childSnapshot.child("/title/").val();
+                  this.userUsername[index]= childSnapshot.child("/userUsername/").val();
+
+
+                  //push into array object
+                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index] });
+
+                }
+
+              });
+            });
+          }
+          else{
+            //delivery req
+            this.delString= `/deliveryStorage/`;
+            this.delRef= firebase.database().ref(this.delString);
+
+
+            this.delRef.on('value', snapshot => {
+              var index=0;
+
+              snapshot.forEach(childSnapshot => {
+                this.key[index]= childSnapshot.key;
+
+                //document.write(this.runnerNode[0].currentDelivery+ " "+ this.key[index]+ "<br>")
+
+                if(this.key[index]==this.runnerNode[0].currentDelivery){
+                  this.haveDel= 1;
+                  this.currentKey= this.key[index];
+                  //get del data
+                  this.accepted[index]=  childSnapshot.child("/accepted/").val();
+                  this.additional[index]= childSnapshot.child("/additional/").val();
+                  this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
+                  this.title[index]= childSnapshot.child("/title/").val();
+                  this.userUsername[index]= childSnapshot.child("/userUsername/").val();
+
+
+                  //push into array object
+                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index] });
+
+                }
+
+              });
+            });
+          }
 
           var boolAv= false;
 
-
+          //availability bool
           if(<string>this.availability[index]=="true")boolAv=true;
 
           this.data=({av: boolAv});
 
-          //delivery req
-          this.delString= `/deliveryStorage/`;
-          this.delRef= firebase.database().ref(this.delString);
 
-
-          this.delRef.on('value', snapshot => {
-            var index=0;
-
-            snapshot.forEach(childSnapshot => {
-              this.key[index]= childSnapshot.key;
-
-              //document.write(this.runnerNode[0].currentDelivery+ " "+ this.key[index]+ "<br>")
-
-              if(this.key[index]==this.runnerNode[0].currentDelivery){
-                this.haveDel= 1;
-                this.currentKey= this.key[index];
-                //get del data
-                this.accepted[index]=  childSnapshot.child("/accepted/").val();
-                this.additional[index]= childSnapshot.child("/additional/").val();
-                this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
-                this.title[index]= childSnapshot.child("/title/").val();
-                this.userUsername[index]= childSnapshot.child("/userUsername/").val();
-
-
-                //push into array object
-                this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index] });
-
-              }
-
-            });
-          });
 
         }
       });
@@ -196,6 +249,14 @@ export class HomeRPage {
         key: this.currentKey
       });
 
+  }
+
+  goChat(){
+    this.navCtrl.push(ChatRPage, {
+      userUsername: <string>this.userUsername[0],
+      runnerUsername: <string>this.runnerUsername[0],
+      key: <string>this.currentKey
+    })
   }
 
 

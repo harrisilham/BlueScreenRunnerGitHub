@@ -110,6 +110,16 @@ export class ConfirmRunnerUPage {
     this.navCtrl.setRoot(HomeUPage, {
       username: this.usernamePassed
     });
+
+    //create chat, same key node as delivery
+    this.pathString= `/chatStorage/`+ newKey+ `/`;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    this.pathRef.push({
+      sentby: this.usernamePassed,
+      message: this.additional,
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    })
   }
 
   presentAlert() {

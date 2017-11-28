@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
+import { ChatUPage } from '../chat-u/chat-u';
 
 import firebase from 'firebase';
 
@@ -29,7 +30,7 @@ export class DispCurrentDelUPage {
   public Cur={};
 
   pathString: any;
-  pathRef: firebase.database.Reference;;
+  pathRef: firebase.database.Reference;
 
   //delivery
   deliveryNode: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
@@ -39,7 +40,7 @@ export class DispCurrentDelUPage {
   public runnerUsername={};
   public title={};
   public userUsername={};
-  public key: string;
+  key: string;
 
   delString: any;
   delRef: firebase.database.Reference;
@@ -144,8 +145,14 @@ export class DispCurrentDelUPage {
       title: <string>this.title,
       additional: <string>this.additional
     });
+  }
 
-
+  goChat(){
+    this.navCtrl.push(ChatUPage, {
+      userUsername: this.usernamePassed,
+      runnerUsername: <string>this.runnerUsername,
+      key: <string>this.Cur
+    })
   }
 
 }

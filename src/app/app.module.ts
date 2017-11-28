@@ -5,8 +5,8 @@ import { Events } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { FrontPage } from '../pages/front/front';
-import { SignInRPage } from '../pages/runner/sign-in-r/sign-in-r'
-import { SignInUPage } from '../pages/user/sign-in-u/sign-in-u'
+import { SignInRPage } from '../pages/runner/sign-in-r/sign-in-r';
+import { SignInUPage } from '../pages/user/sign-in-u/sign-in-u';
 import { SignUpUPage } from '../pages/user/sign-up-u/sign-up-u';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,6 +30,8 @@ import { EditbioRPage } from '../pages/runner/profile-r/editbio-r/editbio-r';
 import { InsDeliveryInfoUPage } from '../pages/user/ins-delivery-info-u/ins-delivery-info-u';
 import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-delivery-title-u';
 import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-current-del-u';
+import { ChatUPage } from '../pages/user/chat-u/chat-u';
+import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 
 
 @NgModule({
@@ -56,7 +58,11 @@ import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-curre
     InsDeliveryInfoUPage,
     InsDeliveryTitleUPage,
     DispDelInfoRPage,
-    DispCurrentDelUPage
+    DispCurrentDelUPage,
+    ChatUPage,
+    ChatRPage
+
+
 
   ],
   imports: [
@@ -90,7 +96,9 @@ import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-curre
     InsDeliveryInfoUPage,
     InsDeliveryTitleUPage,
     DispDelInfoRPage,
-    DispCurrentDelUPage
+    DispCurrentDelUPage,
+    ChatUPage,
+    ChatRPage
 
   ],
   providers: [

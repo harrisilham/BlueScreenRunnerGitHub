@@ -63,9 +63,43 @@
   <br><br>
 
   <!-- current delivery -->
-    <ion-card>
-      <ion-col align="center" [hidden]="!haveAcc"> COMING SOON..<br>SHOW CURRENT DELIVERY..</ion-col>
-    </ion-card>
+    <ion-grid *ngFor="let d of delivery">
+
+      <h4>Delivery for <a>@{{d.userUsername}} </a></h4>
+
+      <ion-row>
+        <ion-col col-4><b>Title</b></ion-col>
+        <ion-col col-4 align="left">{{d.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Description</b></ion-col>
+        <ion-col col-8 align="left">{{d.additional}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
+      </ion-row>
+
+      <ion-card>
+        COMING SOON..MAP SHOWS ROUTE.
+      </ion-card>
+
+      <ion-footer ion-fixed no-border >
+
+        <ion-toolbar no-border>
+          <ion-buttons end>
+            <button ion-button (click)="goChat()">
+              Chat with <a>@{{d.userUsername}}</a>
+              <ion-icon name="chatbubbles" color="primary"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+
+      </ion-footer>
+
+    </ion-grid>
 
   <!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
