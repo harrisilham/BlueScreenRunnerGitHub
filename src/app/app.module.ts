@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Events } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomeAPage } from '../pages/admin/home-a/home-a';
@@ -107,6 +108,7 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FrontPage,
     SignInRPage,
+    Camera,
   ]
 })
 export class AppModule {}

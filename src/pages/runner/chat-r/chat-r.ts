@@ -1,6 +1,7 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
 
 /**
@@ -29,7 +30,11 @@ export class ChatRPage {
   chatString: any;
   chatRef: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  picData: any;
+  captureDataUrl: any;
+  mypicref: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
     //get passed from last page..disp del
     this.userPassed= this.navParams.get('userUsername');
     this.runnerPassed= this.navParams.get('runnerUsername');
@@ -39,6 +44,7 @@ export class ChatRPage {
 
     this.chatString=`/chatStorage/`+ this.keyPassed+ `/`;
     this.chatRef= firebase.database().ref(this.chatString);
+
 
     var temp;
     this.chatRef.on('value', snapshot =>  {
@@ -51,6 +57,7 @@ export class ChatRPage {
 
     });
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatRPage');
@@ -87,5 +94,21 @@ export class ChatRPage {
     setTimeout(() => {
       this.content.scrollToBottom();
     }, 1000);
+  }
+
+
+
+  capture() {
+    const cameraOptions: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      this.captureDataUrl = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
   }
 }

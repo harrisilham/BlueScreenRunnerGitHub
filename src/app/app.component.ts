@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { HomeUPage } from '../pages/user/home-u/home-u';
