@@ -1,6 +1,6 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
-
+import { AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
 
@@ -34,7 +34,7 @@ export class ChatRPage {
   captureDataUrl: any;
   mypicref: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private alertCtrl: AlertController) {
     //get passed from last page..disp del
     this.userPassed= this.navParams.get('userUsername');
     this.runnerPassed= this.navParams.get('runnerUsername');
@@ -96,8 +96,6 @@ export class ChatRPage {
     }, 1000);
   }
 
-
-
   capture() {
     const cameraOptions: CameraOptions = {
       quality: 50,
@@ -111,4 +109,26 @@ export class ChatRPage {
       // Handle error
     });
   }
+
+  upload() {
+      let storageRef = firebase.storage().ref();
+      // Create a timestamp as filename
+      const filename = Math.floor(Date.now() / 1000);
+
+      // Create a reference to 'images/todays-date.jpg'
+      const imageRef = storageRef.child(`images/${filename}.jpg`);
+
+      imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
+          this.presentAlert();
+      });
+
+    }
+    presentAlert() {
+      let alert = this.alertCtrl.create({
+        title: 'Image Will be saved in Firebase',
+        subTitle: 'Thank You!',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
 }

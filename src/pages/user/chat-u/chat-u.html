@@ -20,6 +20,7 @@
       <ion-item *ngFor = "let item of allmessages; let i = index" text-wrap>
 
         <div class="bubble me" *ngIf="item.sentby === runnerPassed">
+          <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
           <h3>{{item.message}}</h3>
         </div>
 
