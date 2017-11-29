@@ -30,11 +30,11 @@ export class ChatRPage {
   chatString: any;
   chatRef: any;
 
-  picData: any;
-  captureDataUrl: any;
+  picdata: any;
+  picurl: any;
   mypicref: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Camera: Camera, private alertCtrl: AlertController) {
     //get passed from last page..disp del
     this.userPassed= this.navParams.get('userUsername');
     this.runnerPassed= this.navParams.get('runnerUsername');
@@ -45,6 +45,7 @@ export class ChatRPage {
     this.chatString=`/chatStorage/`+ this.keyPassed+ `/`;
     this.chatRef= firebase.database().ref(this.chatString);
 
+    this.mypicref= firebase.storage().ref('/');
 
     var temp;
     this.chatRef.on('value', snapshot =>  {
@@ -97,32 +98,37 @@ export class ChatRPage {
   }
 
   capture() {
-    const cameraOptions: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-    this.camera.getPicture(cameraOptions).then((imageData) => {
-      this.captureDataUrl = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
+    this.Camera.getPicture({
+      quality:100,
+      destinationType:this.Camera.DestinationType.DATA_URL,
+      sourceType:this.Camera.PictureSourceType.CAMERA,
+      encodingType:this.Camera.EncodingType.PNG,
+      saveToPhotoAlbum:true
+    }).then(imagedata=>{
+      this.picdata=imagedata;
+      this.upload();
+    })
   }
 
   upload() {
-      let storageRef = firebase.storage().ref();
-      // Create a timestamp as filename
-      const filename = Math.floor(Date.now() / 1000);
-
-      // Create a reference to 'images/todays-date.jpg'
-      const imageRef = storageRef.child(`images/${filename}.jpg`);
-
-      imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
-          this.presentAlert();
-      });
+      this.mypicref.child(this.uid()).child('pic.png')
+      .putString(this.picdata,'base64',{contentType:'image/png'})
+      .then(savepic=>{
+        this.picurl=savepic.downloadURL
+      })
 
     }
+
+    uid() {
+      var d = new Date().getTime();
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+      return uuid;
+    }
+
     presentAlert() {
       let alert = this.alertCtrl.create({
         title: 'Image Will be saved in Firebase',
