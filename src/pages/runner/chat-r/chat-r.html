@@ -22,6 +22,7 @@
         <div class="bubble me" *ngIf="item.sentby === userPassed">
           <h3>{{item.message}}</h3>
           <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
+          <button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</button>
         </div>
 
         <div class="bubble you" *ngIf="item.sentby != userPassed">
