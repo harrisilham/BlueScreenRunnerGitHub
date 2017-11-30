@@ -22,8 +22,17 @@ export class CancelDelRPage {
   captureDataUrl: any;
   mypicref: any;
 
+  pathString: any;
+  pathRef: any;
+  dataRef: firebase.database.Reference;
+
+  usernamePassed: any;
+  public acceptedDel = [];
+  reasonCancel:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private alertCtrl: AlertController) {
 
+    this.usernamePassed= navParams.get('username');
     this.mypicref= firebase.storage().ref('/');
   }
 
@@ -47,18 +56,30 @@ export class CancelDelRPage {
 
   confirmCancel(){
 
-        let storageRef = firebase.storage().ref();
-        const filename = Math.floor(Date.now()/1000);
+        this.reasonCancel=(<HTMLInputElement>document.getElementById('reasonCancel')).value;
 
-        const imageRef = storageRef.child(`images/${filename}.jpg`);
-        imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
-            this.presentAlert();
+        this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
+        this.dataRef= firebase.database().ref(this.pathString);
+        this.dataRef.update({
+        reasonCancel: this.reasonCancel,
+        acceptedDel: "none"
+        })
 
+        this.navCtrl.setRoot(HomeRPage, {
+          username: <string>this.usernamePassed
+        });
 
-      });
 
       }
+upoad(){
+  let storageRef = firebase.storage().ref();
+  const filename = Math.floor(Date.now()/1000);
 
+  const imageRef = storageRef.child(`images/${filename}.jpg`);
+  imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
+  this.presentAlert();
+  });
+}
     presentAlert() {
           let alert = this.alertCtrl.create({
             title: 'Image Will be saved in Firebase',
