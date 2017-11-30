@@ -25,11 +25,12 @@
         <ion-icon name="ios-camera"></ion-icon>
       </button>
       <img src="{{ captureDataUrl }}"/>
+      <button ion-button (click)="upload()" *ngIf="captureDataUrl">Send picture to the user</button>
     </ion-col>
     </ion-row>
     <ion-row>
     <ion-col>
-        <button ion-button type="submit" (click)="confirmCancel()" color="danger"> Confirm and Send to the User
+        <button ion-button type="submit" (click)="confirmCancel()" color="danger"> Confirm
       </button>
     </ion-col>
     </ion-row>
