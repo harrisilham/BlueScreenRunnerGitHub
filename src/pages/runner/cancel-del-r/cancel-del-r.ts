@@ -68,10 +68,10 @@ export class CancelDelRPage {
         this.navCtrl.setRoot(HomeRPage, {
           username: <string>this.usernamePassed
         });
-
+        this.cancelAlert();
 
       }
-upoad(){
+upload(){
   let storageRef = firebase.storage().ref();
   const filename = Math.floor(Date.now()/1000);
 
@@ -88,4 +88,14 @@ upoad(){
           });
           alert.present();
         }
+
+        cancelAlert() {
+              let alert = this.alertCtrl.create({
+                title: 'You successfully cancel the delivery',
+                subTitle: '',
+                buttons: ['Ok']
+              });
+              alert.present();
+            }
+
 }
