@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController, Events, AlertContr
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { DispDelInfoRPage } from '../disp-del-info-r/disp-del-info-r';
 import { ChatRPage } from '../chat-r/chat-r';
+import { CancelDelRPage } from '../cancel-del-r/cancel-del-r';
 
 import firebase from 'firebase';
 /**
@@ -259,5 +260,16 @@ export class HomeRPage {
     })
   }
 
+cancelButton(){
+  this.navCtrl.push(CancelDelRPage, {
+    username: <string>this.usernamePassed,
+    runnerNode: this.runnerNode[0],
+    delivery: this.delivery[0],
+    pathString: this.pathString,
+    delString: this.delString+this.currentKey,
+    key: this.currentKey
+  });
+
+}
 
 }

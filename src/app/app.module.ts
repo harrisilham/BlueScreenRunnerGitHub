@@ -33,7 +33,7 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
 import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-current-del-u';
 import { ChatUPage } from '../pages/user/chat-u/chat-u';
 import { ChatRPage } from '../pages/runner/chat-r/chat-r';
-
+import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
     DispDelInfoRPage,
     DispCurrentDelUPage,
     ChatUPage,
-    ChatRPage
+    ChatRPage,
+    CancelDelRPage
 
 
 
@@ -99,7 +100,8 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
     DispDelInfoRPage,
     DispCurrentDelUPage,
     ChatUPage,
-    ChatRPage
+    ChatRPage,
+    CancelDelRPage
 
   ],
   providers: [
