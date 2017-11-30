@@ -20,15 +20,16 @@
         </ion-row>
         <ion-row>
           <br><br><br>
-        <ion-col>Please take a picture for proof<br>
+        <ion-col>Please take a picture for a proof<br>
       <button ion-button type="submit" (click)="capture()">
         <ion-icon name="ios-camera"></ion-icon>
       </button>
+      <img src="{{ captureDataUrl }}"/>
     </ion-col>
     </ion-row>
     <ion-row>
     <ion-col>
-        <button ion-button type="submit" (click)="confirmCancel()"> Confirm
+        <button ion-button type="submit" (click)="confirmCancel()"> Confirm and Send to the User
       </button>
     </ion-col>
     </ion-row>
