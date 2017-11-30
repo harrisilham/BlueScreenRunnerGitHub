@@ -124,7 +124,7 @@ export class DispCurrentDelUPage {
       this.havePen=1;
       this.haveRej=0;
     }
-    else if(this.accepted=="reject") {
+    else {
       this.haveAcc=0;
       this.havePen=0;
       this.haveRej=1;
