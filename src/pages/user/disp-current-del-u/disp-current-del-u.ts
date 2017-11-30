@@ -124,11 +124,12 @@ export class DispCurrentDelUPage {
       this.havePen=1;
       this.haveRej=0;
     }
-    else{
+    else if(this.accepted=="reject") {
       this.haveAcc=0;
       this.havePen=0;
       this.haveRej=1;
     }
+      
 
     //push to deliveryNode
     this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername}
