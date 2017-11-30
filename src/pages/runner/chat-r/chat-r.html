@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Chat with <a>@{{runnerPassed}}</a></ion-title>
+    <ion-title>Chat with <a>@{{userPassed}}</a></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -26,7 +26,7 @@
         <div class="bubble you" *ngIf="item.sentby != userPassed">
           <h3>{{item.message}}</h3>
           <img src="{{ picurl }}"/>
-          <button ion-button (click)="upload()" *ngIf="captureDataUrl">Send to the user</button>
+          <button ion-button (click)="upload()" *ngIf="[picurl]">Send to the user</button>
         </div>
       </ion-item>
     </ion-list>
