@@ -129,7 +129,7 @@ export class DispCurrentDelUPage {
       this.havePen=0;
       this.haveRej=1;
     }
-      
+
 
     //push to deliveryNode
     this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername}
