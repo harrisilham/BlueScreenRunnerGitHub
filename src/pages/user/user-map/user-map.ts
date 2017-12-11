@@ -22,13 +22,14 @@ export class UserMapPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserMapPage');
-    this.loadMap();
+
   }
 
+    ngAfterViewInit(){
+      this.loadMap();
+    }
   loadMap() {
 
-    let element = document.getElementById('map');
-    let map: GoogleMap = this.googleMaps.create(element,{});
       let mapOptions: GoogleMapOptions = {
         camera: {
           target: {
