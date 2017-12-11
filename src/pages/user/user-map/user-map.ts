@@ -21,13 +21,9 @@ export class UserMapPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserMapPage');
-
-  }
-
-    ngAfterViewInit(){
       this.loadMap();
-    }
+  }
+  
   loadMap() {
 
       let mapOptions: GoogleMapOptions = {

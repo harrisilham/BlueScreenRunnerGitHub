@@ -29,10 +29,15 @@
     "@ionic-native/status-bar": "^4.3.2",
     "@ionic/storage": "2.0.1",
     "cordova-plugin-camera": "git+https://github.com/apache/cordova-plugin-camera.git",
+    "cordova-plugin-device": "1.1.4",
     "cordova-plugin-firebase": "^0.1.24",
     "cordova-plugin-googlemaps": "^2.1.1",
+    "cordova-plugin-ionic-webview": "^1.1.11",
+    "cordova-plugin-splashscreen": "~4.0.1",
+    "cordova-plugin-whitelist": "1.3.1",
     "firebase": "^4.6.1",
     "ionic-angular": "3.8.0",
+    "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
@@ -50,7 +55,12 @@
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "AIzaSyD1Xud9x2JghvDdSLQ0gfuJaw444YeHW48",
         "API_KEY_FOR_IOS": "AIzaSyAmYJ4Unf0L5nE3WoEDUHtUtvk2iCZi4vQ"
-      }
+      },
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {}
     }
   }
 }
