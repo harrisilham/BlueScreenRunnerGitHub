@@ -34,7 +34,10 @@ import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-curre
 import { ChatUPage } from '../pages/user/chat-u/chat-u';
 import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
-
+import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
+import { UserMapPage } from '../pages/user/user-map/user-map';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPosition, MarkerOptions,Marker
+} from '@ionic-native/google-maps';
 @NgModule({
   declarations: [
     MyApp,
@@ -62,7 +65,9 @@ import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
     DispCurrentDelUPage,
     ChatUPage,
     ChatRPage,
-    CancelDelRPage
+    CancelDelRPage,
+    RunnerMapPage,
+    UserMapPage
 
 
 
@@ -101,7 +106,11 @@ import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
     DispCurrentDelUPage,
     ChatUPage,
     ChatRPage,
-    CancelDelRPage
+    CancelDelRPage,
+    RunnerMapPage,
+    UserMapPage,
+
+
 
   ],
   providers: [
@@ -111,6 +120,7 @@ import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
     FrontPage,
     SignInRPage,
     Camera,
+    GoogleMaps,
   ]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 import { ChatUPage } from '../chat-u/chat-u';
+import { UserMapPage } from '../user-map/user-map';
 
 import firebase from 'firebase';
 
@@ -150,6 +151,14 @@ export class DispCurrentDelUPage {
 
   goChat(){
     this.navCtrl.push(ChatUPage, {
+      userUsername: this.usernamePassed,
+      runnerUsername: <string>this.runnerUsername,
+      key: <string>this.Cur
+    })
+  }
+
+  goMap(){
+    this.navCtrl.push(UserMapPage, {
       userUsername: this.usernamePassed,
       runnerUsername: <string>this.runnerUsername,
       key: <string>this.Cur
