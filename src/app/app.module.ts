@@ -38,6 +38,7 @@ import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
 import { UserMapPage } from '../pages/user/user-map/user-map';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPosition, MarkerOptions,Marker
 } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 @NgModule({
   declarations: [
     MyApp,
@@ -121,6 +122,7 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPositio
     SignInRPage,
     Camera,
     GoogleMaps,
+    Geolocation,
   ]
 })
 export class AppModule {}

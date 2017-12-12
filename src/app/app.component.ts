@@ -12,6 +12,8 @@ import { HomeRPage } from '../pages/runner/home-r/home-r';
 import { FrontPage } from '../pages/front/front';
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
+import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
+import { UserMapPage } from '../pages/user/user-map/user-map';
 
 @Component({
   templateUrl: 'app.html'
@@ -44,6 +46,7 @@ export class MyApp {
     this.pagesU = [
       { title: 'Home', component: HomeUPage },
       { title: 'My Profile', component: ProfileUPage },
+      { title: 'Location', component: UserMapPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 
@@ -51,6 +54,7 @@ export class MyApp {
     this.pagesR = [
       { title: 'Home', component: HomeRPage },
       { title: 'My Profile', component: ProfileRPage },
+      { title: 'Location', component: RunnerMapPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 

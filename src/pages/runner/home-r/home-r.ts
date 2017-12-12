@@ -4,7 +4,7 @@ import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { DispDelInfoRPage } from '../disp-del-info-r/disp-del-info-r';
 import { ChatRPage } from '../chat-r/chat-r';
 import { CancelDelRPage } from '../cancel-del-r/cancel-del-r';
-
+import { RunnerMapPage } from '../runner-map/runner-map';
 import firebase from 'firebase';
 /**
  * Generated class for the HomeRPage page.
@@ -270,6 +270,13 @@ cancelButton(){
     key: this.currentKey
   });
 
+}
+goMap(){
+  this.navCtrl.push(RunnerMapPage, {
+    userUsername: <string>this.userUsername[0],
+    runnerUsername: <string>this.runnerUsername[0],
+    key: <string>this.currentKey
+  })
 }
 
 }
