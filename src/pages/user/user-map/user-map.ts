@@ -23,7 +23,7 @@ export class UserMapPage {
   ionViewDidLoad() {
       this.loadMap();
   }
-  
+
   loadMap() {
 
       let mapOptions: GoogleMapOptions = {
@@ -37,7 +37,7 @@ export class UserMapPage {
         }
       };
 
-      this.map = this.googleMaps.create('map_canvas', mapOptions);
+      this.map = this.googleMaps.create('map', mapOptions);
 
       // Wait the MAP_READY before using any methods.
       this.map.one(GoogleMapsEvent.MAP_READY)
