@@ -18,7 +18,7 @@
   <!-- pending req -->
   <div [hidden]="!havePen">
 
-    <ion-grid *ngFor="let d of deliveryNode">
+    <ion-grid *ngFor="let d of deliveryNode, let c of chargeNode">
       <h4>Pending Request</h4>
 
       <ion-row>
@@ -36,9 +36,9 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+      <ion-row *ngFor="let c of chargeNode">
+        <ion-col col-4><b>Expected Service Payment(not included the items that you order like foods)</b></ion-col>
+        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
       </ion-row>
 
       <ion-card>
@@ -65,11 +65,6 @@
       <ion-row>
         <ion-col col-4><b>Description</b></ion-col>
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
       </ion-row>
 
       <ion-card>
@@ -102,9 +97,9 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+      <ion-row *ngFor="let c of chargeNode">
+        <ion-col col-4><b>Service Payment(not included the items that you order like foods)</b></ion-col>
+        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
       </ion-row>
 
       <ion-card>
@@ -128,5 +123,8 @@
     </ion-grid>
 
   </div>
+
+
+
 
 </ion-content>

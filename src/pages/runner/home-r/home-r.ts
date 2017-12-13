@@ -22,7 +22,7 @@ export class HomeRPage {
   activeMenu: string = 'menu-r'
 
   runnerNode: Array<{availability: String, currentDelivery: string, acceptedDel: string}>=[];
-
+  chargeNode: Array<{deliChargeUtm: string, addCharge: string}>=[];
   data={av: true};//for toggle availability
 
   public availability=[];
@@ -34,6 +34,7 @@ export class HomeRPage {
 
   pathString: any;
   pathRef: any;
+  pathStringCharge:any;
 
   //for delivery
   delivery: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
@@ -68,7 +69,10 @@ export class HomeRPage {
 
   delStringA: any;
   delRefA: any;
-
+  public deliChargeUtm={};
+  public addCharge={};
+  pathRefCharge: firebase.database.Reference;
+  pathRefAddCharge:firebase.database.Reference;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -198,6 +202,25 @@ export class HomeRPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeRPage');
+    this.getData();
+  }
+  async getData(){
+    //get charge data
+    this.pathStringCharge= `/chargeStorage/`;
+
+    this.pathRefCharge= firebase.database().ref(this.pathStringCharge+ 'deliChargeUtm/');
+    this.pathRefCharge.on('value', snapshot =>  {
+      this.deliChargeUtm = snapshot.val();
+
+    });
+
+    this.pathRefAddCharge=firebase.database().ref(this.pathStringCharge+ 'addCharge/');
+    this.pathRefAddCharge.on('value', snapshot =>  {
+      this.addCharge = snapshot.val();
+
+    });
+
+    this.chargeNode[0]={deliChargeUtm: <string>this.deliChargeUtm, addCharge: <string>this.addCharge}
   }
 
   availableToggled(){

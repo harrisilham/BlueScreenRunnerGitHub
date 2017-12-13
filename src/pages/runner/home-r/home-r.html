@@ -51,7 +51,7 @@
           <ion-row>
             <ion-col col-4 align="center">{{d.userUsername}}</ion-col>
             <ion-col col-3 align="center">{{d.title}}</ion-col>
-            <ion-col col-4 align="center">RM SOON</ion-col>
+            <ion-col col-4 align="center" *ngFor="let c of chargeNode">RM {{c.deliChargeUtm}}.00</ion-col>
             <ion-col col-1 align="center"><ion-icon name="arrow-forward"></ion-icon></ion-col>
           </ion-row>
 
@@ -77,9 +77,9 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngFor="let c of chargeNode">
         <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
       </ion-row>
 
       <ion-card>

@@ -19,8 +19,10 @@ import firebase from 'firebase';
 export class DispDelInfoRPage {
 
   runnerNode: Array<{availability: String, currentDelivery: string}>=[];
+  chargeNode: Array<{deliChargeUtm: string, addCharge: string}>=[];
 
   usernamePassed: any;
+  pathStringCharge:any;
 
   delivery: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
 
@@ -31,6 +33,11 @@ export class DispDelInfoRPage {
   delString: any;
 
   key:any;
+
+  public deliChargeUtm={};
+  public addCharge={};
+  pathRefCharge: firebase.database.Reference;
+  pathRefAddCharge:firebase.database.Reference;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -47,7 +54,28 @@ export class DispDelInfoRPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DispDelInfoRPage');
+    this.getData();
   }
+
+    async getData(){
+      //get charge data
+      this.pathStringCharge= `/chargeStorage/`;
+
+      this.pathRefCharge= firebase.database().ref(this.pathStringCharge+ 'deliChargeUtm/');
+      this.pathRefCharge.on('value', snapshot =>  {
+        this.deliChargeUtm = snapshot.val();
+
+      });
+
+      this.pathRefAddCharge=firebase.database().ref(this.pathStringCharge+ 'addCharge/');
+      this.pathRefAddCharge.on('value', snapshot =>  {
+        this.addCharge = snapshot.val();
+
+      });
+
+      this.chargeNode[0]={deliChargeUtm: <string>this.deliChargeUtm, addCharge: <string>this.addCharge}
+    }
+
 
   acceptButton(){
     //document.write(this.delString)

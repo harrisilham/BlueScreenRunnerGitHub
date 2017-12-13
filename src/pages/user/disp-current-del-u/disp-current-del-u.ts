@@ -33,14 +33,21 @@ export class DispCurrentDelUPage {
   pathString: any;
   pathRef: firebase.database.Reference;
 
+  pathStringCharge:any;
+  pathRefCharge: firebase.database.Reference;
+  pathRefAddCharge:firebase.database.Reference;
   //delivery
   deliveryNode: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+  chargeNode: Array<{deliChargeUtm: string, addCharge: string}>=[];
 
   public accepted={};
   public additional={};
   public runnerUsername={};
   public title={};
   public userUsername={};
+  public deliChargeUtm={};
+  public addCharge={};
+  public done={};
   key: string;
 
   delString: any;
@@ -51,11 +58,12 @@ export class DispCurrentDelUPage {
   rURef: firebase.database.Reference;
   titleRef: firebase.database.Reference;
   uURef: firebase.database.Reference;
-
+  doneRef: firebase.database.Reference;
 
   haveAcc=0;
   havePen=0;
   haveRej=0;
+  haveDone=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -82,6 +90,22 @@ export class DispCurrentDelUPage {
       this.Cur = snapshot.val();
 
     });
+    //get charge data
+    this.pathStringCharge= `/chargeStorage/`;
+
+    this.pathRefCharge= firebase.database().ref(this.pathStringCharge+ 'deliChargeUtm/');
+    this.pathRefCharge.on('value', snapshot =>  {
+      this.deliChargeUtm = snapshot.val();
+
+    });
+
+    this.pathRefAddCharge=firebase.database().ref(this.pathStringCharge+ 'addCharge/');
+    this.pathRefAddCharge.on('value', snapshot =>  {
+      this.addCharge = snapshot.val();
+
+    });
+
+
 
     await this.delay(1000, Cur); //wait
 
@@ -91,6 +115,11 @@ export class DispCurrentDelUPage {
     this.accRef= firebase.database().ref(this.delString+ 'accepted');
     this.accRef.on('value', snapshot => {
       this.accepted= snapshot.val();
+    });
+
+    this.doneRef= firebase.database().ref(this.delString+ 'done');
+    this.doneRef.on('value', snapshot => {
+      this.done= snapshot.val();
     });
 
     this.addRef= firebase.database().ref(this.delString+ 'additional');
@@ -119,18 +148,28 @@ export class DispCurrentDelUPage {
       this.haveAcc=1;
       this.havePen=0;
       this.haveRej=0;
+      this.haveDone=0;
     }
     else if(this.accepted=="false") {
       this.haveAcc=0;
       this.havePen=1;
       this.haveRej=0;
+      this.haveDone=0;
     }
-    else {
+    else if(this.done=="true"){
+      this.haveAcc=0;
+      this.havePen=0;
+      this.haveRej=0;
+      this.haveDone=1;
+    }
+    else{
       this.haveAcc=0;
       this.havePen=0;
       this.haveRej=1;
+      this.haveDone=0;
     }
 
+    this.chargeNode[0]={deliChargeUtm: <string>this.deliChargeUtm, addCharge: <string>this.addCharge}
 
     //push to deliveryNode
     this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername}

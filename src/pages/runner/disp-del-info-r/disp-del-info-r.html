@@ -28,9 +28,9 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngFor="let c of chargeNode">
         <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
       </ion-row>
 
       <ion-card>
