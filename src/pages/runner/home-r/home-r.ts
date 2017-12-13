@@ -74,7 +74,7 @@ export class HomeRPage {
   public addCharge={};
   pathRefCharge: firebase.database.Reference;
   pathRefAddCharge:firebase.database.Reference;
-  submitDone:any;
+  done: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -306,17 +306,30 @@ goMap(){
 
 confirmDone(){
 
-        this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
-        this.dataRef= firebase.database().ref(this.pathString);
-        this.dataRef.update({
-        submitDone: "true",
-        acceptedDel: "none"
+        var key;
+        this.delString= `/deliveryStorage/`;
+        this.delRef= firebase.database().ref(this.delString);
+        this.delRef.update({
+        done: "true",
+        accepted: "false",
         })
 
-        this.navCtrl.setRoot(HomeRPage, {
-          username: <string>this.usernamePassed
-        });
-        this.doneAlert(); 
+        this.pathString= `/runnerStorage/`;
+        this.pathRef= firebase.database().ref(this.pathString);
+        this.pathRef.update({
+        acceptedDel: this.key,
+        currentDelivery: "none"
+        })
+
+       this.navCtrl.setRoot(HomeRPage, {
+       username: <string>this.usernamePassed,
+       runnerNode: this.runnerNode[0],
+       delivery: this.delivery[0],
+       pathString: this.pathString,
+       delString: this.delString+this.currentKey,
+       key: this.currentKey
+       });
+       this.doneAlert(); 
 
       }
 
