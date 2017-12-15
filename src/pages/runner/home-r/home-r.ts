@@ -49,6 +49,7 @@ export class HomeRPage {
   public title=[];
   public userUsername=[];
   public key=[];
+  public done=[];
 
   currentKey: any;
 
@@ -56,7 +57,7 @@ export class HomeRPage {
   delRef: any;
 
   //for del accepted
-  deliveryA: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+  deliveryA: Array<{accepted: string, done: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
 
 
   public acceptedA=[];
@@ -65,6 +66,7 @@ export class HomeRPage {
   public titleA=[];
   public userUsernameA=[];
   public keyA=[];
+  public doneA=[];
 
   currentKeyA: any;
 
@@ -74,7 +76,6 @@ export class HomeRPage {
   public addCharge={};
   pathRefCharge: firebase.database.Reference;
   pathRefAddCharge:firebase.database.Reference;
-  done: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -307,17 +308,19 @@ goMap(){
 confirmDone(){
 
         var key;
-        this.delString= `/deliveryStorage/`;
+        var Cur;
+        this.delString= `/deliveryStorage/`+ <string>this.Cur+ `/`;
+
         this.delRef= firebase.database().ref(this.delString);
         this.delRef.update({
         done: "true",
-        accepted: "false",
+        accepted: "false"
         })
 
-        this.pathString= `/runnerStorage/`;
+        this.pathString= `/runnerStorage/`+ this.usernamePassed+ `/`;
         this.pathRef= firebase.database().ref(this.pathString);
         this.pathRef.update({
-        acceptedDel: this.key,
+        acceptedDel: "none",
         currentDelivery: "none"
         })
 
