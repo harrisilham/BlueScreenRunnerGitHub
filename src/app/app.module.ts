@@ -36,7 +36,7 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
 import { RunnerMapPage } from '../pages/runner/runner-map/runner-map';
 import { UserMapPage } from '../pages/user/user-map/user-map';
-import { ReceiptUserUPage } from '../pages/user/receipt=u/receipt-u'; 
+import { ReceiptUPage } from '../pages/user/receipt-u/receipt-u'; 
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPosition, MarkerOptions,Marker
 } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -70,7 +70,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     CancelDelRPage,
     RunnerMapPage,
     UserMapPage,
-    ReceiptUserUPage,
+    ReceiptUPage,
 
 
 
@@ -112,7 +112,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     CancelDelRPage,
     RunnerMapPage,
     UserMapPage,
-    ReceiptUserUPage,
+    ReceiptUPage,
 
 
 

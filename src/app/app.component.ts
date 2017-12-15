@@ -14,7 +14,7 @@ import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
 import { UserMapPage } from '../pages/user/user-map/user-map';
-import { ReceiptUserUPage } from '../pages/user/receipt=u/receipt-u'; 
+import { ReceiptUPage } from '../pages/user/receipt-u/receipt-u'; 
 
 @Component({
   templateUrl: 'app.html'
