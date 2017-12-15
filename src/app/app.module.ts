@@ -23,7 +23,7 @@ import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
 import { DispDelInfoRPage } from '../pages/runner/disp-del-info-r/disp-del-info-r';
 import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
 import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
-import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
+import { HomeRPageModule } from '../pages/runner/home-r/home-r.module';
 import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
 import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
@@ -34,8 +34,9 @@ import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-curre
 import { ChatUPage } from '../pages/user/chat-u/chat-u';
 import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
-import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
+import { RunnerMapPage } from '../pages/runner/runner-map/runner-map';
 import { UserMapPage } from '../pages/user/user-map/user-map';
+import { ReceiptUserUPage } from '../pages/user/receipt=u/receipt-u'; 
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPosition, MarkerOptions,Marker
 } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -68,7 +69,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     ChatRPage,
     CancelDelRPage,
     RunnerMapPage,
-    UserMapPage
+    UserMapPage,
+    ReceiptUserUPage,
 
 
 
@@ -110,6 +112,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     CancelDelRPage,
     RunnerMapPage,
     UserMapPage,
+    ReceiptUserUPage,
 
 
 

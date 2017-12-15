@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 import { ChatUPage } from '../chat-u/chat-u';
 import { UserMapPage } from '../user-map/user-map';
+import { UserReceipt } from '../receipt-u/receipt-u';
 
 import firebase from 'firebase';
 
@@ -198,6 +199,14 @@ export class DispCurrentDelUPage {
 
   goMap(){
     this.navCtrl.push(UserMapPage, {
+      userUsername: this.usernamePassed,
+      runnerUsername: <string>this.runnerUsername,
+      key: <string>this.Cur
+    })
+  }
+
+  goReceipt(){
+    this.navCtrl.push(UserReceipt, {
       userUsername: this.usernamePassed,
       runnerUsername: <string>this.runnerUsername,
       key: <string>this.Cur
