@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 
+import { UserMapPage } from '../user-map/user-map';
 
 import firebase from 'firebase';
 
@@ -55,7 +56,7 @@ export class InsDeliveryInfoUPage {
 
     //get frm textarea
     var additional= (<HTMLInputElement>document.getElementById('additionalInfo')).value;
-    
+
     this.navCtrl.push(ChooseRunnerUPage,{
       username: this.usernamePassed,
       title: this.title,
@@ -71,4 +72,5 @@ export class InsDeliveryInfoUPage {
   });
    alert.present();
   }
+
 }
