@@ -145,19 +145,19 @@ export class DispCurrentDelUPage {
 
     await this.delay(1000, Cur); //wait
 
-    if(this.accepted=="true") {
+    if(this.accepted=="true" && this.done=="false") {
       this.haveAcc=1;
       this.havePen=0;
       this.haveRej=0;
       this.haveDone=0;
     }
-    else if(this.accepted=="false") {
+    else if(this.accepted=="false" && this.done=="false") {
       this.haveAcc=0;
       this.havePen=1;
       this.haveRej=0;
       this.haveDone=0;
     }
-    else if(this.done=="true"){
+    else if(this.done=="true" && this.accepted=="false"){
       this.haveAcc=0;
       this.havePen=0;
       this.haveRej=0;
