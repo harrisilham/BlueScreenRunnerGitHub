@@ -307,9 +307,8 @@ goMap(){
 
 confirmDone(){
 
-        var key;
-        var Cur;
-        this.delString= `/deliveryStorage/`+ <string>this.Cur+ `/`;
+    
+        this.delString= `/deliveryStorage/`+ this.key + `/` ;
 
         this.delRef= firebase.database().ref(this.delString);
         this.delRef.update({
