@@ -11,8 +11,53 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
+	<ion-grid *ngFor="let d of deliveryNode, let c of chargeNode">
+		<ion-row>
+			<ion-col>
+				<ion-icon name="paper" style="font-size:100px"></ion-icon>
+			</ion-col>
+		</ion-row>
 
+		<ion-row>
+			<ion-col>
+				<h5>RUNNER SERVICES CHARGE</h5>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+      		<ion-col align="left" col-8 ng-model="c.deliChargeUtm">
+        		<div>Delivery charges: RM{{c.deliChargeUtm}}.00</div>
+     		</ion-col>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+    	</ion-row>
+
+    	<ion-row>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+      		<ion-col align="left" col-8 ng-model="d.foodthing">
+        		<div>Food/Thing prices: RM{{d.foodthing}}</div>
+     		</ion-col>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+    	</ion-row>
+
+    	<ion-row>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+      		<ion-col align="left" col-8>
+        		<div ng-app><p>Total charges: RM{{d.foodthing--c.deliChargeUtm}}</p></div>
+     		</ion-col>
+      		<ion-col>
+        		<div></div>
+      		</ion-col>
+    	</ion-row>
+	</ion-grid>
 </ion-content>

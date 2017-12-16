@@ -310,6 +310,8 @@ confirmDone(){
     
         this.delString= `/deliveryStorage/`+ this.key + `/` ;
 
+        var foodthing= (<HTMLInputElement>document.getElementById('foodthingprice')).value;
+
         this.delRef= firebase.database().ref(this.delString);
         this.delRef.update({
         done: "true",
@@ -329,7 +331,8 @@ confirmDone(){
        delivery: this.delivery[0],
        pathString: this.pathString,
        delString: this.delString+this.currentKey,
-       key: this.currentKey
+       key: this.currentKey,
+       foodthing: foodthing
        });
        this.doneAlert(); 
 

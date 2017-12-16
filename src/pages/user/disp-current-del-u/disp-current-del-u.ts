@@ -209,7 +209,6 @@ export class DispCurrentDelUPage {
     this.navCtrl.push(ReceiptUPage, {
       userUsername: this.usernamePassed,
       runnerUsername: <string>this.runnerUsername,
-      key: <string>this.Cur
     })
   }
 
