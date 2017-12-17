@@ -34,6 +34,8 @@ export class DispCurrentDelUPage {
   pathString: any;
   pathRef: firebase.database.Reference;
 
+  foodthing: any;
+
   pathStringCharge:any;
   pathRefCharge: firebase.database.Reference;
   pathRefAddCharge:firebase.database.Reference;
@@ -209,6 +211,8 @@ export class DispCurrentDelUPage {
     this.navCtrl.push(ReceiptUPage, {
       userUsername: this.usernamePassed,
       runnerUsername: <string>this.runnerUsername,
+      deliChargeUtm: <string>this.deliChargeUtm,
+      foodthing: this.foodthing
     })
   }
 

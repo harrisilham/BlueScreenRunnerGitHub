@@ -31,6 +31,7 @@ export class HomeRPage {
   public acceptedDel=[];
 
   usernamePassed: any;
+  foodthing: any;
 
   pathString: any;
   pathRef: any;
@@ -310,7 +311,7 @@ confirmDone(){
     
         this.delString= `/deliveryStorage/`+ this.key + `/` ;
 
-        var foodthing= (<HTMLInputElement>document.getElementById('foodthingprice')).value;
+        this.foodthing= (<HTMLInputElement>document.getElementById('foodthingprice')).value;
 
         this.delRef= firebase.database().ref(this.delString);
         this.delRef.update({
@@ -332,7 +333,7 @@ confirmDone(){
        pathString: this.pathString,
        delString: this.delString+this.currentKey,
        key: this.currentKey,
-       foodthing: foodthing
+       foodthing: this.foodthing
        });
        this.doneAlert(); 
 
