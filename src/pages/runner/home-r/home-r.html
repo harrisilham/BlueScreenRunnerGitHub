@@ -51,7 +51,7 @@
           <ion-row>
             <ion-col col-4 align="center">{{d.userUsername}}</ion-col>
             <ion-col col-3 align="center">{{d.title}}</ion-col>
-            <ion-col col-4 align="center" *ngFor="let c of chargeNode">RM {{c.deliChargeUtm}}.00</ion-col>
+            <ion-col col-4 align="center">RM SOON</ion-col>
             <ion-col col-1 align="center"><ion-icon name="arrow-forward"></ion-icon></ion-col>
           </ion-row>
 
@@ -63,7 +63,7 @@
   <br><br>
 
   <!-- current delivery -->
-    <ion-grid *ngFor="let d of delivery" [hidden]="!haveAcc">
+    <ion-grid *ngFor="let d of delivery">
 
       <h4>Delivery for <a>@{{d.userUsername}} </a></h4>
 
@@ -77,25 +77,14 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let c of chargeNode">
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
-      </ion-row>
-
       <ion-row>
-        <ion-col col-4><b>Food/Thing prices(RM)</b></ion-col>
-        <ion-col col-4><ion-input type="number" id="foodthingprice" align="middle"></ion-input></ion-col>
-
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">COMING SOON</ion-col>
       </ion-row>
 
       <ion-card>
-        <button ion-button round outline type="submit" (click)="goMap()">Show Map</button>
+        COMING SOON..MAP SHOWS ROUTE.
       </ion-card>
-
-      <ion-row>
-          <ion-col colspan="2" align="middle"> <button ion-button outline type="submit" (click)="confirmDone()" color = "secondary">Done Delivery</button></ion-col>
-          <ion-col colspan="2" align="middle"> <button ion-button outline type="submit" (click)="cancelButton()" color = "danger">Cancel Delivery</button> </ion-col>
-      </ion-row>
 
       <ion-footer ion-fixed no-border >
 

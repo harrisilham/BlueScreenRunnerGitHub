@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuController } from 'ionic-angular';
 import firebase from 'firebase';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { HomeAPage } from '../pages/admin/home-a/home-a';
 import { HomeUPage } from '../pages/user/home-u/home-u';
@@ -12,9 +11,6 @@ import { HomeRPage } from '../pages/runner/home-r/home-r';
 import { FrontPage } from '../pages/front/front';
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
-import { RunnerMapPage } from '../pages/runner/runner-map/runner-map'
-import { UserMapPage } from '../pages/user/user-map/user-map';
-import { ReceiptUPage } from '../pages/user/receipt-u/receipt-u'; 
 
 @Component({
   templateUrl: 'app.html'
@@ -47,7 +43,6 @@ export class MyApp {
     this.pagesU = [
       { title: 'Home', component: HomeUPage },
       { title: 'My Profile', component: ProfileUPage },
-      { title: 'Location', component: UserMapPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 
@@ -55,7 +50,6 @@ export class MyApp {
     this.pagesR = [
       { title: 'Home', component: HomeRPage },
       { title: 'My Profile', component: ProfileRPage },
-      { title: 'Location', component: RunnerMapPage },
       { title: 'Sign Out', component: FrontPage },
     ];
 

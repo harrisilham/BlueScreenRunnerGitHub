@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController, Events, AlertContr
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { DispDelInfoRPage } from '../disp-del-info-r/disp-del-info-r';
 import { ChatRPage } from '../chat-r/chat-r';
-import { CancelDelRPage } from '../cancel-del-r/cancel-del-r';
-import { RunnerMapPage } from '../runner-map/runner-map';
+
 import firebase from 'firebase';
 /**
  * Generated class for the HomeRPage page.
@@ -22,7 +21,7 @@ export class HomeRPage {
   activeMenu: string = 'menu-r'
 
   runnerNode: Array<{availability: String, currentDelivery: string, acceptedDel: string}>=[];
-  chargeNode: Array<{deliChargeUtm: string, addCharge: string}>=[];
+
   data={av: true};//for toggle availability
 
   public availability=[];
@@ -31,12 +30,9 @@ export class HomeRPage {
   public acceptedDel=[];
 
   usernamePassed: any;
-  foodthing: any;
 
   pathString: any;
   pathRef: any;
-  pathStringCharge:any;
-  dataRef: firebase.database.Reference;
 
   //for delivery
   delivery: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
@@ -50,7 +46,6 @@ export class HomeRPage {
   public title=[];
   public userUsername=[];
   public key=[];
-  public done=[];
 
   currentKey: any;
 
@@ -58,7 +53,7 @@ export class HomeRPage {
   delRef: any;
 
   //for del accepted
-  deliveryA: Array<{accepted: string, done: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+  deliveryA: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
 
 
   public acceptedA=[];
@@ -67,16 +62,12 @@ export class HomeRPage {
   public titleA=[];
   public userUsernameA=[];
   public keyA=[];
-  public doneA=[];
 
   currentKeyA: any;
 
   delStringA: any;
   delRefA: any;
-  public deliChargeUtm={};
-  public addCharge={};
-  pathRefCharge: firebase.database.Reference;
-  pathRefAddCharge:firebase.database.Reference;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
     //set active menu runner
@@ -206,25 +197,6 @@ export class HomeRPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeRPage');
-    this.getData();
-  }
-  async getData(){
-    //get charge data
-    this.pathStringCharge= `/chargeStorage/`;
-
-    this.pathRefCharge= firebase.database().ref(this.pathStringCharge+ 'deliChargeUtm/');
-    this.pathRefCharge.on('value', snapshot =>  {
-      this.deliChargeUtm = snapshot.val();
-
-    });
-
-    this.pathRefAddCharge=firebase.database().ref(this.pathStringCharge+ 'addCharge/');
-    this.pathRefAddCharge.on('value', snapshot =>  {
-      this.addCharge = snapshot.val();
-
-    });
-
-    this.chargeNode[0]={deliChargeUtm: <string>this.deliChargeUtm, addCharge: <string>this.addCharge}
   }
 
   availableToggled(){
@@ -287,65 +259,5 @@ export class HomeRPage {
     })
   }
 
-cancelButton(){
-  this.navCtrl.push(CancelDelRPage, {
-    username: <string>this.usernamePassed,
-    runnerNode: this.runnerNode[0],
-    delivery: this.delivery[0],
-    pathString: this.pathString,
-    delString: this.delString+this.currentKey,
-    key: this.currentKey
-  });
-
-}
-goMap(){
-  this.navCtrl.push(RunnerMapPage, {
-    userUsername: <string>this.userUsername[0],
-    runnerUsername: <string>this.runnerUsername[0],
-    key: <string>this.currentKey
-  })
-}
-
-confirmDone(){
-
-    
-        this.delString= `/deliveryStorage/`+ this.key + `/` ;
-
-        this.foodthing= (<HTMLInputElement>document.getElementById('foodthingprice')).value;
-
-        this.delRef= firebase.database().ref(this.delString);
-        this.delRef.update({
-        done: "true",
-        accepted: "false"
-        })
-
-        this.pathString= `/runnerStorage/`+ this.usernamePassed+ `/`;
-        this.pathRef= firebase.database().ref(this.pathString);
-        this.pathRef.update({
-        acceptedDel: "none",
-        currentDelivery: "none"
-        })
-
-       this.navCtrl.setRoot(HomeRPage, {
-       username: <string>this.usernamePassed,
-       runnerNode: this.runnerNode[0],
-       delivery: this.delivery[0],
-       pathString: this.pathString,
-       delString: this.delString+this.currentKey,
-       key: this.currentKey,
-       foodthing: this.foodthing
-       });
-       this.doneAlert(); 
-
-      }
-
-      doneAlert() {
-              let alert = this.alertCtrl.create({
-                title: 'You successfully done the delivery',
-                subTitle: '',
-                buttons: ['Ok']
-              });
-              alert.present();
-            }
 
 }
