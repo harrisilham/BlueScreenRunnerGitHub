@@ -33,6 +33,9 @@ import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-curre
 import { ChatUPage } from '../pages/user/chat-u/chat-u';
 import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 
+import {GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 @NgModule({
   declarations: [
@@ -104,9 +107,12 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     FrontPage,
     SignInRPage,
+    GoogleMaps,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+
   ]
 })
 export class AppModule {}

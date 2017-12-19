@@ -1,7 +1,17 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, AlertController, Platform } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
-
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ GoogleMapOptions,
+ CameraPosition,
+ MarkerOptions,
+ Marker,
+ LatLng
+} from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import firebase from 'firebase';
 
@@ -18,6 +28,11 @@ import firebase from 'firebase';
   templateUrl: 'ins-delivery-info-u.html',
 })
 export class InsDeliveryInfoUPage {
+  @ViewChild('map')
+  private mapElement: ElementRef;
+  private map:GoogleMap;
+  private location:LatLng;
+
   usernamePassed: any;
   runnerPassed: any;
   title: string;
@@ -37,7 +52,11 @@ export class InsDeliveryInfoUPage {
   public deliveryCount=[];
   public biodata=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private alertCtrl: AlertController) {
+  uLat: any;
+  uLng: any;
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private alertCtrl: AlertController, private googleMaps: GoogleMaps, private geolocation: Geolocation, private platform: Platform) {
     //get passed from last page..ins-title
     this.usernamePassed= navParams.get('username');
     this.title= navParams.get('title');
@@ -45,17 +64,41 @@ export class InsDeliveryInfoUPage {
     //db initial
     this.pathString= `/deliveryStorage/`;
     this.pathRef= firebase.database().ref(this.pathString);
+
+    //get user current pos
+    this.geolocation.getCurrentPosition().then( pos=> {
+      this.uLat= pos.coords.latitude;
+      this.uLng= pos.coords.longitude;
+      this.location = new LatLng(this.uLat, this.uLng);
+    }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InsDeliveryInfoUPage');
+
+    this.platform.ready().then(() => {
+      let element = this.mapElement.nativeElement;
+      this.map = this.googleMaps.create(element);
+
+      this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+        let options = {
+          target: this.location,
+          zoom: 8
+        };
+
+        this.map.moveCamera(options);
+      });
+    });
   }
 
   go(){
 
     //get frm textarea
     var additional= (<HTMLInputElement>document.getElementById('additionalInfo')).value;
-    
+
     this.navCtrl.push(ChooseRunnerUPage,{
       username: this.usernamePassed,
       title: this.title,
