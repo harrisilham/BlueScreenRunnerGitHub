@@ -12,6 +12,8 @@ import { FrontPage } from '../pages/front/front';
 import { ProfileUPage } from '../pages/user/profile-u/profile-u';
 import { ProfileRPage } from '../pages/runner/profile-r/profile-r';
 
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,7 +27,7 @@ export class MyApp {
   pagesU: Array<{title: string, component: any}>;
   pagesR: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, public events: Events) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, public events: Events, private backgroundGeolocation: BackgroundGeolocation) {
     this.initializeApp();
 
     //get username passed

@@ -1,10 +1,28 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, Events, AlertController, Platform } from 'ionic-angular';
 import { EditrunnerAPage } from '../../admin/editrunner-a/editrunner-a';
 import { DispDelInfoRPage } from '../disp-del-info-r/disp-del-info-r';
 import { ChatRPage } from '../chat-r/chat-r';
 
 import firebase from 'firebase';
+
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ GoogleMapOptions,
+ CameraPosition,
+ MarkerOptions,
+ Marker,
+ LatLng
+} from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+
+declare var google;
+
 /**
  * Generated class for the HomeRPage page.
  *
@@ -18,6 +36,10 @@ import firebase from 'firebase';
   templateUrl: 'home-r.html',
 })
 export class HomeRPage {
+  @ViewChild('map')
+  private mapElement: ElementRef;
+  map:any;
+  private location:LatLng;
   activeMenu: string = 'menu-r'
 
   runnerNode: Array<{availability: String, currentDelivery: string, acceptedDel: string}>=[];
@@ -35,7 +57,7 @@ export class HomeRPage {
   pathRef: any;
 
   //for delivery
-  delivery: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+  delivery: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string, payment: string, distance: string, tLat: number, tLng: number, uLat: number, uLng: number, rLat: number, rLng: number}>=[];
 
   haveDel= 0;
   haveAcc= 0;
@@ -45,7 +67,19 @@ export class HomeRPage {
   public runnerUsername=[];
   public title=[];
   public userUsername=[];
+  public payment=[];
+  public distance=[];
+  public uLat=[];
+  public uLng=[];
+  public tLat=[];
+  public tLng=[];
+  public rLat=[];
+  public rLng=[];
   public key=[];
+
+  uLoc: LatLng;
+  tLoc: LatLng;
+
 
   currentKey: any;
 
@@ -53,7 +87,7 @@ export class HomeRPage {
   delRef: any;
 
   //for del accepted
-  deliveryA: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
+  deliveryA: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string, payment: string, distance: string, tLat: number, tLng: number, uLat: number, uLng: number, rLat: number, rLng: number}>=[];
 
 
   public acceptedA=[];
@@ -69,7 +103,7 @@ export class HomeRPage {
   delRefA: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public events: Events, private alertCtrl: AlertController, private googleMaps: GoogleMaps, private geolocation: Geolocation, private platform: Platform, public zone: NgZone, private launchNavigator: LaunchNavigator, private backgroundGeolocation: BackgroundGeolocation) {
     //set active menu runner
     this.activeMenu= 'menu-r' ;
     this.menu.enable(false, 'menu-a');
@@ -127,15 +161,25 @@ export class HomeRPage {
                   this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
                   this.title[index]= childSnapshot.child("/title/").val();
                   this.userUsername[index]= childSnapshot.child("/userUsername/").val();
+                  this.payment[index]= childSnapshot.child("/payment/").val();
+                  this.distance[index]= childSnapshot.child("/distance/").val();
+                  this.uLat[index]= childSnapshot.child("/uLat/").val();
+                  this.uLng[index]= childSnapshot.child("/uLng/").val();
+                  this.tLat[index]= childSnapshot.child("/tLat/").val();
+                  this.tLng[index]= childSnapshot.child("/tLng/").val();
+                  this.rLat[index]= childSnapshot.child("/rLat/").val();
+                  this.rLng[index]= childSnapshot.child("/rLng/").val();
 
 
                   //push into array object
-                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index] });
+                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index], payment: this.payment[index], distance: this.distance[index], tLat: <number>this.tLat[index], tLng: <number>this.tLng[index], uLat: <number>this.uLat[index], uLng: <number>this.uLng[index], rLat: <number>this.rLat[index], rLng: <number>this.rLng[index] });
 
                 }
 
               });
+
             });
+
           }
           else{
             //delivery req
@@ -160,14 +204,23 @@ export class HomeRPage {
                   this.runnerUsername[index]= childSnapshot.child("/runnerUsername/").val();
                   this.title[index]= childSnapshot.child("/title/").val();
                   this.userUsername[index]= childSnapshot.child("/userUsername/").val();
-
+                  this.payment[index]= childSnapshot.child("/payment/").val();
+                  this.distance[index]= childSnapshot.child("/distance/").val();
+                  this.uLat[index]= childSnapshot.child("/uLat/").val();
+                  this.uLng[index]= childSnapshot.child("/uLng/").val();
+                  this.tLat[index]= childSnapshot.child("/tLat/").val();
+                  this.tLng[index]= childSnapshot.child("/tLng/").val();
+                  this.rLat[index]= childSnapshot.child("/rLat/").val();
+                  this.rLng[index]= childSnapshot.child("/rLng/").val();
 
                   //push into array object
-                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index] });
+                  this.delivery[0]=({accepted: this.accepted[index], additional: this.additional[index], runnerUsername: this.runnerUsername[index], title: this.title[index], userUsername: this.userUsername[index], payment: this.payment[index], distance: this.distance[index], uLat: <number>this.uLat[index], uLng: <number>this.uLng[index], tLat: <number>this.tLat[index], tLng: <number>this.tLng[index], rLat: <number>this.rLat[index], rLng: <number>this.rLng[index]  });
 
                 }
 
               });
+
+
             });
           }
 
@@ -190,13 +243,52 @@ export class HomeRPage {
     this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
 
 
-
   }
   test(){
     document.write(<string>this.runnerNode[0].availability)
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeRPage');
+
+    if(this.haveAcc){
+
+      //create map
+      this.addMap (1.5578725, 103.63072340000006); //(this.rLat, this.rLng);MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+      //get direction
+      //set path
+      this.pathString= `/runnerStorage/`+ this.usernamePassed+ `/` ;
+      this.pathRef= firebase.database().ref(this.pathString);
+      this.pathRef.on('value', snapshot => {
+      this.uLat[0]= snapshot.child("/uLat/").val();
+      this.uLng[0]= snapshot.child("/uLng/").val();
+      this.tLat[0]= snapshot.child("/tLat/").val();
+      this.tLng[0]= snapshot.child("/tLng/").val();
+
+      //set uLoc n tLoc
+      this.uLoc= new google.maps.LatLng(this.uLat[0], this.uLng[0]);
+      this.tLoc= new google.maps.LatLng(this.tLat[0], this.tLng[0]);
+      console.log("uLoc: "+ this.uLoc)
+      console.log("tLoc: "+ this.tLoc)
+
+      var dir= new google.maps.DirectionsService;
+      var dirDisplay = new google.maps.DirectionsRenderer;
+      dirDisplay.setMap(this.map);
+
+      dir.route({
+          origin: this.tLoc,
+          destination: this.uLoc,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            dirDisplay.setDirections(response);
+          } else {
+            //window.alert('Directions request failed due to ' + status);
+          }
+        });
+
+      })
+    }
   }
 
   availableToggled(){
@@ -259,5 +351,125 @@ export class HomeRPage {
     })
   }
 
+  addMap(lat,long){
+
+    let latLng = new google.maps.LatLng(lat, long);
+
+
+    let mapOptions = {
+    center: latLng,
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker(lat, long, "ME");
+
+  }
+
+  addMarker(lat, lng, des){
+
+    let marker = new google.maps.Marker({
+    map: this.map,
+    animation: google.maps.Animation.DROP,
+    position: {lat: lat, lng: lng}
+    });
+
+    let infoWindow = new google.maps.InfoWindow({
+    content: des
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+    infoWindow.open(this.map, marker);
+    });
+
+
+  }
+
+  launchNavA(){
+    //set path
+    this.pathString= `/runnerStorage/`+this.usernamePassed+ `/` ;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    //setup background location
+    const config: BackgroundGeolocationConfig = {
+            desiredAccuracy: 5,
+            stationaryRadius: 5,
+            distanceFilter: 5,
+            interval: 1000,
+            debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+            stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+    };
+
+    this.backgroundGeolocation.configure(config)
+      .subscribe((location: BackgroundGeolocationResponse) => {
+        console.log(location);
+        //update db
+        this.pathRef.update({
+         rLat: location.latitude,
+         rLng: location.longitude
+         })
+      });
+
+      //start background tracking
+      this.backgroundGeolocation.start();
+
+
+    //foreground tracking
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+     //update db
+     this.pathRef.update({
+      rLat: data.coords.latitude,
+      rLng: data.coords.longitude
+      })
+    });
+
+    //open navigation
+    this.launchNavigator.navigate([this.tLat[0], this.tLng[0]]);
+  }
+
+  launchNavB(){
+    //set path
+    this.pathString= `/runnerStorage/`+this.usernamePassed+ `/` ;
+    this.pathRef= firebase.database().ref(this.pathString);
+
+    //setup background location
+    const config: BackgroundGeolocationConfig = {
+            desiredAccuracy: 5,
+            stationaryRadius: 5,
+            distanceFilter: 5,
+            interval: 1000,
+            debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+            stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+    };
+
+    this.backgroundGeolocation.configure(config)
+      .subscribe((location: BackgroundGeolocationResponse) => {
+        console.log(location);
+        //update db
+        this.pathRef.update({
+         rLat: location.latitude,
+         rLng: location.longitude
+         })
+      });
+
+      //start background tracking
+      this.backgroundGeolocation.start();
+
+
+    //foreground tracking
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+     //update db
+     this.pathRef.update({
+      rLat: data.coords.latitude,
+      rLng: data.coords.longitude
+      })
+    });
+
+    //open navigation
+    this.launchNavigator.navigate([this.uLat[0], this.uLng[0]]);
+  }
 
 }

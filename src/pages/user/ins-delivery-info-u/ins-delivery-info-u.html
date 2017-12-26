@@ -14,20 +14,28 @@
 
 
 <ion-content padding>
-<div #map style="height:100%"></div>
+
   <h3 align="center">Set Your Delivery Path</h3>
-  <ion-card>
-    {{uLat}}<br>
-    {{uLng}}
 
+    <ion-toolbar color="primary">
+      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
 
-  </ion-card>
+      <ion-list [hidden]="autocompleteItems.length == 0">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+          {{ item.description }}
+        </ion-item>
+      </ion-list>
+    </ion-toolbar>
+    <div #map style="height:70%"></div>
+
   <br><br>
 
 
-  <h3 align="center">Total Payment</h3>
+  <h3 align="center">Payment</h3>
   <ion-card>
-    COMING SOON..
+    Distance:<input id="distanceU" type="text" value="0.00" style="text-align:center"readonly> km<br />
+    RM<input id="paymentU" type="text" value="0.00" style="text-align:center"readonly>
+
   </ion-card>
   <br><br>
 

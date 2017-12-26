@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 
 import firebase from 'firebase';
@@ -29,7 +29,7 @@ export class ChatUPage {
   chatString: any;
   chatRef: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public zone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
     //get passed from last page..disp del
     this.userPassed= this.navParams.get('userUsername');
     this.runnerPassed= this.navParams.get('runnerUsername');

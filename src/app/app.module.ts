@@ -35,6 +35,8 @@ import { ChatRPage } from '../pages/runner/chat-r/chat-r';
 
 import {GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 
 
 @NgModule({
@@ -111,6 +113,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     SignInRPage,
     GoogleMaps,
     Geolocation,
+    LaunchNavigator,
+    BackgroundGeolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
 
   ]

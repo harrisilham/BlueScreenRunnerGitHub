@@ -21,6 +21,12 @@ export class ConfirmRunnerUPage {
   runnerPassed: any;
   title: string;
   additional: string;
+  uLat: any;
+  uLng: any;
+  tLat: any;
+  tLng: any;
+  distance: any;
+  payment: any
 
   runnerNode: Array<{email: String, fullName: String, phoneNum: number, username: String, rating: number, deliveryCount: number, biodata: String}>=[];
 
@@ -41,6 +47,12 @@ export class ConfirmRunnerUPage {
     this.runnerPassed= navParams.get('runner');
     this.title= navParams.get('title');
     this.additional= navParams.get('additional');
+    this.uLat= navParams.get('uLat');
+    this.uLng= navParams.get('uLng');
+    this.tLat= navParams.get('tLat');
+    this.tLng= navParams.get('tLng');
+    this.distance= navParams.get('distance');
+    this.payment= navParams.get('payment');
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -74,6 +86,7 @@ export class ConfirmRunnerUPage {
     //set new key node
     var newKey= this.pathRef.push().key;
 
+    console.log("distance: "+ this.distance)
 
     //create delivery
     this.pathString= `/deliveryStorage/`+newKey +`/`;
@@ -84,7 +97,15 @@ export class ConfirmRunnerUPage {
       additional: this.additional,
       runnerUsername: this.runnerPassed,
       title: this.title,
-      userUsername: this.usernamePassed
+      userUsername: this.usernamePassed,
+      uLat: this.uLat,
+      uLng: this.uLng,
+      tLat: this.tLat,
+      tLng: this.tLng,
+      rLat: 0,
+      rLng: 0,
+      distance: this.distance,
+      payment: this.payment
     });
 
     //update at user

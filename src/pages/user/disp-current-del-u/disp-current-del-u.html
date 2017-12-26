@@ -37,13 +37,20 @@
       </ion-row>
 
       <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4><b>Distance</b></ion-col>
+        <ion-col col-4 align="left">{{d.distance}} km</ion-col>
       </ion-row>
 
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
+      </ion-row>
+
+      <!--
       <ion-card>
         COMING SOON..MAP SHOWS ROUTE.
       </ion-card>
+      -->
 
     </ion-grid>
 
@@ -68,13 +75,15 @@
       </ion-row>
 
       <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4><b>Distance</b></ion-col>
+        <ion-col col-4 align="left">{{d.distance}} km</ion-col>
       </ion-row>
 
-      <ion-card>
-        COMING SOON..MAP SHOWS ROUTE.
-      </ion-card>
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
+      </ion-row>
+
 
       <ion-row>
           <ion-col  align="middle"> <button ion-button round outline type="submit" (click)="newRunner()">Choose New Runner</button> </ion-col>
@@ -87,7 +96,9 @@
 
 
   <!-- approved req -->
+  <div #map  style="height:50%"></div>
   <div [hidden]="!haveAcc">
+
 
     <ion-grid *ngFor="let d of deliveryNode">
       <h4>Request Approved by <a>@{{d.runnerUsername}} </a></h4>
@@ -103,17 +114,17 @@
       </ion-row>
 
       <ion-row>
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4><b>Distance</b></ion-col>
+        <ion-col col-4 align="left">{{d.distance}} km</ion-col>
       </ion-row>
 
-      <ion-card>
-        COMING SOON..MAP SHOWS ROUTE.
-      </ion-card>
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
+      </ion-row>
 
 
-      <ion-footer ion-fixed no-border>
-
+      <ion-footer>
         <ion-toolbar no-border>
           <ion-buttons end>
             <button ion-button (click)="goChat()">
@@ -122,9 +133,8 @@
             </button>
           </ion-buttons>
         </ion-toolbar>
-
       </ion-footer>
-
+      
     </ion-grid>
 
   </div>

@@ -51,7 +51,7 @@
           <ion-row>
             <ion-col col-4 align="center">{{d.userUsername}}</ion-col>
             <ion-col col-3 align="center">{{d.title}}</ion-col>
-            <ion-col col-4 align="center">RM SOON</ion-col>
+            <ion-col col-4 align="center">RM{{d.payment}}</ion-col>
             <ion-col col-1 align="center"><ion-icon name="arrow-forward"></ion-icon></ion-col>
           </ion-row>
 
@@ -63,7 +63,8 @@
   <br><br>
 
   <!-- current delivery -->
-    <ion-grid *ngFor="let d of delivery">
+  <div #map style="height:50%"></div>
+    <ion-grid *ngFor="let d of delivery" [hidden]="!haveAcc">
 
       <h4>Delivery for <a>@{{d.userUsername}} </a></h4>
 
@@ -79,25 +80,25 @@
 
       <ion-row>
         <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">COMING SOON</ion-col>
+        <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
       </ion-row>
 
-      <ion-card>
-        COMING SOON..MAP SHOWS ROUTE.
-      </ion-card>
+      <ion-row>
+        <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="launchNavA()">Navigate To A </button> </ion-col>
+      </ion-row>
 
-      <ion-footer ion-fixed no-border >
+      <ion-row>
+        <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="launchNavB()">Navigate To B </button> </ion-col>
+      </ion-row>
 
-        <ion-toolbar no-border>
-          <ion-buttons end>
-            <button ion-button (click)="goChat()">
-              Chat with <a>@{{d.userUsername}}</a>
-              <ion-icon name="chatbubbles" color="primary"></ion-icon>
-            </button>
-          </ion-buttons>
-        </ion-toolbar>
-
-      </ion-footer>
+      <ion-toolbar no-border>
+        <ion-buttons end>
+          <button ion-button (click)="goChat()">
+            Chat with <a>@{{d.userUsername}}</a>
+            <ion-icon name="chatbubbles" color="primary"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
 
     </ion-grid>
 
