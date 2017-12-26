@@ -252,9 +252,6 @@ export class HomeRPage {
 
     if(this.haveAcc){
 
-      //create map
-      this.addMap (1.5578725, 103.63072340000006); //(this.rLat, this.rLng);MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
       //get direction
       //set path
       this.pathString= `/runnerStorage/`+ this.usernamePassed+ `/` ;
@@ -264,28 +261,58 @@ export class HomeRPage {
       this.uLng[0]= snapshot.child("/uLng/").val();
       this.tLat[0]= snapshot.child("/tLat/").val();
       this.tLng[0]= snapshot.child("/tLng/").val();
+      //this.rLat[0]= snapshot.child("/rLat/").val();
+      //this.rLng[0]= snapshot.child("/rLng/").val();
 
-      //set uLoc n tLoc
-      this.uLoc= new google.maps.LatLng(this.uLat[0], this.uLng[0]);
-      this.tLoc= new google.maps.LatLng(this.tLat[0], this.tLng[0]);
-      console.log("uLoc: "+ this.uLoc)
-      console.log("tLoc: "+ this.tLoc)
+      //get user current pos
+      this.geolocation.getCurrentPosition().then( pos=> {
+        this.rLat[0]= pos.coords.latitude;
+        this.rLng[0]= pos.coords.longitude;
 
-      var dir= new google.maps.DirectionsService;
-      var dirDisplay = new google.maps.DirectionsRenderer;
-      dirDisplay.setMap(this.map);
+        //create map
+        this.addMap(this.rLat[0], this.rLng[0]);
 
-      dir.route({
-          origin: this.tLoc,
-          destination: this.uLoc,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            dirDisplay.setDirections(response);
-          } else {
-            //window.alert('Directions request failed due to ' + status);
-          }
+        //update r loc to db
+        this.pathRef.update({
+          rLat: this.rLat[0],
+          rLng: this.rLng[0]
+        })
+
+        //set uLoc n tLoc
+        this.uLoc= new google.maps.LatLng(this.uLat[0], this.uLng[0]);
+        this.tLoc= new google.maps.LatLng(this.tLat[0], this.tLng[0]);
+        console.log("uLoc: "+ this.uLoc)
+        console.log("tLoc: "+ this.tLoc)
+
+        var dir= new google.maps.DirectionsService;
+        var dirDisplay = new google.maps.DirectionsRenderer;
+        dirDisplay.setMap(this.map);
+
+        dir.route({
+            origin: this.tLoc,
+            destination: this.uLoc,
+            travelMode: 'DRIVING'
+          }, function(response, status) {
+            if (status === 'OK') {
+              dirDisplay.setDirections(response);
+            } else {
+              //window.alert('Directions request failed due to ' + status);
+            }
+          });
+
+        let options = {
+          target: this.location,
+          zoom: 8
+        };
+
+        //this.map.moveCamera(options);
+      }).catch((error) => {
+          console.log('Error getting location', error);
         });
+
+
+
+
 
       })
     }
@@ -470,6 +497,96 @@ export class HomeRPage {
 
     //open navigation
     this.launchNavigator.navigate([this.uLat[0], this.uLng[0]]);
+  }
+
+  stopBackgroundLocation(){
+
+  }
+
+  doneButton(){
+    var path= `/deliveryStorage/` + <string>this.currentKey+ `/`;
+    var ref= firebase.database().ref(path)
+    ref.update({
+      accepted:"doneReq"
+    })
+
+    this.pathRef= firebase.database().ref(this.pathString);
+    this.pathRef.update({
+      acceptedDel: "none",
+      currentDelivery: "none"
+    })
+
+    //stop background location
+    this.backgroundGeolocation.stop();
+
+    //alert wait for user confirmation
+    this.presentAlertWait();
+
+    //alert user has confirmed
+    ref.on('value', snapshot => {
+      var settle= snapshot.child("accepted").val();
+
+      if(settle=="done"){
+        this.presentAlertDone();
+      }
+    })
+  }
+
+  cancelButton(){
+    var path= `/deliveryStorage/` + <string>this.currentKey+ `/`;
+    var ref= firebase.database().ref(path)
+    ref.update({
+      accepted:"cancel"
+    })
+
+    this.pathRef= firebase.database().ref(this.pathString);
+    this.pathRef.update({
+      currentDelivery: "none"
+    })
+
+    //stop background location
+    this.backgroundGeolocation.stop();
+
+    //go home...
+    this.navCtrl.setRoot(HomeRPage, {
+      username: <string>this.usernamePassed
+    });
+  }
+
+  presentAlertWait() {
+    let alert = this.alertCtrl.create({
+      title: 'WAIT FOR USER CONFIRMATION',
+      buttons: ['Okay']
+    });
+    alert.present();
+  }
+
+  presentAlertDone() {
+    let alert = this.alertCtrl.create({
+      title: 'DELIVERY DONE',
+      buttons: ['Okay']
+    });
+    alert.present();
+
+    // refresh home page
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.navCtrl.setRoot(HomeRPage, {
+        username: <string> this.usernamePassed
+      });
+    }, 2000);
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.navCtrl.setRoot(HomeRPage, {
+        username: <string> this.usernamePassed
+      });
+      refresher.complete();
+    }, 2000);
   }
 
 }

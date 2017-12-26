@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController  } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 import { ChatUPage } from '../chat-u/chat-u';
+import { HomeUPage } from '../home-u/home-u';
 
 import firebase from 'firebase';
 
@@ -85,7 +86,7 @@ export class DispCurrentDelUPage {
   uLoc: LatLng;
   tLoc: LatLng;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
 
 
@@ -97,12 +98,8 @@ export class DispCurrentDelUPage {
     //get username from last page..homeu
     this.usernamePassed= this.navParams.get('username');
 
-    //getdata
+    //getdata AND CREATE MAP INSIDE THAT FUNC.....
     this.getData();
-
-    //create map
-    console.log("admap")
-    this.addMap (1.5578725, 103.63072340000006); //(this.rLat, this.rLng);MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     await this.delay(1000); //wait
 
@@ -131,7 +128,7 @@ export class DispCurrentDelUPage {
 
     let marker = new google.maps.Marker({
     map: this.map,
-    animation: google.maps.Animation.DROP,
+    //animation: google.maps.Animation.DROP,
     position: {lat: lat, lng: lng}
     });
     this.markers= marker;
@@ -173,89 +170,92 @@ export class DispCurrentDelUPage {
       this.additional= snapshot.val();
     });
 
-
     //get runner username, then location
     this.rURef= firebase.database().ref(this.delString+ 'runnerUsername');
-    this.rURef.on('value', snapshot => {
+    this.rURef.on('value', async snapshot => {
       this.runnerUsername= snapshot.val();
 
       var rPath= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
-      console.log("rpath: "+ rPath);
       var rRef= firebase.database().ref(rPath);
-      rRef.on('value', snap => {
+
+      //to create map
+      rRef.on('value', async snap => {
+      var rLat= snap.child("/rLat/").val();
+      var rLng= snap.child("/rLng/").val();
+
+      //CREATE MAP HERE
+
+      console.log("rLat: "+ rLat)
+      this.addMap(rLat, rLng);
+
+      //get direction
+      //set path
+      var uLat= snap.child("/uLat/").val();
+      var uLng= snap.child("/uLng/").val();
+      var tLat= snap.child("/tLat/").val();
+      var tLng= snap.child("/tLng/").val();
+
+      //set uLoc n tLoc
+      this.uLoc= new google.maps.LatLng(<number> uLat, <number> uLng);
+      this.tLoc= new google.maps.LatLng(<number> tLat, <number> tLng);
+
+      this.deleteMarkers();
+      this.addMarker(rLat, rLng, "RUNNER");
+
+      console.log("uLoc: "+ this.uLoc)
+      console.log("tLoc: "+ this.tLoc)
+
+      var dir= new google.maps.DirectionsService;
+      var dirDisplay = new google.maps.DirectionsRenderer;
+      dirDisplay.setMap(this.map);
+
+      dir.route({
+          origin: this.tLoc,
+          destination: this.uLoc,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            dirDisplay.setDirections(response);
+          } else {
+            //window.alert('Directions request failed due to ' + status);
+          }
+        });
+      })
+      await this.delay(6000); //wait
+      rRef.off();
+
+
+      var rPath2= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
+      var rRef2= firebase.database().ref(rPath2);
+      rRef2.on('value', snap => {
+        //update at map
         var rLat= snap.child("/rLat/").val();
         var rLng= snap.child("/rLng/").val();
-
-        //update at map ==============================================
-        //get direction
-        //set path
-        var uLat= snap.child("/uLat/").val();
-        var uLng= snap.child("/uLng/").val();
-        var tLat= snap.child("/tLat/").val();
-        var tLng= snap.child("/tLng/").val();
-
-        //set uLoc n tLoc
-        this.uLoc= new google.maps.LatLng(<number> uLat, <number> uLng);
-        this.tLoc= new google.maps.LatLng(<number> tLat, <number> tLng);
 
         this.deleteMarkers();
         this.addMarker(rLat, rLng, "RUNNER");
 
-        console.log("uLoc: "+ this.uLoc)
-        console.log("tLoc: "+ this.tLoc)
+        })
 
-        var dir= new google.maps.DirectionsService;
-        var dirDisplay = new google.maps.DirectionsRenderer;
-        dirDisplay.setMap(this.map);
 
-        dir.route({
-            origin: this.tLoc,
-            destination: this.uLoc,
-            travelMode: 'DRIVING'
-          }, function(response, status) {
-            if (status === 'OK') {
-              dirDisplay.setDirections(response);
-            } else {
-              //window.alert('Directions request failed due to ' + status);
-            }
-          });
+      //to update RUNNER marker to current position
+      /*
+      var rPath2= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
+      var rRef2= firebase.database().ref(rPath2);
+      rRef2.on('value', snap => {
 
-        /*
-        this.pathString= `/runnerStorage/`+ <string> this.runnerUsername+ `/` ;
-        console.log(this.pathString)
-        this.pathRef= firebase.database().ref(this.pathString);
-        this.pathRef.once('value', snapshot => {
-          this.uLat= snapshot.child("/uLat/").val();
-          this.uLng= snapshot.child("/uLng/").val();
-          this.tLat= snapshot.child("/tLat/").val();
-          this.tLng= snapshot.child("/tLng/").val();
+        rRef.off();
 
-          //set uLoc n tLoc
-          this.uLoc= new google.maps.LatLng(<number> this.uLat, <number> this.uLng);
-          this.tLoc= new google.maps.LatLng(<number> this.tLat, <number> this.tLng);
+        //update at map
+        var rLat= snap.child("/rLat/").val();
+        var rLng= snap.child("/rLng/").val();
 
-          console.log("uLoc: "+ this.uLoc)
-          console.log("tLoc: "+ this.tLoc)
+        this.deleteMarkers();
+        this.addMarker(rLat, rLng, "RUNNER");
 
-          var dir= new google.maps.DirectionsService;
-          var dirDisplay = new google.maps.DirectionsRenderer;
-          dirDisplay.setMap(this.map);
-
-          dir.route({
-              origin: this.tLoc,
-              destination: this.uLoc,
-              travelMode: 'DRIVING'
-            }, function(response, status) {
-              if (status === 'OK') {
-                dirDisplay.setDirections(response);
-              } else {
-                //window.alert('Directions request failed due to ' + status);
-              }
-            });
-
-        })*/
 
       })
+      */
 
 
     });
@@ -296,12 +296,30 @@ export class DispCurrentDelUPage {
     });
 
     await this.delay(1000); //wait
-    //console.log(this.distance+ "  "+ this.payment)
 
     if(this.accepted=="true") {
       this.haveAcc=1;
       this.havePen=0;
       this.haveRej=0;
+
+      //on for done request, or reject
+      var path= `/deliveryStorage/` + <string>this.Cur+ `/`;
+      var ref= firebase.database().ref(path)
+      ref.on('value', snapshot =>{
+        var doneReq= snapshot.child("accepted").val();
+
+        if(doneReq=="doneReq"){
+          //alert ask to confirm ================================<<<<<<<<<<<<
+          this.presentConfirm();
+        }
+
+        if(doneReq=="cancel"){
+          //alert cancelled ....
+          this.presentAlertCancel();
+        }
+
+      })
+
     }
     else if(this.accepted=="false") {
       this.haveAcc=0;
@@ -342,24 +360,79 @@ export class DispCurrentDelUPage {
   }
 
   // Sets the map on all markers in the array.
-       setMapOnAll(map) {
-        this.markers.setMap(map);
-      }
+  setMapOnAll(map) {
+    this.markers.setMap(map);
+  }
 
-      // Removes the markers from the map, but keeps them in the array.
-       clearMarkers() {
-        this.setMapOnAll(null);
-      }
+  // Removes the markers from the map, but keeps them in the array.
+  clearMarkers() {
+    this.setMapOnAll(null);
+    }
 
-      // Shows any markers currently in the array.
-       showMarkers() {
-        this.setMapOnAll(this.map);
-      }
+  // Shows any markers currently in the array.
+  showMarkers() {
+    this.setMapOnAll(this.map);
+  }
 
-      // Deletes all markers in the array by removing references to them.
-       deleteMarkers() {
-        this.clearMarkers();
-        this.markers = null;
-      }
+  // Deletes all markers in the array by removing references to them.
+  deleteMarkers() {
+    this.clearMarkers();
+    this.markers = null;
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delivery Done',
+      message: 'Confirm that this delivery is done?',
+      buttons: [
+        {
+          text: 'NO',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'CONFIRM',
+          handler: () => {
+            console.log('Buy clicked');
+
+            //update db delivery is done
+            var path= `/deliveryStorage/` + <string>this.Cur+ `/`;
+            var ref= firebase.database().ref(path)
+            ref.update({
+              accepted: "done"
+            })
+
+            //done alert
+            this.presentAlert();
+
+            //go home
+            this.navCtrl.setRoot(HomeUPage, {
+              username: <string> this.usernamePassed
+            });
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'DELIVERY DONE',
+      buttons: ['Okay']
+    });
+    alert.present();
+  }
+
+  presentAlertCancel() {
+    let alert = this.alertCtrl.create({
+      title: 'DELIVERY CANCELLED',
+      buttons: ['Okay']
+    });
+    alert.present();
+  }
 
 }

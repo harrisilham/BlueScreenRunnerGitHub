@@ -86,15 +86,15 @@ export class DispDelInfoRPage {
 
       //MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       this.pathRef.update({
-        rLat: 1.5578725,  //this.location.lat,
-        rLng: 103.63072340000006,  //this.location.lng
+        rLat: this.location.lat,
+        rLng: this.location.lng,
         uLat: this.delivery[0].uLat,
         uLng: this.delivery[0].uLng,
         tLat: this.delivery[0].tLat,
         tLng: this.delivery[0].tLng,
       })
 
-      this.addMap (1.5578725, 103.63072340000006); //(this.rLat, this.rLng);MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+      this.addMap (this.rLat, this.rLng); //MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
       //set uLoc n tLoc
       this.uLoc= new google.maps.LatLng(this.delivery[0].uLat, this.delivery[0].uLng);
@@ -121,7 +121,7 @@ export class DispDelInfoRPage {
         });
 
         //set map center to runner pos
-        this.rLoc= new google.maps.LatLng(1.5578725, 103.63072340000006); //(this.rLat, this.rLng);MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        this.rLoc= new google.maps.LatLng(this.rLat, this.rLng);//MOCK LOCATION ONLY DIS ONE, LATER UBAH<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         this.map.setCenter(this.rLoc);
 
 

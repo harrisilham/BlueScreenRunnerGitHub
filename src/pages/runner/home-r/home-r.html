@@ -16,6 +16,12 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
   <h3 style="color: blue" align="left">@{{usernamePassed}}</h3>
 
   <!--availability -->
@@ -29,7 +35,7 @@
   <br><br>
 
   <!-- delivery request-->
-  <h4 align="center" [hidden]="!haveDel">Delivery Request</h4>
+  <h4 align="center" style="text-align: center" [hidden]="!haveDel">Delivery Request</h4>
 
   <ion-card [hidden]="!haveDel">
 
@@ -64,31 +70,38 @@
 
   <!-- current delivery -->
   <div #map style="height:50%"></div>
-    <ion-grid *ngFor="let d of delivery" [hidden]="!haveAcc">
+    <ion-grid *ngFor="let d of delivery" [hidden]="!haveAcc" align="middle">
 
       <h4>Delivery for <a>@{{d.userUsername}} </a></h4>
 
-      <ion-row>
+      <ion-row align="center">
         <ion-col col-4><b>Title</b></ion-col>
         <ion-col col-4 align="left">{{d.title}}</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row align="middle">
         <ion-col col-4><b>Description</b></ion-col>
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row align="center">
         <ion-col col-4><b>Payment</b></ion-col>
         <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row align="center">
         <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="launchNavA()">Navigate To A </button> </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col colspan="2" align="middle"> <button ion-button round outline type="submit" (click)="launchNavB()">Navigate To B </button> </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col col-4 align="center"><button ion-button detail-none type="submit" color="danger" (click)="cancelButton()"><ion-icon name="close-circle"></ion-icon>CANCEL </button></ion-col>
+        <ion-col col-4 align="center"><button ion-button detail-none type="submit" color="secondary" (click)="doneButton()"><ion-icon name="checkmark-circle"></ion-icon>DONE REQUEST</button></ion-col>
+        <ion-col col-2></ion-col>
       </ion-row>
 
       <ion-toolbar no-border>
