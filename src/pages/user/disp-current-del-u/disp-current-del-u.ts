@@ -88,9 +88,6 @@ export class DispCurrentDelUPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
-
-
-
   }
 
     async ionViewDidLoad() {
@@ -102,16 +99,11 @@ export class DispCurrentDelUPage {
     this.getData();
 
     await this.delay(1000); //wait
-
-
-
-
   }
 
   addMap(lat,long){
 
     let latLng = new google.maps.LatLng(lat, long);
-
 
     let mapOptions = {
     center: latLng,
@@ -237,27 +229,6 @@ export class DispCurrentDelUPage {
 
         })
 
-
-      //to update RUNNER marker to current position
-      /*
-      var rPath2= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
-      var rRef2= firebase.database().ref(rPath2);
-      rRef2.on('value', snap => {
-
-        rRef.off();
-
-        //update at map
-        var rLat= snap.child("/rLat/").val();
-        var rLng= snap.child("/rLng/").val();
-
-        this.deleteMarkers();
-        this.addMarker(rLat, rLng, "RUNNER");
-
-
-      })
-      */
-
-
     });
 
     this.titleRef= firebase.database().ref(this.delString+ 'title');
@@ -270,7 +241,6 @@ export class DispCurrentDelUPage {
       this.userUsername= snapshot.val();
     });
 
-    //this.uURef= firebase.database().ref(this.delString+ 'userUsername');
     firebase.database().ref(this.delString+ 'distance').on('value', snapshot => {
       this.distance= snapshot.val();
     });
@@ -302,7 +272,7 @@ export class DispCurrentDelUPage {
       this.havePen=0;
       this.haveRej=0;
 
-      //on for done request, or reject
+      //on for done request, or cancel
       var path= `/deliveryStorage/` + <string>this.Cur+ `/`;
       var ref= firebase.database().ref(path)
       ref.on('value', snapshot =>{
@@ -316,6 +286,7 @@ export class DispCurrentDelUPage {
         if(doneReq=="cancel"){
           //alert cancelled ....
           this.presentAlertCancel();
+
         }
 
       })
@@ -433,6 +404,11 @@ export class DispCurrentDelUPage {
       buttons: ['Okay']
     });
     alert.present();
+    
+    //go home
+    this.navCtrl.setRoot(HomeUPage, {
+      username: <string> this.usernamePassed
+    });
   }
 
 }

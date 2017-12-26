@@ -41,6 +41,7 @@ export class HomeRPage {
   map:any;
   private location:LatLng;
   activeMenu: string = 'menu-r'
+  markers: any;
 
   runnerNode: Array<{availability: String, currentDelivery: string, acceptedDel: string}>=[];
 
@@ -256,7 +257,7 @@ export class HomeRPage {
       //set path
       this.pathString= `/runnerStorage/`+ this.usernamePassed+ `/` ;
       this.pathRef= firebase.database().ref(this.pathString);
-      this.pathRef.on('value', snapshot => {
+      this.pathRef.once('value', snapshot => {
       this.uLat[0]= snapshot.child("/uLat/").val();
       this.uLng[0]= snapshot.child("/uLng/").val();
       this.tLat[0]= snapshot.child("/tLat/").val();
@@ -305,6 +306,19 @@ export class HomeRPage {
           zoom: 8
         };
 
+        //update to current runner location
+        var path= `/runnerStorage/`+ this.usernamePassed+ `/` ;
+        var ref= firebase.database().ref(path);
+        ref.on('value', snap => {
+          //update at map
+          var rLat= snap.child("/rLat/").val();
+          var rLng= snap.child("/rLng/").val();
+
+          this.deleteMarkers();
+          this.addMarker(rLat, rLng, "RUNNER");
+
+          })
+
         //this.map.moveCamera(options);
       }).catch((error) => {
           console.log('Error getting location', error);
@@ -316,6 +330,27 @@ export class HomeRPage {
 
       })
     }
+  }
+
+  // Sets the map on all markers in the array.
+  setMapOnAll(map) {
+    this.markers.setMap(map);
+  }
+
+  // Removes the markers from the map, but keeps them in the array.
+  clearMarkers() {
+    this.setMapOnAll(null);
+    }
+
+  // Shows any markers currently in the array.
+  showMarkers() {
+    this.setMapOnAll(this.map);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  deleteMarkers() {
+    this.clearMarkers();
+    this.markers = null;
   }
 
   availableToggled(){
@@ -541,7 +576,8 @@ export class HomeRPage {
 
     this.pathRef= firebase.database().ref(this.pathString);
     this.pathRef.update({
-      currentDelivery: "none"
+      currentDelivery: "none",
+      acceptedDel: "none"
     })
 
     //stop background location
