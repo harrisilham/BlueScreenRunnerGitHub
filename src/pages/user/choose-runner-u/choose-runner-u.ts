@@ -20,6 +20,12 @@ export class ChooseRunnerUPage {
   usernamePassed: any;
   title: string;
   additional: string;
+  uLat: any;
+  uLng: any;
+  tLat: any;
+  tLng: any;
+  distance: any;
+  payment: any
 
   runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String, availability: String, rating: number, deliveryCount: number}>=[];
 
@@ -38,12 +44,19 @@ export class ChooseRunnerUPage {
   public rating=[];
   public deliveryCount=[];
 
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
     //get passed from last page..ins del info
     this.usernamePassed= navParams.get('username');
     this.title= navParams.get('title');
     this.additional= navParams.get('additional');
-
+    this.uLat= navParams.get('uLat');
+    this.uLng= navParams.get('uLng');
+    this.tLat= navParams.get('tLat');
+    this.tLng= navParams.get('tLng');
+    this.distance= navParams.get('distance');
+    this.payment= navParams.get('payment');
 
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
@@ -104,7 +117,13 @@ export class ChooseRunnerUPage {
       runner: <string>usernameR ,//pass runner selected
       username: this.usernamePassed,
       title: this.title,
-      additional: this.additional
+      additional: this.additional,
+      uLat: this.uLat,
+      uLng: this.uLng,
+      tLat: this.tLat,
+      tLng: this.tLng,
+      distance: this.distance,
+      payment: this.payment
     });
   }
 

@@ -15,6 +15,8 @@
 
 <ion-content padding>
 
+  <div #map style="height:70%"></div>
+
   <ion-card *ngFor="let d of delivery">
     <ion-grid>
 
@@ -28,14 +30,21 @@
         <ion-col col-8 align="left">{{d.additional}}</ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let c of chargeNode">
-        <ion-col col-4><b>Payment</b></ion-col>
-        <ion-col col-4 align="left">RM {{c.deliChargeUtm}}.00</ion-col>
+      <ion-row>
+        <ion-col col-4><b>Distance From Me To A</b></ion-col>
+        <ion-col  col-4 align="left"><input id="distA" type="text" value="0.00" style="text-align:center"readonly> km </ion-col>
       </ion-row>
 
-      <ion-card>
-        COMING SOON..MAP SHOWS ROUTE.
-      </ion-card>
+      <ion-row>
+        <ion-col col-4><b>Distance From A To B</b></ion-col>
+        <ion-col col-4 align="left"> <input id="dist" type="text" value="{{d.distance}}" style="text-align:center"readonly> km  </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col col-4><b>Payment</b></ion-col>
+        <ion-col col-4 align="left">RM{{d.payment}}</ion-col>
+      </ion-row>
 
       <ion-row>
         <ion-col col-2></ion-col>

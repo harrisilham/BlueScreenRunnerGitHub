@@ -12,13 +12,7 @@ import { ViewrunnerAPage } from '../viewrunner-a/viewrunner-a';
   templateUrl: 'home-a.html'
 })
 export class HomeAPage {
-
-  deliChargeUtm: string;
-  addCharge: string;
-
   activeMenu: string = 'menu-a'
-
-  chargeNode: Array<{addCharge: string, deliChargeUTM: string}>=[];
 
   runnerNode: Array<{index: number, email: String, fullName: String, ic: number, password: String, phoneNum: number, username: String}>=[];
 
@@ -26,10 +20,6 @@ export class HomeAPage {
 
   pathString: any;
   pathRef: any;
-  dataRef: firebase.database.Reference;
-
-  pathStringCharge: any;
-  pathRefCharge: any;
 
   public email=[];
   public fullName=[];
@@ -37,9 +27,6 @@ export class HomeAPage {
   public password=[];
   public phoneNum=[];
   public username=[];
-  public deliCharge=[];
-  public addDeliCharge=[];
-
 
   constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController, private menu: MenuController) {
     this.activeMenu= 'menu-u' ;
@@ -49,8 +36,6 @@ export class HomeAPage {
 
     events.publish('user:entered');//disable tab
 
-    this.pathStringCharge= `/chargeStorage/` ;
-    this.pathRefCharge= firebase.database().ref(this.pathStringCharge);
     this.pathString= `/runnerStorage/` ;
     this.pathRef= firebase.database().ref(this.pathString);
 
@@ -71,7 +56,6 @@ export class HomeAPage {
         index++;
       });
     });
-
     this.initializeRunnerSearch();
   }
 
@@ -144,28 +128,5 @@ export class HomeAPage {
     this.navCtrl.push(EditrunnerAPage, {
       username: username
     });
-  }
-
-  itemTapped(){
-    this.deliChargeUtm=(<HTMLInputElement>document.getElementById('deliChargeUtm')).value;
-    this.addCharge=(<HTMLInputElement>document.getElementById('addCharge')).value;
-
-    var pathStringCharge= `/chargeStorage/`;
-    var pathRefCharge= firebase.database().ref(pathStringCharge);
-    this.pathRefCharge.update({
-      addCharge: this.addCharge,
-      deliChargeUtm: this.deliChargeUtm,
-    })
-    this.changeAlert();
-    this.navCtrl.setRoot(HomeAPage);
-  }
-
-  changeAlert() {
-  let alert = this.alertCtrl.create({
-    title: 'Successfully change delivery rate',
-    subTitle: 'thank you ',
-    buttons: ['OK']
-  });
-  alert.present();
   }
 }

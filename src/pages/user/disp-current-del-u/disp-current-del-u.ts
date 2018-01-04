@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform, AlertController  } from 'ionic-angular';
 import { ChooseRunnerUPage } from '../choose-runner-u/choose-runner-u';
 import { ChatUPage } from '../chat-u/chat-u';
-import { UserMapPage } from '../user-map/user-map';
-import { ReceiptUPage } from '../receipt-u/receipt-u';
+import { HomeUPage } from '../home-u/home-u';
 
 import firebase from 'firebase';
+
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ GoogleMapOptions,
+ CameraPosition,
+ MarkerOptions,
+ Marker,
+ LatLng
+} from '@ionic-native/google-maps';
+
+declare var google;
 
 /**
  * Generated class for the DispCurrentDelUPage page.
@@ -20,6 +32,11 @@ import firebase from 'firebase';
   templateUrl: 'disp-current-del-u.html',
 })
 export class DispCurrentDelUPage {
+  @ViewChild('map')
+  private mapElement: ElementRef;
+  map:any;
+  private location:LatLng;
+  markers: any;
 
   usernamePassed: any;
 
@@ -34,23 +51,22 @@ export class DispCurrentDelUPage {
   pathString: any;
   pathRef: firebase.database.Reference;
 
-  foodthing: any;
-
-  pathStringCharge:any;
-  pathRefCharge: firebase.database.Reference;
-  pathRefAddCharge:firebase.database.Reference;
   //delivery
-  deliveryNode: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string}>=[];
-  chargeNode: Array<{deliChargeUtm: string, addCharge: string}>=[];
+  deliveryNode: Array<{accepted: string, additional: string, runnerUsername: string, title: string, userUsername: string, payment: string, distance: string, tLat: number, tLng: number, uLat: number, uLng: number, rLat: number, rLng: number}>=[];
 
   public accepted={};
   public additional={};
   public runnerUsername={};
   public title={};
   public userUsername={};
-  public deliChargeUtm={};
-  public addCharge={};
-  public done={};
+  public distance={};
+  public payment={};
+  public uLat={};
+  public uLng={};
+  public tLat={};
+  public tLng={};
+  public rLat={};
+  public rLng={};
   key: string;
 
   delString: any;
@@ -61,26 +77,63 @@ export class DispCurrentDelUPage {
   rURef: firebase.database.Reference;
   titleRef: firebase.database.Reference;
   uURef: firebase.database.Reference;
-  doneRef: firebase.database.Reference;
+
 
   haveAcc=0;
   havePen=0;
   haveRej=0;
-  haveDone=0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  uLoc: LatLng;
+  tLoc: LatLng;
 
-
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
   }
 
-  ionViewDidLoad() {
+    async ionViewDidLoad() {
     console.log('ionViewDidLoad DispCurrentDelUPage');
     //get username from last page..homeu
     this.usernamePassed= this.navParams.get('username');
 
+    //getdata AND CREATE MAP INSIDE THAT FUNC.....
     this.getData();
+
+    await this.delay(1000); //wait
+  }
+
+  addMap(lat,long){
+
+    let latLng = new google.maps.LatLng(lat, long);
+
+    let mapOptions = {
+    center: latLng,
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker(lat, long, "RUNNER");
+
+  }
+
+  addMarker(lat, lng, des){
+
+    let marker = new google.maps.Marker({
+    map: this.map,
+    //animation: google.maps.Animation.DROP,
+    position: {lat: lat, lng: lng}
+    });
+    this.markers= marker;
+
+    let infoWindow = new google.maps.InfoWindow({
+    content: des
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+    infoWindow.open(this.map, marker);
+    });
+
+
   }
 
   async getData(){
@@ -93,24 +146,8 @@ export class DispCurrentDelUPage {
       this.Cur = snapshot.val();
 
     });
-    //get charge data
-    this.pathStringCharge= `/chargeStorage/`;
 
-    this.pathRefCharge= firebase.database().ref(this.pathStringCharge+ 'deliChargeUtm/');
-    this.pathRefCharge.on('value', snapshot =>  {
-      this.deliChargeUtm = snapshot.val();
-
-    });
-
-    this.pathRefAddCharge=firebase.database().ref(this.pathStringCharge+ 'addCharge/');
-    this.pathRefAddCharge.on('value', snapshot =>  {
-      this.addCharge = snapshot.val();
-
-    });
-
-
-
-    await this.delay(1000, Cur); //wait
+    await this.delay(1000); //wait
 
     //get del data
     this.delString=`/deliveryStorage/`+ <string>this.Cur+ `/`;
@@ -120,19 +157,78 @@ export class DispCurrentDelUPage {
       this.accepted= snapshot.val();
     });
 
-    this.doneRef= firebase.database().ref(this.delString+ 'done');
-    this.doneRef.on('value', snapshot => {
-      this.done= snapshot.val();
-    });
-
     this.addRef= firebase.database().ref(this.delString+ 'additional');
     this.addRef.on('value', snapshot => {
       this.additional= snapshot.val();
     });
 
+    //get runner username, then location
     this.rURef= firebase.database().ref(this.delString+ 'runnerUsername');
-    this.rURef.on('value', snapshot => {
+    this.rURef.on('value', async snapshot => {
       this.runnerUsername= snapshot.val();
+
+      var rPath= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
+      var rRef= firebase.database().ref(rPath);
+
+      //to create map
+      rRef.on('value', async snap => {
+      var rLat= snap.child("/rLat/").val();
+      var rLng= snap.child("/rLng/").val();
+
+      //CREATE MAP HERE
+
+      console.log("rLat: "+ rLat)
+      this.addMap(rLat, rLng);
+
+      //get direction
+      //set path
+      var uLat= snap.child("/uLat/").val();
+      var uLng= snap.child("/uLng/").val();
+      var tLat= snap.child("/tLat/").val();
+      var tLng= snap.child("/tLng/").val();
+
+      //set uLoc n tLoc
+      this.uLoc= new google.maps.LatLng(<number> uLat, <number> uLng);
+      this.tLoc= new google.maps.LatLng(<number> tLat, <number> tLng);
+
+      this.deleteMarkers();
+      this.addMarker(rLat, rLng, "RUNNER");
+
+      console.log("uLoc: "+ this.uLoc)
+      console.log("tLoc: "+ this.tLoc)
+
+      var dir= new google.maps.DirectionsService;
+      var dirDisplay = new google.maps.DirectionsRenderer;
+      dirDisplay.setMap(this.map);
+
+      dir.route({
+          origin: this.tLoc,
+          destination: this.uLoc,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            dirDisplay.setDirections(response);
+          } else {
+            //window.alert('Directions request failed due to ' + status);
+          }
+        });
+      })
+      await this.delay(6000); //wait
+      rRef.off();
+
+
+      var rPath2= `/runnerStorage/`+ <string>this.runnerUsername+ `/`;
+      var rRef2= firebase.database().ref(rPath2);
+      rRef2.on('value', snap => {
+        //update at map
+        var rLat= snap.child("/rLat/").val();
+        var rLng= snap.child("/rLng/").val();
+
+        this.deleteMarkers();
+        this.addMarker(rLat, rLng, "RUNNER");
+
+        })
+
     });
 
     this.titleRef= firebase.database().ref(this.delString+ 'title');
@@ -145,40 +241,75 @@ export class DispCurrentDelUPage {
       this.userUsername= snapshot.val();
     });
 
-    await this.delay(1000, Cur); //wait
+    firebase.database().ref(this.delString+ 'distance').on('value', snapshot => {
+      this.distance= snapshot.val();
+    });
 
-    if(this.accepted=="true" && this.done=="false") {
+    firebase.database().ref(this.delString+ 'payment').on('value', snapshot => {
+      this.payment= snapshot.val();
+    });
+
+    firebase.database().ref(this.delString+ 'uLat').on('value', snapshot => {
+      this.uLat= snapshot.val();
+    });
+
+    firebase.database().ref(this.delString+ 'uLng').on('value', snapshot => {
+      this.uLng= snapshot.val();
+    });
+
+    firebase.database().ref(this.delString+ 'tLat').on('value', snapshot => {
+      this.tLat= snapshot.val();
+    });
+
+    firebase.database().ref(this.delString+ 'tLng').on('value', snapshot => {
+      this.tLng= snapshot.val();
+    });
+
+    await this.delay(1000); //wait
+
+    if(this.accepted=="true") {
       this.haveAcc=1;
       this.havePen=0;
       this.haveRej=0;
-      this.haveDone=0;
+
+      //on for done request, or cancel
+      var path= `/deliveryStorage/` + <string>this.Cur+ `/`;
+      var ref= firebase.database().ref(path)
+      ref.on('value', snapshot =>{
+        var doneReq= snapshot.child("accepted").val();
+
+        if(doneReq=="doneReq"){
+          //alert ask to confirm ================================<<<<<<<<<<<<
+          this.presentConfirm();
+        }
+
+        if(doneReq=="cancel"){
+          //alert cancelled ....
+          this.presentAlertCancel();
+
+        }
+
+      })
+
     }
-    else if(this.accepted=="false" && this.done=="false") {
+    else if(this.accepted=="false") {
       this.haveAcc=0;
       this.havePen=1;
       this.haveRej=0;
-      this.haveDone=0;
     }
-    else if(this.done=="true" && this.accepted=="false"){
-      this.haveAcc=0;
-      this.havePen=0;
-      this.haveRej=0;
-      this.haveDone=1;
-    }
-    else{
+    else if(this.accepted=="reject"){
       this.haveAcc=0;
       this.havePen=0;
       this.haveRej=1;
-      this.haveDone=0;
     }
 
-    this.chargeNode[0]={deliChargeUtm: <string>this.deliChargeUtm, addCharge: <string>this.addCharge}
-
     //push to deliveryNode
-    this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername}
+    this.deliveryNode[0]={accepted: <string>this.accepted, additional: <string>this.additional, runnerUsername: <string>this.runnerUsername, title: <string>this.title, userUsername: <string>this.userUsername, distance: <string> this.distance, payment: <string> this.payment, tLat: <number>this.tLat, tLng: <number>this.tLng, uLat: <number>this.uLat, uLng: <number>this.uLng, rLat: <number>this.rLat, rLng: <number>this.rLng }
+
+    console.log("del: "+ this.deliveryNode[0].payment)
   }
 
-  delay(ms: number, Cur) {
+  delay(ms: number) {
     //this.test(Cur)
      return new Promise(resolve => setTimeout(resolve, ms) );
   }
@@ -199,21 +330,85 @@ export class DispCurrentDelUPage {
     })
   }
 
-  goMap(){
-    this.navCtrl.push(UserMapPage, {
-      userUsername: this.usernamePassed,
-      runnerUsername: <string>this.runnerUsername,
-      key: <string>this.Cur
-    })
+  // Sets the map on all markers in the array.
+  setMapOnAll(map) {
+    this.markers.setMap(map);
   }
 
-  goReceipt(){
-    this.navCtrl.push(ReceiptUPage, {
-      userUsername: this.usernamePassed,
-      runnerUsername: <string>this.runnerUsername,
-      deliChargeUtm: <string>this.deliChargeUtm,
-      foodthing: this.foodthing
-    })
+  // Removes the markers from the map, but keeps them in the array.
+  clearMarkers() {
+    this.setMapOnAll(null);
+    }
+
+  // Shows any markers currently in the array.
+  showMarkers() {
+    this.setMapOnAll(this.map);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  deleteMarkers() {
+    this.clearMarkers();
+    this.markers = null;
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delivery Done',
+      message: 'Confirm that this delivery is done?',
+      buttons: [
+        {
+          text: 'NO',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'CONFIRM',
+          handler: () => {
+            console.log('Buy clicked');
+
+            //update db delivery is done
+            var path= `/deliveryStorage/` + <string>this.Cur+ `/`;
+            var ref= firebase.database().ref(path)
+            ref.update({
+              accepted: "done"
+            })
+
+            //done alert
+            this.presentAlert();
+
+            //go home
+            this.navCtrl.setRoot(HomeUPage, {
+              username: <string> this.usernamePassed
+            });
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'DELIVERY DONE',
+      buttons: ['Okay']
+    });
+    alert.present();
+  }
+
+  presentAlertCancel() {
+    let alert = this.alertCtrl.create({
+      title: 'DELIVERY CANCELLED',
+      buttons: ['Okay']
+    });
+    alert.present();
+    
+    //go home
+    this.navCtrl.setRoot(HomeUPage, {
+      username: <string> this.usernamePassed
+    });
   }
 
 }

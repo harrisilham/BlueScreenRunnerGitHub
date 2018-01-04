@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Events } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomeAPage } from '../pages/admin/home-a/home-a';
@@ -23,7 +22,7 @@ import { ViewrunnerUPage } from '../pages/user/viewrunner-u/viewrunner-u';
 import { DispDelInfoRPage } from '../pages/runner/disp-del-info-r/disp-del-info-r';
 import { ChooseRunnerUPage } from '../pages/user/choose-runner-u/choose-runner-u';
 import { ConfirmRunnerUPage } from '../pages/user/confirm-runner-u/confirm-runner-u';
-import { HomeRPageModule } from '../pages/runner/home-r/home-r.module';
+import { HomeRPageModule } from '../pages/runner/home-r/home-r.module'
 import { HomeUPageModule } from '../pages/user/home-u/home-u.module';
 import { ProfileUPageModule } from '../pages/user/profile-u/profile-u.module';
 import { EditAocrPage } from '../pages/runner/profile-r/edit-aocr/edit-aocr';
@@ -33,13 +32,13 @@ import { InsDeliveryTitleUPage } from '../pages/user/ins-delivery-title-u/ins-de
 import { DispCurrentDelUPage } from '../pages/user/disp-current-del-u/disp-current-del-u';
 import { ChatUPage } from '../pages/user/chat-u/chat-u';
 import { ChatRPage } from '../pages/runner/chat-r/chat-r';
-import { CancelDelRPage } from '../pages/runner/cancel-del-r/cancel-del-r';
-import { RunnerMapPage } from '../pages/runner/runner-map/runner-map';
-import { UserMapPage } from '../pages/user/user-map/user-map';
-import { ReceiptUPage } from '../pages/user/receipt-u/receipt-u'; 
-import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, CameraPosition, MarkerOptions,Marker
-} from '@ionic-native/google-maps';
+
+import {GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -66,11 +65,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     DispDelInfoRPage,
     DispCurrentDelUPage,
     ChatUPage,
-    ChatRPage,
-    CancelDelRPage,
-    RunnerMapPage,
-    UserMapPage,
-    ReceiptUPage,
+    ChatRPage
 
 
 
@@ -108,24 +103,20 @@ import { Geolocation } from '@ionic-native/geolocation';
     DispDelInfoRPage,
     DispCurrentDelUPage,
     ChatUPage,
-    ChatRPage,
-    CancelDelRPage,
-    RunnerMapPage,
-    UserMapPage,
-    ReceiptUPage,
-
-
+    ChatRPage
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     FrontPage,
     SignInRPage,
-    Camera,
     GoogleMaps,
     Geolocation,
+    LaunchNavigator,
+    BackgroundGeolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+
   ]
 })
 export class AppModule {}
