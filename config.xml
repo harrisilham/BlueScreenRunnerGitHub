@@ -105,7 +105,5 @@
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
         <variable name="ALWAYS_USAGE_DESCRIPTION" value="This app always requires location tracking" />
-
-        
     </plugin>
 </widget>
