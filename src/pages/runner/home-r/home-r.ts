@@ -194,7 +194,6 @@ export class HomeRPage {
               snapshot.forEach(childSnapshot => {
                 this.key[index]= childSnapshot.key;
 
-                //document.write(this.runnerNode[0].currentDelivery+ " "+ this.key[index]+ "<br>")
 
                 if(this.key[index]==this.runnerNode[0].currentDelivery){
                   this.haveDel= 1;
@@ -238,8 +237,6 @@ export class HomeRPage {
       });
     });
 
-    //document.write(this.runnerNode[0].currentDelivery+"<br>")
-
     //set pathstring to the current username
     this.pathString = `/runnerStorage/`+ this.usernamePassed+ `/` ;
 
@@ -262,8 +259,6 @@ export class HomeRPage {
       this.uLng[0]= snapshot.child("/uLng/").val();
       this.tLat[0]= snapshot.child("/tLat/").val();
       this.tLng[0]= snapshot.child("/tLng/").val();
-      //this.rLat[0]= snapshot.child("/rLat/").val();
-      //this.rLng[0]= snapshot.child("/rLng/").val();
 
       //get user current pos
       this.geolocation.getCurrentPosition().then( pos=> {
@@ -298,6 +293,7 @@ export class HomeRPage {
               dirDisplay.setDirections(response);
             } else {
               //window.alert('Directions request failed due to ' + status);
+              //do nothing
             }
           });
 
@@ -319,7 +315,6 @@ export class HomeRPage {
 
           })
 
-        //this.map.moveCamera(options);
       }).catch((error) => {
           console.log('Error getting location', error);
         });
